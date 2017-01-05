@@ -1,0 +1,17 @@
+//
+//  UIViewExtensions.swift
+//  Wadi
+//
+//  Created by Serghei Catraniuc on 12/26/16.
+//  Copyright © 2016 YOPESO. All rights reserved.
+//
+
+import Foundation
+
+extension UIView {
+    static var shadowView: UIView {
+        let shadowView = UIView(frame: UIScreen.main.bounds)
+        shadowView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        return shadowView
+    }
+}
