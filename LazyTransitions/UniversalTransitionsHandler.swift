@@ -17,7 +17,7 @@ public class UniversalTransitionsHandler: Transitioner {
     public var interactor: TransitionInteractor? {
         return transitionCombinator.interactor
     }
-    var allowedOrientations: [TransitionOrientation]? {
+    public var allowedOrientations: [TransitionOrientation]? {
         didSet {
            transitionCombinator.allowedOrientations = allowedOrientations
         }
@@ -28,7 +28,7 @@ public class UniversalTransitionsHandler: Transitioner {
     weak public var delegate: TransitionerDelegate?
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
-    init(animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
+    public init(animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
          interactor: TransitionInteractor = TransitionInteractor.default()) {
         self.internalAnimator = animator
         self.internalInteractor = interactor
@@ -37,7 +37,7 @@ public class UniversalTransitionsHandler: Transitioner {
     }
     
     @objc(addTransitionForView:)
-    func addTransition(for view: UIView) {
+    public func addTransition(for view: UIView) {
         if transitionerTuples.contains(where: { $0.view === view }) { return }
         let transitioner = createTransitioner(for: view)
         weak var weakView = view
@@ -46,7 +46,7 @@ public class UniversalTransitionsHandler: Transitioner {
     }
     
     @objc(addTransitionForScrollView:)
-    func addTransition(for scrollView: UIScrollView) {
+    public func addTransition(for scrollView: UIScrollView) {
         if transitionerTuples.contains(where: { $0.view === scrollView }) { return }
         let transitioners = createTransitioners(for: scrollView)
         transitionCombinator.add(transitioners)
@@ -54,13 +54,13 @@ public class UniversalTransitionsHandler: Transitioner {
         transitioners.forEach { transitioner in transitionerTuples.append((transitioner, weakView)) }
     }
     
-    func removeTransitions(for view: UIView) {
+    public func removeTransitions(for view: UIView) {
         let transitioners = self.transitioners(for: view)
         transitionCombinator.remove(transitioners)
         transitionerTuples = transitionerTuples.filter{ $0.view !== view }
     }
     
-    func didScroll(_ scrollView: UIScrollView) {
+    public func didScroll(_ scrollView: UIScrollView) {
         let partialTransitioner = self.partialTransitioner(for: scrollView)
         partialTransitioner?.scrollViewDidScroll()
     }
