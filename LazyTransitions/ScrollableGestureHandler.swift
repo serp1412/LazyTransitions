@@ -8,21 +8,21 @@
 
 import Foundation
 
-class ScrollableGestureHandler: TransitionGestureHandler {
-    var shouldFinish = false
-    var didBegin = false
-    var inProgressTransitionOrientation = TransitionOrientation.unknown
-    weak var delegate: TransitionGestureHandlerDelegate?
+public class ScrollableGestureHandler: TransitionGestureHandler {
+    public var shouldFinish = false
+    public var didBegin = false
+    public var inProgressTransitionOrientation = TransitionOrientation.unknown
+    public weak var delegate: TransitionGestureHandlerDelegate?
     
     fileprivate weak var scrollable: Scrollable?
     fileprivate var translationOffset = CGPoint.zero
     
-    init(scrollable: Scrollable) {
+    public init(scrollable: Scrollable) {
         self.scrollable = scrollable
         self.scrollable?.bounces = false
     }
     
-    func didChange(_ gesture: UIPanGestureRecognizer) {
+    public func didChange(_ gesture: UIPanGestureRecognizer) {
         guard scrollable != nil else {
             didBegin = false
             shouldFinish = false
@@ -37,7 +37,7 @@ class ScrollableGestureHandler: TransitionGestureHandler {
         handleTransitionGestureBegan(gesture)
     }
     
-    func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float {
+    public func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float {
         guard let view = view else { return 0 }
         
         let progress = TransitionProgressCalculator

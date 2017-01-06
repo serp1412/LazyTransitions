@@ -16,16 +16,16 @@ public protocol TransitionAnimator : UIViewControllerAnimatedTransitioning {
     var allowedOrientations: [TransitionOrientation]? { get set }
 }
 
-public extension TransitionAnimator {
-    var supportedOrientations: [TransitionOrientation] {
+extension TransitionAnimator {
+    public var supportedOrientations: [TransitionOrientation] {
         return [.topToBottom, .bottomToTop, .leftToRight, .rightToLeft]
     }
     
-    var isOrientationAllowed: Bool {
+    public var isOrientationAllowed: Bool {
         return allowedOrientations?.contains(orientation) ?? true
     }
     
-    var isOrientationSupported: Bool {
+    public var isOrientationSupported: Bool {
         return supportedOrientations.contains(orientation)
     }
 }
@@ -34,8 +34,8 @@ public protocol TransitionAnimatorDelegate: class {
     func transitionDidFinish(_ completed: Bool)
 }
 
-public extension TransitionAnimator {
-    func finalFrame(for view: UIView, for orientation: TransitionOrientation) -> CGRect {
+extension TransitionAnimator {
+    public func finalFrame(for view: UIView, for orientation: TransitionOrientation) -> CGRect {
         let size = view.frame.size
         switch orientation {
         case .topToBottom:

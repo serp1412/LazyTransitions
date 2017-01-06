@@ -8,20 +8,20 @@
 
 import Foundation
 
-class TransitionCombinator: Transitioner {
-    weak var delegate: TransitionerDelegate?
-    var animator: TransitionAnimator  {
+public class TransitionCombinator: Transitioner {
+    public weak var delegate: TransitionerDelegate?
+    public var animator: TransitionAnimator  {
         return currentTransitioner?.animator ?? defaultAnimator
     }
-    var interactor: TransitionInteractor? {
+    public var interactor: TransitionInteractor? {
         return currentTransitioner?.interactor
     }
-    var allowedOrientations: [TransitionOrientation]? {
+    public var allowedOrientations: [TransitionOrientation]? {
         didSet {
             updateAnimatorsAllowedOrientations()
         }
     }
-    private(set) var transitioners: [Transitioner] {
+    public private(set) var transitioners: [Transitioner] {
         didSet {
             updateTransitionersDelegate()
             updateAnimatorsAllowedOrientations()
@@ -33,23 +33,24 @@ class TransitionCombinator: Transitioner {
     fileprivate var isTransitionInProgress: Bool {
         return currentTransitioner != nil
     }
-    convenience init(defaultAnimator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
+    
+    public convenience init(defaultAnimator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
                      transitioners: Transitioner...) {
         self.init(defaultAnimator: defaultAnimator, transitioners: transitioners)
     }
     
-    init(defaultAnimator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
+    public init(defaultAnimator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
          transitioners: [Transitioner]) {
         self.defaultAnimator = defaultAnimator
         self.transitioners = transitioners
         updateTransitionersDelegate()
     }
     
-    func add(_ transitioner: Transitioner) {
+    public func add(_ transitioner: Transitioner) {
         transitioners.append(transitioner)
     }
     
-    func remove(_ transitioner: Transitioner) {
+    public func remove(_ transitioner: Transitioner) {
         let remove: (() -> ()) = { [weak self] in
             self?.transitioners = self?.transitioners.filter { $0 !== transitioner } ?? []
         }
@@ -69,12 +70,12 @@ class TransitionCombinator: Transitioner {
 }
 
 extension TransitionCombinator: TransitionerDelegate {
-    func beginTransition(with transitioner: Transitioner) {
+    public func beginTransition(with transitioner: Transitioner) {
         currentTransitioner = transitioner
         delegate?.beginTransition(with: transitioner)
     }
     
-    func finishedInteractiveTransition(_ completed: Bool) {
+    public func finishedInteractiveTransition(_ completed: Bool) {
         currentTransitioner = nil
         delayedRemove?()
         delayedRemove = nil
@@ -83,11 +84,11 @@ extension TransitionCombinator: TransitionerDelegate {
 }
 
 extension TransitionCombinator {
-    func add(_ transitioners: [Transitioner]) {
+    public func add(_ transitioners: [Transitioner]) {
         transitioners.forEach { transitioner in add(transitioner) }
     }
     
-    func remove(_ transitioners: [Transitioner]) {
+    public func remove(_ transitioners: [Transitioner]) {
         transitioners.forEach { transitioner in remove(transitioner) }
     }
 }

@@ -8,8 +8,8 @@
 
 import Foundation
 
-class PartialTransitioner: Transitioner {
-    weak var scrollView: UIScrollView?
+public class PartialTransitioner: Transitioner {
+    public weak var scrollView: UIScrollView?
     fileprivate var isPartialTransitionPossible: Bool {
         guard let scrollView = scrollView else { return false }
         if lastRecordedSpeed == 0 { return false }
@@ -28,19 +28,19 @@ class PartialTransitioner: Transitioner {
     
     //MARK: Transitioner Protocol
     
-    weak var delegate: TransitionerDelegate?
-    var animator: TransitionAnimator {
+    public weak var delegate: TransitionerDelegate?
+    public var animator: TransitionAnimator {
         return PartialTransitionAnimator(orientation: orientation,
                                          speed: lastRecordedSpeed)
     }
     
     //MARK: Public Methods
     
-    init(scrollView: UIScrollView) {
+    public init(scrollView: UIScrollView) {
         self.scrollView = scrollView
     }
     
-    func scrollViewDidScroll() {
+    public func scrollViewDidScroll() {
         recalculateScrollSpeed()
         guard isPartialTransitionPossible else { return }
         performPartialTransition()

@@ -8,26 +8,30 @@
 
 import Foundation
 
-class StaticViewTransitionGestureHandler: TransitionGestureHandler {
-    var shouldFinish: Bool = false
-    var didBegin: Bool = false
-    var inProgressTransitionOrientation = TransitionOrientation.unknown
-    weak var delegate: TransitionGestureHandlerDelegate?
+public class StaticViewTransitionGestureHandler: TransitionGestureHandler {
+    public var shouldFinish: Bool = false
+    public var didBegin: Bool = false
+    public var inProgressTransitionOrientation = TransitionOrientation.unknown
+    public weak var delegate: TransitionGestureHandlerDelegate?
     
-    func didBegin(_ gesture: UIPanGestureRecognizer) {
+    public convenience init(string: String) {
+        self.init()
+    }
+    
+    public func didBegin(_ gesture: UIPanGestureRecognizer) {
         inProgressTransitionOrientation = gesture.direction.orientation
         didBegin = true
         delegate?.beginInteractiveTransition(with: inProgressTransitionOrientation)
     }
     
-    func didChange(_ gesture: UIPanGestureRecognizer) {
+    public func didChange(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: gesture.view)
         let progress = calculateTransitionProgressWithTranslation(translation, on: gesture.view)
         shouldFinish = progress > progressThreshold
         delegate?.updateInteractiveTransitionWithProgress(progress)
     }
     
-    func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float {
+    public func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float {
         
         guard let view = view else { return 0 }
         
@@ -42,7 +46,7 @@ class StaticViewTransitionGestureHandler: TransitionGestureHandler {
 }
 
 extension UIPanGestureRecognizerDirection {
-    var orientation: TransitionOrientation {
+    public var orientation: TransitionOrientation {
         switch self {
         case .left: return .rightToLeft
         case .right: return .leftToRight
@@ -54,7 +58,7 @@ extension UIPanGestureRecognizerDirection {
 }
 
 extension UIPanGestureRecognizerDirection {
-    var isHorizontal: Bool {
+    public var isHorizontal: Bool {
         switch self {
         case .left, .right:
             return true

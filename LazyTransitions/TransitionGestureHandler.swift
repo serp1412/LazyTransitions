@@ -28,8 +28,8 @@ public protocol TransitionGestureHandler: class {
     func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float
 }
 
-public extension TransitionGestureHandler {
-    func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+extension TransitionGestureHandler {
+    public func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
             didBegin(gesture)
@@ -43,9 +43,9 @@ public extension TransitionGestureHandler {
         }
     }
     
-    func didBegin(_ gesture: UIPanGestureRecognizer) { }
+    public func didBegin(_ gesture: UIPanGestureRecognizer) { }
     
-    func didEnd(_ gesture: UIPanGestureRecognizer) {
+    public func didEnd(_ gesture: UIPanGestureRecognizer) {
         if shouldFinish || shouldTransitionByQuickSwipe(gesture) {
             delegate?.finishInteractiveTransition()
         } else {
@@ -55,12 +55,12 @@ public extension TransitionGestureHandler {
         didBegin = false
     }
     
-    func didCancel(_ gesture: UIPanGestureRecognizer) {
+    public func didCancel(_ gesture: UIPanGestureRecognizer) {
         delegate?.cancelInteractiveTransition()
         didBegin = false
     }
     
-    func shouldTransitionByQuickSwipe(_ gesture: UIPanGestureRecognizer) -> Bool {
+    public func shouldTransitionByQuickSwipe(_ gesture: UIPanGestureRecognizer) -> Bool {
         if !didBegin { return false }
         
         return gesture.isQuickSwipe(for: inProgressTransitionOrientation)

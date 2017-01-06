@@ -8,11 +8,11 @@
 
 import Foundation
 
-class DefaultInteractiveTransitioner: InteractiveTransitioner {
+public class DefaultInteractiveTransitioner: InteractiveTransitioner {
     
     //MARK: Initializers
     
-    required init(with gestureHandler: TransitionGestureHandler,
+    public required init(with gestureHandler: TransitionGestureHandler,
          with animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
          with interactor: TransitionInteractor = TransitionInteractor.default()) {
         self.gestureHandler = gestureHandler
@@ -24,37 +24,37 @@ class DefaultInteractiveTransitioner: InteractiveTransitioner {
     
     //MARK: InteractiveTransitioner Protocol
     
-    var gestureHandler: TransitionGestureHandler
-    weak var delegate: TransitionerDelegate?
-    var animator: TransitionAnimator
-    var interactor: TransitionInteractor?
+    public var gestureHandler: TransitionGestureHandler
+    public weak var delegate: TransitionerDelegate?
+    public var animator: TransitionAnimator
+    public var interactor: TransitionInteractor?
 }
 
 extension DefaultInteractiveTransitioner: TransitionGestureHandlerDelegate {
-    func beginInteractiveTransition(with orientation: TransitionOrientation) {
+    public func beginInteractiveTransition(with orientation: TransitionOrientation) {
         guard animator.allowedOrientations?.contains(orientation) ?? true else { return }
         guard animator.supportedOrientations.contains(orientation) else { return }
         animator.orientation = orientation
         delegate?.beginTransition(with: self)
     }
     
-    func updateInteractiveTransitionWithProgress(_ progress: Float) {
+    public func updateInteractiveTransitionWithProgress(_ progress: Float) {
         interactor?.update(CGFloat(progress))
     }
     
-    func finishInteractiveTransition() {
+    public func finishInteractiveTransition() {
         interactor?.setCompletionSpeedForFinish()
         interactor?.finish()
     }
     
-    func cancelInteractiveTransition() {
+    public func cancelInteractiveTransition() {
         interactor?.setCompletionSpeedForCancel()
         interactor?.cancel()
     }
 }
 
 extension DefaultInteractiveTransitioner: TransitionAnimatorDelegate {
-    func transitionDidFinish(_ completed: Bool) {
+    public func transitionDidFinish(_ completed: Bool) {
         delegate?.finishedInteractiveTransition(completed)
     }
 }

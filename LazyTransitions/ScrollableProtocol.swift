@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Scrollable: class {
+public protocol Scrollable: class {
     var isAtTop: Bool { get }
     var isAtBottom: Bool { get }
     var isAtLeftEdge: Bool { get }
@@ -19,19 +19,19 @@ protocol Scrollable: class {
 }
 
 extension Scrollable {
-    var possibleVerticalOrientation: TransitionOrientation {
+    public var possibleVerticalOrientation: TransitionOrientation {
         return isAtTop ? .topToBottom : .bottomToTop
     }
     
-    var possibleHorizontalOrientation: TransitionOrientation {
+    public var possibleHorizontalOrientation: TransitionOrientation {
         return isAtLeftEdge ? .leftToRight : .rightToLeft
     }
     
-    var scrollsHorizontally: Bool {
+    public var scrollsHorizontally: Bool {
         return !(isAtRightEdge && isAtLeftEdge)
     }
     
-    var scrollsVertically: Bool {
+    public var scrollsVertically: Bool {
         return !(isAtTop && isAtBottom)
     }
 }

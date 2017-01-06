@@ -24,7 +24,6 @@
 		DA65CBB31E1E987000ECE942 /* TransitionGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */; };
 		DA65CBB41E1E987000ECE942 /* TransitionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */; };
 		DA65CBB51E1E987000ECE942 /* TransitionProgressCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */; };
-		DA65CBB61E1E987000ECE942 /* TransitionsTopSecretAsFuck.h in Headers */ = {isa = PBXBuildFile; fileRef = DA65CBA21E1E987000ECE942 /* TransitionsTopSecretAsFuck.h */; };
 		DA65CBB71E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */; };
 		DA65CBB81E1E987000ECE942 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */; };
 		DA65CBB91E1E987000ECE942 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */; };
@@ -68,7 +67,6 @@
 		DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionGestureHandler.swift; sourceTree = "<group>"; };
 		DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionInteractor.swift; sourceTree = "<group>"; };
 		DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionProgressCalculator.swift; sourceTree = "<group>"; };
-		DA65CBA21E1E987000ECE942 /* TransitionsTopSecretAsFuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionsTopSecretAsFuck.h; sourceTree = "<group>"; };
 		DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizerExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */,
 				DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */,
 				DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */,
-				DA65CBA21E1E987000ECE942 /* TransitionsTopSecretAsFuck.h */,
 				DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */,
 				DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */,
 				DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */,
@@ -168,7 +165,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA65CBB61E1E987000ECE942 /* TransitionsTopSecretAsFuck.h in Headers */,
 				DA65CB8A1E1E984C00ECE942 /* LazyTransitions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

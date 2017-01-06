@@ -8,29 +8,29 @@
 
 import UIKit
 
-class PartialTransitionAnimator: NSObject {
-    weak var delegate : TransitionAnimatorDelegate?
-    var orientation : TransitionOrientation
-    var speed : Float
-    var allowedOrientations: [TransitionOrientation]?
-    var supportedOrientations: [TransitionOrientation] = [.topToBottom, .bottomToTop, .leftToRight, .rightToLeft]
-    init(orientation: TransitionOrientation, speed: Float) {
+public class PartialTransitionAnimator: NSObject {
+    public weak var delegate : TransitionAnimatorDelegate?
+    public var orientation : TransitionOrientation
+    public var speed : Float
+    public var allowedOrientations: [TransitionOrientation]?
+    public var supportedOrientations: [TransitionOrientation] = [.topToBottom, .bottomToTop, .leftToRight, .rightToLeft]
+    public init(orientation: TransitionOrientation, speed: Float) {
         self.orientation = orientation
         self.speed = speed
     }
     
-    required init(orientation: TransitionOrientation) {
+    public required init(orientation: TransitionOrientation) {
         self.orientation = orientation
         self.speed = 0
     }
 }
 
 extension PartialTransitionAnimator: TransitionAnimator {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.2
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard isOrientationAllowed,
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
@@ -72,7 +72,7 @@ extension PartialTransitionAnimator: TransitionAnimator {
         })
     }
     
-    func animationEnded(_ transitionCompleted: Bool) {
+    public func animationEnded(_ transitionCompleted: Bool) {
         delegate?.transitionDidFinish(transitionCompleted)
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 extension UIView {
-    static var shadowView: UIView {
+    public static var shadowView: UIView {
         let shadowView = UIView(frame: UIScreen.main.bounds)
         shadowView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         return shadowView

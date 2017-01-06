@@ -8,21 +8,21 @@
 
 import UIKit
 
-class DefaultAnimator: NSObject {
-    weak var delegate : TransitionAnimatorDelegate?
-    var orientation : TransitionOrientation
-    var allowedOrientations: [TransitionOrientation]?
-    required init(orientation: TransitionOrientation) {
+public class DefaultAnimator: NSObject {
+    weak public var delegate : TransitionAnimatorDelegate?
+    public var orientation : TransitionOrientation
+    public var allowedOrientations: [TransitionOrientation]?
+    required public init(orientation: TransitionOrientation) {
         self.orientation = orientation
     }
 }
 
 extension DefaultAnimator: TransitionAnimator {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard isOrientationAllowed,
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
@@ -48,7 +48,7 @@ extension DefaultAnimator: TransitionAnimator {
         })
     }
     
-    func animationEnded(_ transitionCompleted: Bool) {
+    public func animationEnded(_ transitionCompleted: Bool) {
         delegate?.transitionDidFinish(transitionCompleted)
     }
 }

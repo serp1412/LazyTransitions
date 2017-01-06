@@ -9,11 +9,11 @@
 import Foundation
 
 extension UIScrollView: Scrollable {
-    var isAtTop: Bool {
+    public var isAtTop: Bool {
         return contentOffset.y == 0
     }
     
-    var isAtBottom: Bool {
+    public var isAtBottom: Bool {
         let scrollOffset = Int(contentOffset.y)
         let height = Int(frame.height)
         let contentHeight = Int(contentSize.height)
@@ -21,15 +21,15 @@ extension UIScrollView: Scrollable {
         return scrollOffset + height >= contentHeight
     }
     
-    var isSomeWhereInVerticalMiddle: Bool {
+    public var isSomeWhereInVerticalMiddle: Bool {
         return !isAtTop && !isAtBottom
     }
     
-    var isAtLeftEdge: Bool {
+    public var isAtLeftEdge: Bool {
         return contentOffset.x == 0
     }
     
-    var isAtRightEdge: Bool {
+    public var isAtRightEdge: Bool {
         let scrollOffset = Int(contentOffset.x)
         let width = Int(frame.width)
         let contentWidth = Int(contentSize.width)
@@ -37,7 +37,7 @@ extension UIScrollView: Scrollable {
         return scrollOffset + width >= contentWidth
     }
     
-    var isSomeWhereInHorizontalMiddle: Bool {
+    public var isSomeWhereInHorizontalMiddle: Bool {
         return !isAtLeftEdge && !isAtRightEdge
     }
 }

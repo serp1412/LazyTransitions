@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum UIPanGestureRecognizerDirection {
+public enum UIPanGestureRecognizerDirection {
     case undefined
     case up
     case down
@@ -17,7 +17,7 @@ enum UIPanGestureRecognizerDirection {
 }
 
 extension UIPanGestureRecognizer {
-    var direction: UIPanGestureRecognizerDirection {
+    public var direction: UIPanGestureRecognizerDirection {
         let velocity = self.velocity(in: view)
         let isVertical = fabs(velocity.y) > fabs(velocity.x)
         
@@ -32,7 +32,7 @@ extension UIPanGestureRecognizer {
         return direction
     }
     
-    func isQuickSwipe(for orientation: TransitionOrientation) -> Bool {
+    public func isQuickSwipe(for orientation: TransitionOrientation) -> Bool {
         let velocity = self.velocity(in: view)
         return isQuickSwipeForVelocity(velocity, for: orientation)
     }
@@ -52,13 +52,13 @@ extension UIPanGestureRecognizer {
     typealias GestureHandlingTuple = (gesture: UIPanGestureRecognizer? , handle: (UIPanGestureRecognizer) -> ())
     fileprivate static var handlers = [GestureHandlingTuple]()
     
-    convenience init(gestureHandle: @escaping (UIPanGestureRecognizer) -> ()) {
+    public convenience init(gestureHandle: @escaping (UIPanGestureRecognizer) -> ()) {
         self.init()
         UIPanGestureRecognizer.cleanup()
         set(gestureHandle: gestureHandle)
     }
     
-    func set(gestureHandle: @escaping (UIPanGestureRecognizer) -> ()) {
+    public func set(gestureHandle: @escaping (UIPanGestureRecognizer) -> ()) {
         weak var weakSelf = self
         let tuple = (weakSelf, gestureHandle)
         UIPanGestureRecognizer.handlers.append(tuple)

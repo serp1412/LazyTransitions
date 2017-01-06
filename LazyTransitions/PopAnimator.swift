@@ -8,24 +8,24 @@
 
 import Foundation
 
-class PopAnimator: NSObject {
-    weak var delegate : TransitionAnimatorDelegate?
-    var orientation: TransitionOrientation
-    var allowedOrientations: [TransitionOrientation]?
-    required init(orientation: TransitionOrientation) {
+public class PopAnimator: NSObject {
+    public weak var delegate : TransitionAnimatorDelegate?
+    public var orientation: TransitionOrientation
+    public var allowedOrientations: [TransitionOrientation]?
+    public required init(orientation: TransitionOrientation) {
         self.orientation = orientation
     }
-    var supportedOrientations: [TransitionOrientation] {
+    public var supportedOrientations: [TransitionOrientation] {
         return [.leftToRight, .rightToLeft]
     }
 }
 
 extension PopAnimator: TransitionAnimator {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard isOrientationSupported,
             isOrientationAllowed,
             let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
@@ -66,7 +66,7 @@ extension PopAnimator: TransitionAnimator {
         })
     }
     
-    func animationEnded(_ transitionCompleted: Bool) {
+    public func animationEnded(_ transitionCompleted: Bool) {
         delegate?.transitionDidFinish(transitionCompleted)
     }
 }
