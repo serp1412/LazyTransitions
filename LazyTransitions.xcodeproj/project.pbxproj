@@ -98,6 +98,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D7D556D1E1FC07D00054D3A /* Gesture Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				DA65CB991E1E987000ECE942 /* ScrollableGestureHandler.swift */,
+				DA65CB9B1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift */,
+				DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */,
+			);
+			name = "Gesture Handlers";
+			sourceTree = "<group>";
+		};
+		9D7D556E1E1FC08A00054D3A /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				DA65CB9C1E1E987000ECE942 /* TransitionAnimator.swift */,
+				DA65CB931E1E987000ECE942 /* DefaultAnimator.swift */,
+				DA65CB961E1E987000ECE942 /* PartialTransitionAnimator.swift */,
+				DA65CB981E1E987000ECE942 /* PopAnimator.swift */,
+			);
+			name = Animators;
+			sourceTree = "<group>";
+		};
+		9D7D556F1E1FC0B600054D3A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DA65CB951E1E987000ECE942 /* OptionalExtensions.swift */,
+				DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */,
+				DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */,
+				DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		9D7D55701E1FC0C100054D3A /* Transitioners */ = {
+			isa = PBXGroup;
+			children = (
+				DA65CB9D1E1E987000ECE942 /* TransitionCombinator.swift */,
+				DA65CB941E1E987000ECE942 /* DefaultInteractiveTransitioner.swift */,
+				DA65CB971E1E987000ECE942 /* PartialTransitioner.swift */,
+				DA65CBA61E1E987000ECE942 /* UniversalTransitionsHandler.swift */,
+				DA65CB9E1E1E987000ECE942 /* TransitionerProtocols.swift */,
+			);
+			name = Transitioners;
+			sourceTree = "<group>";
+		};
+		9D7D55711E1FC0DB00054D3A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DA65CB9A1E1E987000ECE942 /* ScrollableProtocol.swift */,
+				DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */,
+				DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		DA65CB6F1E1E984C00ECE942 = {
 			isa = PBXGroup;
 			children = (
@@ -120,25 +174,11 @@
 			isa = PBXGroup;
 			children = (
 				DA65CB7C1E1E984C00ECE942 /* LazyTransitions.h */,
-				DA65CB931E1E987000ECE942 /* DefaultAnimator.swift */,
-				DA65CB941E1E987000ECE942 /* DefaultInteractiveTransitioner.swift */,
-				DA65CB951E1E987000ECE942 /* OptionalExtensions.swift */,
-				DA65CB961E1E987000ECE942 /* PartialTransitionAnimator.swift */,
-				DA65CB971E1E987000ECE942 /* PartialTransitioner.swift */,
-				DA65CB981E1E987000ECE942 /* PopAnimator.swift */,
-				DA65CB991E1E987000ECE942 /* ScrollableGestureHandler.swift */,
-				DA65CB9A1E1E987000ECE942 /* ScrollableProtocol.swift */,
-				DA65CB9B1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift */,
-				DA65CB9C1E1E987000ECE942 /* TransitionAnimator.swift */,
-				DA65CB9D1E1E987000ECE942 /* TransitionCombinator.swift */,
-				DA65CB9E1E1E987000ECE942 /* TransitionerProtocols.swift */,
-				DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */,
-				DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */,
-				DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */,
-				DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */,
-				DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */,
-				DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */,
-				DA65CBA61E1E987000ECE942 /* UniversalTransitionsHandler.swift */,
+				9D7D55701E1FC0C100054D3A /* Transitioners */,
+				9D7D556E1E1FC08A00054D3A /* Animators */,
+				9D7D556F1E1FC0B600054D3A /* Extensions */,
+				9D7D556D1E1FC07D00054D3A /* Gesture Handlers */,
+				9D7D55711E1FC0DB00054D3A /* Utilities */,
 				DA65CB7D1E1E984C00ECE942 /* Info.plist */,
 			);
 			path = LazyTransitions;
