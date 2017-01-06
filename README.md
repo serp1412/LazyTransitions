@@ -56,3 +56,19 @@ extension MyVC : TransitionerDelegate {
     }
 }
 ```
+
+If you have a UIScrollView in that view controller and you want to begin a transition when user scrolls to its edges, you can just use: 
+
+```transitioner.addTransition(for: scrollView)```
+
+To add the a bouncy effect when user scrolls with inertia and the UIScrollView reaches its edges, do the following:
+```swift
+// become the delegate of your UIScrollView
+scrollView.delegate = self
+
+// implement the scrollViewDidScroll() delegate method
+func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // forward it to the transitioner
+    transitioner.didScroll(scrollView)
+}
+```
