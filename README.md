@@ -12,7 +12,12 @@ Add the following line to your PodFile:
 
 ## Usage
 
-Here's the simplest way to use LazyTransitions in your project.
+The simplest way to use this framework is to take advantage of `UniversalTransitionsHandler` class.
+
+You can just give it the views in your view controller that will trigger a transition when the user swipes on them. 
+It could be a simple static view. Or a scroll view that will trigger the transition when it reaches the edges of it's content.
+
+Here's some sample code on how to use LazyTransitions in your project.
 
 ```swift
 // first of all import LazyTransitions
