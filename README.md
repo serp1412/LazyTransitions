@@ -103,4 +103,6 @@ func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
 To achieve the standard pop animation of iOS, use the provided `PopAnimator` when initializing the `UniversalTransitionsHandler`
 
-```let transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))```
+```swift 
+let transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))
+```
