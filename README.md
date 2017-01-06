@@ -13,7 +13,6 @@ Add the following line to your PodFile:
 ## Usage
 
 Here's the simplest way to use LazyTransitions in your project.
-Let's assume you want to add a lazy dismiss in all four directions to a simple view controller. 
 
 ```swift
 // first of all import LazyTransitions
@@ -28,14 +27,20 @@ class MyVC : UIViewController {
         // add the main view to your transition handler
         transitioner.addTransition(for: view)
         
+        // FOR DISMISS
         // become your delegate for custom view controller transitioning
         transitioningDelegate = self
+        
+        // or FOR POP
+        // become the delegate for your navigation controller
+        navigationController.delegate = self
         
         // become the transitioner delegate
         transitioner.delegate = self
     }
 }
 
+// FOR DISMISS
 // in the view controller's transitioning methods...
 extension MyVC : UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -49,17 +54,40 @@ extension MyVC : UIViewControllerTransitioningDelegate {
     }
 }
 
-// in the transitioner delegate begin your transition (call dismiss)
+// FOR POP
+// in the navigation controller's delegate methods
+extension MyVC : UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationControllerOperation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard operation == .pop else { return nil }
+        // ... pass the animator if the operation is pop
+        return transitioner.animator
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        // ... pass the interactor
+        return transitioner.interactor
+    }
+}
+
+// in the transitioner delegate begin your transition
 extension MyVC : TransitionerDelegate {
     func beginTransition(with transitioner: Transitioner) {
+        // FOR DISMISS call dismiss
         dismiss(animated: true, completion: nil)
+        // FOR POP call pop
+        _ = navigationController?.popViewController(animated: true)
     }
 }
 ```
 
 If you have a UIScrollView in that view controller and you want to begin a transition when user scrolls to its edges, you can just use: 
 
-```transitioner.addTransition(for: scrollView)```
+```swift
+transitioner.addTransition(for: scrollView)
+```
 
 To add the a bouncy effect when user scrolls with inertia and the UIScrollView reaches its edges, do the following:
 ```swift
