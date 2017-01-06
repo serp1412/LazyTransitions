@@ -1,9 +1,9 @@
 //
 //  ScrollableTests.swift
-//  Wadi
+//  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 1/4/17.
-//  Copyright © 2017 YOPESO. All rights reserved.
+//  Copyright © 2017 BeardWare. All rights reserved.
 //
 
 import XCTest

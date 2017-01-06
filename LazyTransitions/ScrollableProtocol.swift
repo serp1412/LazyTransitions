@@ -1,9 +1,9 @@
 //
 //  ScrollableProtocol.swift
-//  Wadi
+//  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 1/2/17.
-//  Copyright © 2017 YOPESO. All rights reserved.
+//  Copyright © 2017 BeardWare. All rights reserved.
 //
 
 import Foundation

@@ -1,9 +1,9 @@
 //
 //  TransitionAnimator.swift
-//  Wadi
+//  LazyTransitions
 //
-//  Created by Yopeso on 6/29/16.
-//  Copyright © 2016 YOPESO. All rights reserved.
+//  Created by BeardWare on 6/29/16.
+//  Copyright © 2016 BeardWare. All rights reserved.
 //
 
 import UIKit

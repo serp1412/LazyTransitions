@@ -1,9 +1,9 @@
 //
 //  TransitionCombinator.swift
-//  Wadi
+//  LazyTransitions
 //
-//  Created by Yopeso on 12/11/16.
-//  Copyright © 2016 YOPESO. All rights reserved.
+//  Created by BeardWare on 12/11/16.
+//  Copyright © 2016 BeardWare. All rights reserved.
 //
 
 import Foundation

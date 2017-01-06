@@ -1,9 +1,9 @@
 //
 //  OptionalExtensions.swift
-//  Wadi
+//  LazyTransitions
 //
-//  Created by Stanislav Gutuleac on 9/12/16.
-//  Copyright © 2016 YOPESO. All rights reserved.
+//  Created by Serghei Catraniuc on 9/12/16.
+//  Copyright © 2016 BeardWare. All rights reserved.
 //
 
 import Foundation

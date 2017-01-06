@@ -2,7 +2,7 @@
 //  LazyTransitions.h
 //  LazyTransitions
 //
-//  Created by Yopeso on 1/5/17.
+//  Created by BeardWare on 1/5/17.
 //  Copyright © 2017 BeardWare. All rights reserved.
 //
 

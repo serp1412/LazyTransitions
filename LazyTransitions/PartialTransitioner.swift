@@ -1,9 +1,9 @@
 //
 //  PartialTransitioner.swift
-//  Wadi
+//  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 11/30/16.
-//  Copyright © 2016 YOPESO. All rights reserved.
+//  Copyright © 2016 BeardWare. All rights reserved.
 //
 
 import Foundation
