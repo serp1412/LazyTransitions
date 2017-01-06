@@ -14,10 +14,6 @@ public class StaticViewTransitionGestureHandler: TransitionGestureHandler {
     public var inProgressTransitionOrientation = TransitionOrientation.unknown
     public weak var delegate: TransitionGestureHandlerDelegate?
     
-    public convenience init(string: String) {
-        self.init()
-    }
-    
     public func didBegin(_ gesture: UIPanGestureRecognizer) {
         inProgressTransitionOrientation = gesture.direction.orientation
         didBegin = true
