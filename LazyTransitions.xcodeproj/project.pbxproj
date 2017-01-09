@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D7D55731E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */; };
+		9D7D55751E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55741E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift */; };
+		9D7D55771E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55761E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift */; };
 		DA65CB831E1E984C00ECE942 /* LazyTransitions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA65CB791E1E984C00ECE942 /* LazyTransitions.framework */; };
 		DA65CB8A1E1E984C00ECE942 /* LazyTransitions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA65CB7C1E1E984C00ECE942 /* LazyTransitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA65CBA71E1E987000ECE942 /* DefaultAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB931E1E987000ECE942 /* DefaultAnimator.swift */; };
@@ -47,6 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizerTests.swift; sourceTree = "<group>"; };
+		9D7D55741E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensionsTests.swift; sourceTree = "<group>"; };
+		9D7D55761E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionProgressCalculatorTests.swift; sourceTree = "<group>"; };
 		DA65CB791E1E984C00ECE942 /* LazyTransitions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LazyTransitions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA65CB7C1E1E984C00ECE942 /* LazyTransitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyTransitions.h; sourceTree = "<group>"; };
 		DA65CB7D1E1E984C00ECE942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -193,6 +199,9 @@
 				DA65CBBE1E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift */,
 				DA65CBBF1E1E98A800ECE942 /* TransitionCombinatorTests.swift */,
 				DA65CBC01E1E98A800ECE942 /* TransitionGestureHandlerTests.swift */,
+				9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */,
+				9D7D55741E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift */,
+				9D7D55761E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift */,
 				DA65CB891E1E984C00ECE942 /* Info.plist */,
 			);
 			path = LazyTransitionsTests;
@@ -339,8 +348,11 @@
 			files = (
 				DA65CBC51E1E98A800ECE942 /* TransitionCombinatorTests.swift in Sources */,
 				DA65CBC11E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift in Sources */,
+				9D7D55731E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift in Sources */,
 				DA65CBC21E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift in Sources */,
 				DA65CBC31E1E98A800ECE942 /* ScrollableTests.swift in Sources */,
+				9D7D55771E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift in Sources */,
+				9D7D55751E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift in Sources */,
 				DA65CBC61E1E98A800ECE942 /* TransitionGestureHandlerTests.swift in Sources */,
 				DA65CBC41E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift in Sources */,
 			);
