@@ -31,6 +31,10 @@ extension CatViewController {
 
 // MARK: - Private
 extension CatViewController {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
     @IBAction fileprivate func dismiss() {
         dismiss(animated: true, completion: nil)
     }
