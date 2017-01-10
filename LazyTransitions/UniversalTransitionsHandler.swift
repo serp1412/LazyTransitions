@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UniversalTransitionsHandler: Transitioner {
+public class UniversalTransitionsHandler {
     fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?)
     
     public var animator: TransitionAnimator {
@@ -19,9 +19,10 @@ public class UniversalTransitionsHandler: Transitioner {
     }
     public var allowedOrientations: [TransitionOrientation]? {
         didSet {
-           transitionCombinator.allowedOrientations = allowedOrientations
+            transitionCombinator.allowedOrientations = allowedOrientations
         }
     }
+    public var beginTransitionAction: (UniversalTransitionsHandler) -> () = { _ in }
     
     fileprivate let internalAnimator: TransitionAnimator
     fileprivate let internalInteractor: TransitionInteractor
@@ -29,7 +30,7 @@ public class UniversalTransitionsHandler: Transitioner {
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
     public init(animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
-         interactor: TransitionInteractor = TransitionInteractor.default()) {
+                interactor: TransitionInteractor = TransitionInteractor.default()) {
         self.internalAnimator = animator
         self.internalInteractor = interactor
         self.transitionCombinator = TransitionCombinator(defaultAnimator: animator)
@@ -94,8 +95,8 @@ public class UniversalTransitionsHandler: Transitioner {
     fileprivate func createTransitioners(for scrollView: UIScrollView) -> [Transitioner] {
         let scrollViewGestureHandler = ScrollableGestureHandler(scrollable: scrollView)
         let scrollViewTransitioner = DefaultInteractiveTransitioner(with: scrollViewGestureHandler,
-                                                                            with: internalAnimator,
-                                                                            with: internalInteractor)
+                                                                    with: internalAnimator,
+                                                                    with: internalInteractor)
         scrollView.panGestureRecognizer.set { gesture in
             scrollViewGestureHandler.handlePanGesture(gesture)
         }
@@ -107,10 +108,6 @@ public class UniversalTransitionsHandler: Transitioner {
 
 extension UniversalTransitionsHandler: TransitionerDelegate {
     public func beginTransition(with transitioner: Transitioner) {
-        delegate?.beginTransition(with: self)
-    }
-    
-    public func finishedInteractiveTransition(_ completed: Bool) {
-        delegate?.finishedInteractiveTransition(completed)
+        beginTransitionAction(self)
     }
 }
