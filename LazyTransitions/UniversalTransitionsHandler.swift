@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UniversalTransitionsHandler: Transitioner {
+public class UniversalTransitionsHandler {
     fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?)
     
     public var animator: TransitionAnimator {
@@ -22,6 +22,7 @@ public class UniversalTransitionsHandler: Transitioner {
            transitionCombinator.allowedOrientations = allowedOrientations
         }
     }
+    public var beginTransitionAction: (UniversalTransitionsHandler) -> () = { _ in }
     
     fileprivate let internalAnimator: TransitionAnimator
     fileprivate let internalInteractor: TransitionInteractor
@@ -107,10 +108,6 @@ public class UniversalTransitionsHandler: Transitioner {
 
 extension UniversalTransitionsHandler: TransitionerDelegate {
     public func beginTransition(with transitioner: Transitioner) {
-        delegate?.beginTransition(with: self)
-    }
-    
-    public func finishedInteractiveTransition(_ completed: Bool) {
-        delegate?.finishedInteractiveTransition(completed)
+        beginTransitionAction(self)
     }
 }
