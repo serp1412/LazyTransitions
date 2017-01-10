@@ -10,7 +10,7 @@ import Foundation
 
 extension UIScrollView: Scrollable {
     public var isAtTop: Bool {
-        return contentOffset.y == 0
+        return (contentOffset.y - contentInset.top) == 0
     }
     
     public var isAtBottom: Bool {
@@ -26,7 +26,7 @@ extension UIScrollView: Scrollable {
     }
     
     public var isAtLeftEdge: Bool {
-        return contentOffset.x == 0
+        return (contentOffset.x - contentInset.left) == 0
     }
     
     public var isAtRightEdge: Bool {
