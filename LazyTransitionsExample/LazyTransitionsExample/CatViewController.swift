@@ -9,7 +9,8 @@
 import UIKit
 
 class CatViewController: UICollectionViewController {
-    
+    var didScrollCallback: (UIScrollView) -> () = { _ in }
+    fileprivate var viewDidAppear: Bool = false
     fileprivate let reuseIdentifier = "PhotoCell"
     fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     fileprivate let itemsPerRow: CGFloat = 3
@@ -17,10 +18,10 @@ class CatViewController: UICollectionViewController {
 
 // MARK: - Public
 extension CatViewController {
-    static func instantiate() -> CatViewController {
+    static func instantiate(withTitle title: String) -> CatViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let catVC = storyboard.instantiateViewController(withIdentifier: "CatViewController") as! CatViewController
-        
+        catVC.navigationItem.title = title
         return catVC
     }
     
@@ -33,8 +34,9 @@ extension CatViewController {
 extension CatViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        viewDidAppear = true
     }
+    
     @IBAction fileprivate func dismiss() {
         dismiss(animated: true, completion: nil)
     }
@@ -61,13 +63,18 @@ extension CatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
     }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard viewDidAppear else { return }
+        didScrollCallback(scrollView)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension CatViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return 13
+        return 27
     }
     
     override func collectionView(_ collectionView: UICollectionView,

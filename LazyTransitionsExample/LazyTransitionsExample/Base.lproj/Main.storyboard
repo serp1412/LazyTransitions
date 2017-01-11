@@ -49,14 +49,14 @@
                                 <rect key="frame" x="138" y="256" width="98" height="30"/>
                                 <state key="normal" title="Dismiss Demo"/>
                                 <connections>
-                                    <action selector="dismissTapped" destination="OcM-pY-gZO" eventType="touchUpInside" id="Omv-75-TOb"/>
+                                    <action selector="dismissDemoTapped" destination="OcM-pY-gZO" eventType="touchUpInside" id="Chi-l0-9HV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYj-AW-ck3">
                                 <rect key="frame" x="151" y="318" width="72" height="30"/>
                                 <state key="normal" title="Pop Demo"/>
                                 <connections>
-                                    <action selector="popTapped" destination="OcM-pY-gZO" eventType="touchUpInside" id="8DZ-mL-Ful"/>
+                                    <action selector="popDemoTapped" destination="OcM-pY-gZO" eventType="touchUpInside" id="BK5-8F-CtD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -80,7 +80,7 @@
         <scene sceneID="BdP-D7-gm0">
             <objects>
                 <collectionViewController storyboardIdentifier="CatViewController" id="QDE-8W-dFB" customClass="CatViewController" customModule="LazyTransitionsExample" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="MMd-lU-Qyn">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MMd-lU-Qyn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -10,25 +10,27 @@ import UIKit
 import LazyTransitions
 
 class IntroViewController: UIViewController {
-    
     fileprivate var transitioner = UniversalTransitionsHandler()
     
-    @IBAction func dismissTapped() {
-        let catVC = CatViewController.instantiate()
+    @IBAction func dismissDemoTapped() {
+        let catVC = CatViewController.instantiate(withTitle: "Dismiss Demo")
         let navController = UINavigationController(rootViewController: catVC)
         present(navController, animated: true, completion: nil)
         transitioner = UniversalTransitionsHandler()
-        let view = catVC.view as UIView
         transitioner.addTransition(for: catVC.collectionView!)
+        let view = catVC.view as UIView
         transitioner.addTransition(for: view)
         transitioner.beginTransitionAction = { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
+        catVC.didScrollCallback = { [weak self] scrollView in
+            self?.transitioner.didScroll(scrollView)
+        }
         navController.transitioningDelegate = self
     }
     
-    @IBAction func popTapped() {
-        let catVC = CatViewController.instantiate()
+    @IBAction func popDemoTapped() {
+        let catVC = CatViewController.instantiate(withTitle: "Pop Demo")
         catVC.removeDismissButton()
         navigationController?.pushViewController(catVC, animated: true)
         transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))
@@ -64,4 +66,3 @@ extension IntroViewController: UINavigationControllerDelegate {
         return transitioner.interactor
     }
 }
-
