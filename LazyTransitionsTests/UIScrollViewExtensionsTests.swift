@@ -25,7 +25,7 @@ class UIScrollViewExtensionsTests: XCTestCase {
     
     func testIsAtTop_True_WithContentInset() {
         scrollView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
-        scrollView.contentOffset = CGPoint(x: 0, y: 64)
+        scrollView.contentOffset = CGPoint(x: 0, y: -64)
         XCTAssert(scrollView.isAtTop)
         XCTAssert(!scrollView.isAtBottom)
         XCTAssert(!scrollView.isSomeWhereInVerticalMiddle)
@@ -33,6 +33,14 @@ class UIScrollViewExtensionsTests: XCTestCase {
     
     func testisAtTop_False() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 10), animated: false)
+        XCTAssert(!scrollView.isAtTop)
+        XCTAssert(!scrollView.isAtBottom)
+        XCTAssert(scrollView.isSomeWhereInVerticalMiddle)
+    }
+    
+    func testisAtTop_False_WithContentInset() {
+        scrollView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        scrollView.contentOffset = CGPoint(x: 0, y: -40)
         XCTAssert(!scrollView.isAtTop)
         XCTAssert(!scrollView.isAtBottom)
         XCTAssert(scrollView.isSomeWhereInVerticalMiddle)
@@ -62,7 +70,7 @@ class UIScrollViewExtensionsTests: XCTestCase {
     
     func testisAtLeftEdge_True_WithContentInset() {
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        scrollView.setContentOffset(CGPoint(x: 10, y: 0), animated: false)
+        scrollView.setContentOffset(CGPoint(x: -10, y: 0), animated: false)
         
         XCTAssert(scrollView.isAtLeftEdge)
         XCTAssert(!scrollView.isAtRightEdge)
