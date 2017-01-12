@@ -72,6 +72,14 @@ class MyVC : UIViewController {
         // add the main view to your transition handler
         transitioner.addTransition(for: view)
         
+        // trigger the transition in beginTransitionAction
+        transitioner.beginTransitionAction = { [weak self] _ in
+            // for dismiss
+            self?.dismiss(animated: true, completion: nil)
+            // or for pop
+            _ = self?.navigationController?.popViewController(animated: true)
+        }
+        
         // FOR DISMISS
         // become your delegate for custom view controller transitioning
         transitioningDelegate = self
@@ -79,9 +87,6 @@ class MyVC : UIViewController {
         // or FOR POP
         // become the delegate for your navigation controller
         navigationController.delegate = self
-        
-        // become the transitioner delegate
-        transitioner.delegate = self
     }
 }
 
@@ -115,16 +120,6 @@ extension MyVC : UINavigationControllerDelegate {
                               interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         // ... pass the interactor
         return transitioner.interactor
-    }
-}
-
-// in the transitioner delegate begin your transition
-extension MyVC : TransitionerDelegate {
-    func beginTransition(with transitioner: Transitioner) {
-        // FOR DISMISS call dismiss
-        dismiss(animated: true, completion: nil)
-        // FOR POP call pop
-        _ = navigationController?.popViewController(animated: true)
     }
 }
 ```
