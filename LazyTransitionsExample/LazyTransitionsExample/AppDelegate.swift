@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if let fingerWindow = window as? MBFingerTipWindow {
-            fingerWindow.alwaysShowTouches = true
-        }
+//        if let fingerWindow = window as? MBFingerTipWindow {
+//            fingerWindow.alwaysShowTouches = true
+//        }
         // Override point for customization after application launch.
         return true
     }
