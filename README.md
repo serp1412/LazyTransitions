@@ -1,6 +1,10 @@
 # LazyTransitions
 
-A simple framework that allows you to create similar lazy transitions like in the Facebook, Instagram or Twitter apps.
+A simple framework that allows you to create similar lazy pops and dismisses like in the Facebook, Instagram or Twitter apps.
+
+<p align="center" >
+<img src="https://github.com/serp1412/LazyTransitions/blob/master/LazyTransitionsDemo.gif" alt="LazyTransitions" title="LazyTransitions demo">
+</p>
 
 ## Installation
 
@@ -16,6 +20,44 @@ The simplest way to use this framework is to take advantage of `UniversalTransit
 
 You can just give it the views in your view controller that will trigger a transition when the user swipes on them. 
 It could be a simple static view. Or a scroll view that will trigger the transition when it reaches the edges of it's content.
+
+1. Import the framework
+
+```swift
+import LazyTransitions
+```
+
+2. Create an instance of `UniversalTransitionsHandler`
+```swift
+let transitioner = UniversalTransitionsHandler()
+```
+
+3. Pass your transition views (views that will trigger a transition when user pans on them) to the handler
+```swift
+transitioner.addTransition(for: view)
+// or
+transitioner.addTransition(for: scrollView)
+```
+
+4. In the beginTransitionAction trigger your transition (dismiss or pop)
+```swift
+transitioner.beginTransitionAction = { [weak self] _ in
+    self?.dismiss(animated: true, completion: nil)
+}
+```
+
+5. In your transitioning delegate methods pass the animator and interactor from the transition handler
+```swift
+func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    // ... pass the animator
+    return transitioner.animator
+}
+    
+func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    // ... pass the interactor
+    return transitioner.interactor
+}
+```
 
 Here's some sample code on how to use LazyTransitions in your project.
 
@@ -88,11 +130,7 @@ extension MyVC : TransitionerDelegate {
 }
 ```
 
-If you have a UIScrollView in that view controller and you want to begin a transition when user scrolls to its edges, you can just use: 
-
-```swift
-transitioner.addTransition(for: scrollView)
-```
+## Usage Tips
 
 To add the a bouncy effect when user scrolls with inertia and the UIScrollView reaches its edges, do the following:
 ```swift
@@ -110,4 +148,9 @@ To achieve the standard pop animation of iOS, use the provided `PopAnimator` whe
 
 ```swift 
 let transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))
+```
+
+You can limit the allowed transition orientations by setting them like this:
+```swift
+transitioner.allowedOrientations = [.leftToRight, .topToBottom, .bottomToTop]
 ```
