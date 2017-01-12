@@ -1,5 +1,7 @@
 # LazyTransitions
 
+[![Twitter](https://img.shields.io/badge/twitter-@serp1412-blue.svg?style=flat)](http://twitter.com/serp1412)
+
 A simple framework that allows you to create similar lazy pops and dismisses like in the Facebook, Instagram or Twitter apps.
 
 <p align="center" >
