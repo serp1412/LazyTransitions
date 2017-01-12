@@ -21,32 +21,28 @@ The simplest way to use this framework is to take advantage of `UniversalTransit
 You can just give it the views in your view controller that will trigger a transition when the user swipes on them. 
 It could be a simple static view. Or a scroll view that will trigger the transition when it reaches the edges of it's content.
 
-1. Import the framework
-
+* Import the framework
 ```swift
 import LazyTransitions
 ```
-
-2. Create an instance of `UniversalTransitionsHandler`
+* Create an instance of `UniversalTransitionsHandler`
 ```swift
 let transitioner = UniversalTransitionsHandler()
 ```
-
-3. Pass your transition views (views that will trigger a transition when user pans on them) to the handler
+* Pass your transition views (views that will trigger a transition when user pans on them) to the handler
 ```swift
 transitioner.addTransition(for: view)
 // or
 transitioner.addTransition(for: scrollView)
 ```
-
-4. In the beginTransitionAction trigger your transition (dismiss or pop)
+* In the `beginTransitionAction` trigger your transition (dismiss or pop)
 ```swift
 transitioner.beginTransitionAction = { [weak self] _ in
     self?.dismiss(animated: true, completion: nil)
 }
 ```
 
-5. In your transitioning delegate methods pass the animator and interactor from the transition handler
+* In your transitioning delegate methods pass the animator and interactor from the transition handler
 ```swift
 func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     // ... pass the animator
@@ -58,6 +54,8 @@ func interactionControllerForDismissal(using animator: UIViewControllerAnimatedT
     return transitioner.interactor
 }
 ```
+
+### Example
 
 Here's some sample code on how to use LazyTransitions in your project.
 
@@ -113,7 +111,8 @@ extension MyVC : UINavigationControllerDelegate {
         return transitioner.animator
     }
     
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, 
+                              interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         // ... pass the interactor
         return transitioner.interactor
     }
