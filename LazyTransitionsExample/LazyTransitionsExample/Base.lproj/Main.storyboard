@@ -45,14 +45,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z6-ea-Tdu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z6-ea-Tdu" customClass="HABorderButton">
                                 <rect key="frame" x="138" y="256" width="98" height="30"/>
                                 <state key="normal" title="Dismiss Demo"/>
                                 <connections>
                                     <action selector="dismissDemoTapped" destination="OcM-pY-gZO" eventType="touchUpInside" id="Chi-l0-9HV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYj-AW-ck3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYj-AW-ck3" customClass="HABorderButton">
                                 <rect key="frame" x="151" y="318" width="72" height="30"/>
                                 <state key="normal" title="Pop Demo"/>
                                 <connections>

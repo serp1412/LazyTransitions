@@ -37,6 +37,8 @@
 		9D7D55D71E262D6C00054D3A /* 18.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7D55C91E262D6C00054D3A /* 18.png */; };
 		9D7D55D81E262D6C00054D3A /* 19.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7D55CA1E262D6C00054D3A /* 19.png */; };
 		9D7D55D91E262D6C00054D3A /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7D55CB1E262D6C00054D3A /* 13.png */; };
+		9D7D55DD1E26366700054D3A /* MBFingerTipWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55DC1E26366700054D3A /* MBFingerTipWindow.m */; };
+		9D7D55E01E2637DE00054D3A /* HABorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55DF1E2637DE00054D3A /* HABorderButton.m */; };
 		DAEE389D1E23E2F2004CB8D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE389C1E23E2F2004CB8D9 /* AppDelegate.swift */; };
 		DAEE389F1E23E2F2004CB8D9 /* CatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE389E1E23E2F2004CB8D9 /* CatViewController.swift */; };
 		DAEE38A21E23E2F2004CB8D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAEE38A01E23E2F2004CB8D9 /* Main.storyboard */; };
@@ -77,6 +79,11 @@
 		9D7D55C91E262D6C00054D3A /* 18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 18.png; sourceTree = "<group>"; };
 		9D7D55CA1E262D6C00054D3A /* 19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 19.png; sourceTree = "<group>"; };
 		9D7D55CB1E262D6C00054D3A /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
+		9D7D55DA1E26366600054D3A /* LazyTransitionsExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyTransitionsExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		9D7D55DB1E26366700054D3A /* MBFingerTipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFingerTipWindow.h; sourceTree = "<group>"; };
+		9D7D55DC1E26366700054D3A /* MBFingerTipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFingerTipWindow.m; sourceTree = "<group>"; };
+		9D7D55DE1E2637DE00054D3A /* HABorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HABorderButton.h; sourceTree = "<group>"; };
+		9D7D55DF1E2637DE00054D3A /* HABorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HABorderButton.m; sourceTree = "<group>"; };
 		DAEE38991E23E2F2004CB8D9 /* LazyTransitionsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyTransitionsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEE389C1E23E2F2004CB8D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAEE389E1E23E2F2004CB8D9 /* CatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +139,10 @@
 				DAEE389E1E23E2F2004CB8D9 /* CatViewController.swift */,
 				9D7D55BC1E2515B800054D3A /* IntroViewController.swift */,
 				9D7D55BA1E25128700054D3A /* PhotoCell.swift */,
+				9D7D55DB1E26366700054D3A /* MBFingerTipWindow.h */,
+				9D7D55DC1E26366700054D3A /* MBFingerTipWindow.m */,
+				9D7D55DE1E2637DE00054D3A /* HABorderButton.h */,
+				9D7D55DF1E2637DE00054D3A /* HABorderButton.m */,
 				DAEE38A01E23E2F2004CB8D9 /* Main.storyboard */,
 				DAEE38A31E23E2F2004CB8D9 /* Assets.xcassets */,
 				9D7D55A81E25118C00054D3A /* 0.png */,
@@ -163,6 +174,7 @@
 				9D7D55C41E262D6C00054D3A /* 26.png */,
 				DAEE38A51E23E2F2004CB8D9 /* LaunchScreen.storyboard */,
 				DAEE38A81E23E2F2004CB8D9 /* Info.plist */,
+				9D7D55DA1E26366600054D3A /* LazyTransitionsExample-Bridging-Header.h */,
 			);
 			path = LazyTransitionsExample;
 			sourceTree = "<group>";
@@ -211,6 +223,7 @@
 					DAEE38981E23E2F2004CB8D9 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7C2WZ3W3L2;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -328,8 +341,10 @@
 			files = (
 				DAEE389F1E23E2F2004CB8D9 /* CatViewController.swift in Sources */,
 				9D7D55BB1E25128700054D3A /* PhotoCell.swift in Sources */,
+				9D7D55E01E2637DE00054D3A /* HABorderButton.m in Sources */,
 				DAEE389D1E23E2F2004CB8D9 /* AppDelegate.swift in Sources */,
 				9D7D55BD1E2515B800054D3A /* IntroViewController.swift in Sources */,
+				9D7D55DD1E26366700054D3A /* MBFingerTipWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,11 +466,14 @@
 			baseConfigurationReference = 5EEF53A5A5C9CCF1C4AA17AF /* Pods-LazyTransitionsExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 7C2WZ3W3L2;
 				INFOPLIST_FILE = LazyTransitionsExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beardware.LazyTransitionsExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LazyTransitionsExample/LazyTransitionsExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -465,11 +483,13 @@
 			baseConfigurationReference = 61078182D18FB4F76B31F5CC /* Pods-LazyTransitionsExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 7C2WZ3W3L2;
 				INFOPLIST_FILE = LazyTransitionsExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beardware.LazyTransitionsExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LazyTransitionsExample/LazyTransitionsExample-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

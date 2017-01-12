@@ -38,6 +38,7 @@ class IntroViewController: UIViewController {
         transitioner.beginTransitionAction = { [weak self] _ in
             _ = self?.navigationController?.popViewController(animated: true)
         }
+        transitioner.allowedOrientations = [.leftToRight]
         navigationController?.delegate = self
     }
 }
