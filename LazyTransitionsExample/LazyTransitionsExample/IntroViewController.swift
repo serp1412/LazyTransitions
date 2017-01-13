@@ -20,7 +20,7 @@ class IntroViewController: UIViewController {
         transitioner.addTransition(for: catVC.collectionView!)
         let view = catVC.view as UIView
         transitioner.addTransition(for: view)
-        transitioner.beginTransitionAction = { [weak self] _ in
+        transitioner.triggerTransitionAction = { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
         catVC.didScrollCallback = { [weak self] scrollView in
@@ -35,7 +35,7 @@ class IntroViewController: UIViewController {
         navigationController?.pushViewController(catVC, animated: true)
         transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))
         transitioner.addTransition(for: catVC.view)
-        transitioner.beginTransitionAction = { [weak self] _ in
+        transitioner.triggerTransitionAction = { [weak self] _ in
             _ = self?.navigationController?.popViewController(animated: true)
         }
         transitioner.allowedOrientations = [.leftToRight]
