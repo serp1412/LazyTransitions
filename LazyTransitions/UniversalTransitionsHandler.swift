@@ -22,7 +22,7 @@ public class UniversalTransitionsHandler {
             transitionCombinator.allowedOrientations = allowedOrientations
         }
     }
-    public var beginTransitionAction: (UniversalTransitionsHandler) -> () = { _ in }
+    public var triggerTransitionAction: (UniversalTransitionsHandler) -> () = { _ in }
     
     fileprivate let internalAnimator: TransitionAnimator
     fileprivate let internalInteractor: TransitionInteractor
@@ -108,6 +108,6 @@ public class UniversalTransitionsHandler {
 
 extension UniversalTransitionsHandler: TransitionerDelegate {
     public func beginTransition(with transitioner: Transitioner) {
-        beginTransitionAction(self)
+        triggerTransitionAction(self)
     }
 }
