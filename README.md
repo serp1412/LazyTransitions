@@ -37,9 +37,9 @@ transitioner.addTransition(for: view)
 // or
 transitioner.addTransition(for: scrollView)
 ```
-* In the `beginTransitionAction` trigger your transition (dismiss or pop)
+* In the `triggerTransitionAction` trigger your transition (dismiss or pop)
 ```swift
-transitioner.beginTransitionAction = { [weak self] _ in
+transitioner.triggerTransitionAction = { [weak self] _ in
     self?.dismiss(animated: true, completion: nil)
 }
 ```
@@ -74,8 +74,8 @@ class MyVC : UIViewController {
         // add the main view to your transition handler
         transitioner.addTransition(for: view)
         
-        // trigger the transition in beginTransitionAction
-        transitioner.beginTransitionAction = { [weak self] _ in
+        // trigger the transition in triggerTransitionAction
+        transitioner.triggerTransitionAction = { [weak self] _ in
             // for dismiss
             self?.dismiss(animated: true, completion: nil)
             // or for pop
