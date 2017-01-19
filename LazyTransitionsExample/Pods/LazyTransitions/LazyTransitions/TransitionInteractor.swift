@@ -24,7 +24,8 @@ public class TransitionInteractor: UIPercentDrivenInteractiveTransition {
         return transitionInteractor
     }
     
-    fileprivate var isiOS9: Bool {
-        return ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0))
-    }
+    fileprivate let isiOS9: Bool = {
+        if #available(iOS 9.0, *) { return true }
+        return false
+    }()
 }

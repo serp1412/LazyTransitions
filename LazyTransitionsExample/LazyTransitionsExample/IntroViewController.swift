@@ -26,7 +26,7 @@ class IntroViewController: UIViewController {
         catVC.didScrollCallback = { [weak self] scrollView in
             self?.transitioner.didScroll(scrollView)
         }
-        navController.transitioningDelegate = self
+        navController.transitioningDelegate = transitioner
     }
     
     @IBAction func popDemoTapped() {
@@ -39,31 +39,6 @@ class IntroViewController: UIViewController {
             _ = self?.navigationController?.popViewController(animated: true)
         }
         transitioner.allowedOrientations = [.leftToRight]
-        navigationController?.delegate = self
-    }
-}
-
-extension IntroViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return transitioner.animator
-    }
-    
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return transitioner.interactor
-    }
-}
-
-extension IntroViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController,
-                              animationControllerFor operation: UINavigationControllerOperation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard operation == .pop else { return nil }
-        return transitioner.animator
-    }
-    
-    func navigationController(_ navigationController: UINavigationController,
-                              interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return transitioner.interactor
+        navigationController?.delegate = transitioner
     }
 }
