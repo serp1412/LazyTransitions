@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UniversalTransitionsHandler {
+public class UniversalTransitionsHandler : NSObject {
     fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?)
     
     public var animator: TransitionAnimator {
@@ -34,6 +34,7 @@ public class UniversalTransitionsHandler {
         self.internalAnimator = animator
         self.internalInteractor = interactor
         self.transitionCombinator = TransitionCombinator(defaultAnimator: animator)
+        super.init()
         transitionCombinator.delegate = self
     }
     
@@ -109,5 +110,26 @@ public class UniversalTransitionsHandler {
 extension UniversalTransitionsHandler: TransitionerDelegate {
     public func beginTransition(with transitioner: Transitioner) {
         triggerTransitionAction(self)
+    }
+}
+
+extension UniversalTransitionsHandler : UIViewControllerTransitioningDelegate {
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return animator
+    }
+    
+    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor
+    }
+}
+
+extension UniversalTransitionsHandler : UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard operation == .pop else { return nil }
+        return animator
+    }
+    
+    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor
     }
 }
