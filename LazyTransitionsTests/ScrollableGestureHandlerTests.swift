@@ -27,7 +27,7 @@ class MockScrollable: Scrollable {
         return mockIsAtBottom
     }
     
-    var isSomeWhereInVerticalMiddle: Bool {
+    var isSomewhereInVerticalMiddle: Bool {
         return mockIsInVerticalMiddle
     }
     
@@ -39,7 +39,7 @@ class MockScrollable: Scrollable {
         return mockIsAtRightEdge
     }
     
-    var isSomeWhereInHorizontalMiddle: Bool {
+    var isSomewhereInHorizontalMiddle: Bool {
         return mockIsInHorizontalMiddle
     }
 }

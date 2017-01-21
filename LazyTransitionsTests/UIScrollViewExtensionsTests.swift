@@ -20,7 +20,7 @@ class UIScrollViewExtensionsTests: XCTestCase {
     func testisAtTop_True() {
         XCTAssert(scrollView.isAtTop)
         XCTAssert(!scrollView.isAtBottom)
-        XCTAssert(!scrollView.isSomeWhereInVerticalMiddle)
+        XCTAssert(!scrollView.isSomewhereInVerticalMiddle)
     }
     
     func testIsAtTop_True_WithContentInset() {
@@ -28,14 +28,14 @@ class UIScrollViewExtensionsTests: XCTestCase {
         scrollView.contentOffset = CGPoint(x: 0, y: -64)
         XCTAssert(scrollView.isAtTop)
         XCTAssert(!scrollView.isAtBottom)
-        XCTAssert(!scrollView.isSomeWhereInVerticalMiddle)
+        XCTAssert(!scrollView.isSomewhereInVerticalMiddle)
     }
     
     func testisAtTop_False() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 10), animated: false)
         XCTAssert(!scrollView.isAtTop)
         XCTAssert(!scrollView.isAtBottom)
-        XCTAssert(scrollView.isSomeWhereInVerticalMiddle)
+        XCTAssert(scrollView.isSomewhereInVerticalMiddle)
     }
     
     func testisAtTop_False_WithContentInset() {
@@ -43,21 +43,21 @@ class UIScrollViewExtensionsTests: XCTestCase {
         scrollView.contentOffset = CGPoint(x: 0, y: -40)
         XCTAssert(!scrollView.isAtTop)
         XCTAssert(!scrollView.isAtBottom)
-        XCTAssert(scrollView.isSomeWhereInVerticalMiddle)
+        XCTAssert(scrollView.isSomewhereInVerticalMiddle)
     }
     
     func testisAtBottom_True_FirstScenario() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: false)
         XCTAssert(scrollView.isAtBottom)
         XCTAssert(!scrollView.isAtTop)
-        XCTAssert(!scrollView.isSomeWhereInVerticalMiddle)
+        XCTAssert(!scrollView.isSomewhereInVerticalMiddle)
     }
     
     func testisAtBottom_True_SecondScenario() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 150), animated: false)
         XCTAssert(scrollView.isAtBottom)
         XCTAssert(!scrollView.isAtTop)
-        XCTAssert(!scrollView.isSomeWhereInVerticalMiddle)
+        XCTAssert(!scrollView.isSomewhereInVerticalMiddle)
     }
     
     func testisAtLeftEdge_True() {
@@ -65,7 +65,7 @@ class UIScrollViewExtensionsTests: XCTestCase {
         
         XCTAssert(scrollView.isAtLeftEdge)
         XCTAssert(!scrollView.isAtRightEdge)
-        XCTAssert(!scrollView.isSomeWhereInHorizontalMiddle)
+        XCTAssert(!scrollView.isSomewhereInHorizontalMiddle)
     }
     
     func testisAtLeftEdge_True_WithContentInset() {
@@ -74,27 +74,27 @@ class UIScrollViewExtensionsTests: XCTestCase {
         
         XCTAssert(scrollView.isAtLeftEdge)
         XCTAssert(!scrollView.isAtRightEdge)
-        XCTAssert(!scrollView.isSomeWhereInHorizontalMiddle)
+        XCTAssert(!scrollView.isSomewhereInHorizontalMiddle)
     }
     
     func testisAtLeftEdge_False() {
         scrollView.setContentOffset(CGPoint(x: 10, y: 0), animated: false)
         XCTAssertFalse(scrollView.isAtLeftEdge)
         XCTAssertFalse(scrollView.isAtRightEdge)
-        XCTAssert(scrollView.isSomeWhereInHorizontalMiddle)
+        XCTAssert(scrollView.isSomewhereInHorizontalMiddle)
     }
     
     func testisAtRightEdge_True_FirstScenario() {
         scrollView.setContentOffset(CGPoint(x: 100, y: 10), animated: false)
         XCTAssert(scrollView.isAtRightEdge)
         XCTAssertFalse(scrollView.isAtLeftEdge)
-        XCTAssertFalse(scrollView.isSomeWhereInHorizontalMiddle)
+        XCTAssertFalse(scrollView.isSomewhereInHorizontalMiddle)
     }
     
     func testisAtRightEdge_True_SecondScenario() {
         scrollView.setContentOffset(CGPoint(x: 120, y: 10), animated: false)
         XCTAssert(scrollView.isAtRightEdge)
         XCTAssertFalse(scrollView.isAtLeftEdge)
-        XCTAssertFalse(scrollView.isSomeWhereInHorizontalMiddle)
+        XCTAssertFalse(scrollView.isSomewhereInHorizontalMiddle)
     }
 }

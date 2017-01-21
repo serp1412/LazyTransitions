@@ -13,7 +13,7 @@ public class PartialTransitioner: Transitioner {
     fileprivate var isPartialTransitionPossible: Bool {
         guard let scrollView = scrollView else { return false }
         if lastRecordedSpeed == 0 { return false }
-        if scrollView.isSomeWhereInVerticalMiddle { return false }
+        if scrollView.isSomewhereInVerticalMiddle { return false }
         if scrollView.panGestureRecognizer.state != .possible { return false }
         
         return true
@@ -22,7 +22,7 @@ public class PartialTransitioner: Transitioner {
         guard let scrollView = scrollView else { return .topToBottom }
         return scrollView.possibleVerticalOrientation
     }
-    fileprivate var lastRecordedSpeed: Float = 0
+    fileprivate var lastRecordedSpeed: CGFloat = 0
     fileprivate var lastOffset: CGPoint = .zero
     fileprivate var lastOffsetCapture: TimeInterval = 0
     
@@ -59,7 +59,7 @@ public class PartialTransitioner: Transitioner {
         let distance = currentOffset.y - lastOffset.y
         let scrollSpeedNotAbs = (distance * 10) / 1000.0 //in pixels per millisecond
         
-        lastRecordedSpeed = fabs(Float(scrollSpeedNotAbs))
+        lastRecordedSpeed = fabs(scrollSpeedNotAbs)
         lastOffset = currentOffset
         lastOffsetCapture = currentTime
     }

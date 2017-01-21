@@ -21,7 +21,7 @@ extension UIScrollView: Scrollable {
         return scrollOffset + height >= contentHeight
     }
     
-    public var isSomeWhereInVerticalMiddle: Bool {
+    public var isSomewhereInVerticalMiddle: Bool {
         return !isAtTop && !isAtBottom
     }
     
@@ -37,7 +37,7 @@ extension UIScrollView: Scrollable {
         return scrollOffset + width >= contentWidth
     }
     
-    public var isSomeWhereInHorizontalMiddle: Bool {
+    public var isSomewhereInHorizontalMiddle: Bool {
         return !isAtLeftEdge && !isAtRightEdge
     }
 }

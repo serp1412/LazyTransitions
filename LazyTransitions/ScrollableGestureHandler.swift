@@ -69,14 +69,14 @@ public class ScrollableGestureHandler: TransitionGestureHandler {
         if didBegin { return false }
         guard let scrollable = scrollable else { return false }
         
-        if scrollable.isSomeWhereInVerticalMiddle && scrollable.isSomeWhereInHorizontalMiddle { return false }
+        if scrollable.isSomewhereInVerticalMiddle && scrollable.isSomewhereInHorizontalMiddle { return false }
         if !scrollable.scrollsHorizontally
-            && scrollable.isSomeWhereInVerticalMiddle {
+            && scrollable.isSomewhereInVerticalMiddle {
             return false
         }
         
         if !scrollable.scrollsVertically
-            && scrollable.isSomeWhereInHorizontalMiddle {
+            && scrollable.isSomewhereInHorizontalMiddle {
             return false
         }
         
@@ -94,11 +94,11 @@ public class ScrollableGestureHandler: TransitionGestureHandler {
             return scrollable.possibleHorizontalOrientation
         }
         
-        if scrollable.isSomeWhereInHorizontalMiddle {
+        if scrollable.isSomewhereInHorizontalMiddle {
             return scrollable.possibleVerticalOrientation
         }
         
-        if scrollable.isSomeWhereInVerticalMiddle {
+        if scrollable.isSomewhereInVerticalMiddle {
             return scrollable.possibleHorizontalOrientation
         }
         
