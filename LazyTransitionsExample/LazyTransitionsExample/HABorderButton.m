@@ -10,25 +10,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation HABorderButton
-
-- (instancetype)initWithCoder:(NSCoder *)coder {
-        self = [super initWithCoder:coder];
-        if (self) {
-            [self adjustFrameForTitle];
-            [self drawBorder];
-        }
-        return self;
-    }
     
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self adjustFrameForTitle];
+    self.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    [self setNeedsLayout];
     [self drawBorder];
-}
-    
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self adjustFrameForTitle];
 }
     
 - (void)drawBorder {
@@ -63,20 +50,8 @@
 
 
 -(void)setTitle:(NSString *)title forState:(UIControlState)state {
-    
-    [self adjustFrameForTitle];
     [self drawBorder];
     [self setupTitleColor];
-}
-    
-- (void)adjustFrameForTitle {
-    CGPoint center = self.center;
-    
-    CGSize stringSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font];
-    CGRect frame = self.frame;
-    frame.size = CGSizeMake(stringSize.width + 10, stringSize.height + 10);
-    self.frame = frame;
-    self.center = center;
 }
 
 @end

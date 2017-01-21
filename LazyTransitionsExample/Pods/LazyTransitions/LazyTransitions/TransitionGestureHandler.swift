@@ -10,7 +10,7 @@ import Foundation
 
 public protocol TransitionGestureHandlerDelegate: class {
     func beginInteractiveTransition(with orientation: TransitionOrientation)
-    func updateInteractiveTransitionWithProgress(_ progress: Float)
+    func updateInteractiveTransitionWithProgress(_ progress: CGFloat)
     func finishInteractiveTransition()
     func cancelInteractiveTransition()
 }
@@ -25,7 +25,7 @@ public protocol TransitionGestureHandler: class {
     func didChange(_ gesture: UIPanGestureRecognizer)
     func didEnd(_ gesture: UIPanGestureRecognizer)
     func didCancel(_ gesture: UIPanGestureRecognizer)
-    func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float
+    func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> CGFloat
 }
 
 extension TransitionGestureHandler {

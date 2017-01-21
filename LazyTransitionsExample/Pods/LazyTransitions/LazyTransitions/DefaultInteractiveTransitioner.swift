@@ -38,8 +38,8 @@ extension DefaultInteractiveTransitioner: TransitionGestureHandlerDelegate {
         delegate?.beginTransition(with: self)
     }
     
-    public func updateInteractiveTransitionWithProgress(_ progress: Float) {
-        interactor?.update(CGFloat(progress))
+    public func updateInteractiveTransitionWithProgress(_ progress: CGFloat) {
+        interactor?.update(progress)
     }
     
     public func finishInteractiveTransition() {

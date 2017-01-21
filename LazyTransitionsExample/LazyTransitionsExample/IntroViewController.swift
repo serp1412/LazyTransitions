@@ -17,9 +17,8 @@ class IntroViewController: UIViewController {
         let navController = UINavigationController(rootViewController: catVC)
         present(navController, animated: true, completion: nil)
         transitioner = UniversalTransitionsHandler()
-        transitioner.addTransition(for: catVC.collectionView!)
-        let view = catVC.view as UIView
-        transitioner.addTransition(for: view)
+        transitioner.addTransition(forScrollView: catVC.collectionView!)
+        transitioner.addTransition(forView: catVC.view)
         transitioner.triggerTransitionAction = { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -34,7 +33,7 @@ class IntroViewController: UIViewController {
         catVC.removeDismissButton()
         navigationController?.pushViewController(catVC, animated: true)
         transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))
-        transitioner.addTransition(for: catVC.view)
+        transitioner.addTransition(forView: catVC.view)
         transitioner.triggerTransitionAction = { [weak self] _ in
             _ = self?.navigationController?.popViewController(animated: true)
         }

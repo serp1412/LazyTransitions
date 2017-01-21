@@ -10,10 +10,10 @@ import Foundation
 
 public enum UIPanGestureRecognizerDirection {
     case undefined
-    case up
-    case down
-    case left
-    case right
+    case bottomToTop
+    case topToBottom
+    case rightToLeft
+    case leftToRight
 }
 
 extension UIPanGestureRecognizer {
@@ -24,9 +24,9 @@ extension UIPanGestureRecognizer {
         var direction: UIPanGestureRecognizerDirection
         
         if isVertical {
-            direction = velocity.y > 0 ? .down : .up
+            direction = velocity.y > 0 ? .topToBottom : .bottomToTop
         } else {
-            direction = velocity.x > 0 ? .right : .left
+            direction = velocity.x > 0 ? .leftToRight : .rightToLeft
         }
         
         return direction

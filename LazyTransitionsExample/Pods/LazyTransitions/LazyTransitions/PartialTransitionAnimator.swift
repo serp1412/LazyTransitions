@@ -11,10 +11,10 @@ import UIKit
 public class PartialTransitionAnimator: NSObject {
     public weak var delegate : TransitionAnimatorDelegate?
     public var orientation : TransitionOrientation
-    public var speed : Float
+    public var speed : CGFloat
     public var allowedOrientations: [TransitionOrientation]?
     public var supportedOrientations: [TransitionOrientation] = [.topToBottom, .bottomToTop, .leftToRight, .rightToLeft]
-    public init(orientation: TransitionOrientation, speed: Float) {
+    public init(orientation: TransitionOrientation, speed: CGFloat) {
         self.orientation = orientation
         self.speed = speed
     }
@@ -39,7 +39,7 @@ extension PartialTransitionAnimator: TransitionAnimator {
         let containerView = transitionContext.containerView
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
         
-        var adjustmentRatio = CGFloat(self.speed / 25)
+        var adjustmentRatio = self.speed / 25
         
         if adjustmentRatio > 0.3 {
             adjustmentRatio = 0.3
@@ -49,10 +49,8 @@ extension PartialTransitionAnimator: TransitionAnimator {
         let finalFrame = self.finalFrame(for: fromVC.view, for: orientation)
         let adjustedFrame = CGRect(x: finalFrame.origin.x * adjustmentRatio, y: finalFrame.origin.y * adjustmentRatio, width: finalFrame.size.width, height: finalFrame.size.height)
         
-        let shadowView = UIView()
-        shadowView.frame = UIScreen.main.bounds
+        let shadowView = UIView.shadowView
         
-        shadowView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         containerView.insertSubview(shadowView, aboveSubview: toVC.view)
         
         let options: UIViewAnimationOptions = [.curveEaseOut]

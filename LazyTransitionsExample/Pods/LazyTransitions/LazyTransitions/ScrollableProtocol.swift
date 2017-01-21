@@ -13,8 +13,8 @@ public protocol Scrollable: class {
     var isAtBottom: Bool { get }
     var isAtLeftEdge: Bool { get }
     var isAtRightEdge: Bool { get }
-    var isSomeWhereInVerticalMiddle: Bool { get }
-    var isSomeWhereInHorizontalMiddle: Bool { get }
+    var isSomewhereInVerticalMiddle: Bool { get }
+    var isSomewhereInHorizontalMiddle: Bool { get }
     var bounces: Bool { get set }
 }
 
