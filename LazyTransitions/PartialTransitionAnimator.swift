@@ -49,10 +49,8 @@ extension PartialTransitionAnimator: TransitionAnimator {
         let finalFrame = self.finalFrame(for: fromVC.view, for: orientation)
         let adjustedFrame = CGRect(x: finalFrame.origin.x * adjustmentRatio, y: finalFrame.origin.y * adjustmentRatio, width: finalFrame.size.width, height: finalFrame.size.height)
         
-        let shadowView = UIView()
-        shadowView.frame = UIScreen.main.bounds
+        let shadowView = UIView.shadowView
         
-        shadowView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         containerView.insertSubview(shadowView, aboveSubview: toVC.view)
         
         let options: UIViewAnimationOptions = [.curveEaseOut]

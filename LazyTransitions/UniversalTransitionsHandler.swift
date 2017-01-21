@@ -38,8 +38,7 @@ public class UniversalTransitionsHandler : NSObject {
         transitionCombinator.delegate = self
     }
     
-    @objc(addTransitionForView:)
-    public func addTransition(for view: UIView) {
+    public func addTransition(forView view: UIView) {
         if transitionerTuples.contains(where: { $0.view === view }) { return }
         let transitioner = createTransitioner(for: view)
         weak var weakView = view
@@ -47,8 +46,7 @@ public class UniversalTransitionsHandler : NSObject {
         transitionerTuples.append((transitioner, weakView))
     }
     
-    @objc(addTransitionForScrollView:)
-    public func addTransition(for scrollView: UIScrollView) {
+    public func addTransition(forScrollView scrollView: UIScrollView) {
         if transitionerTuples.contains(where: { $0.view === scrollView }) { return }
         let transitioners = createTransitioners(for: scrollView)
         transitionCombinator.add(transitioners)
