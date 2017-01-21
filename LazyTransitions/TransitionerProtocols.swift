@@ -8,7 +8,7 @@
 
 import Foundation
 
-let progressThreshold: Float = 0.3
+let progressThreshold: CGFloat = 0.3
 
 public protocol TransitionerDelegate: class {
     func finishedInteractiveTransition(_ completed: Bool)

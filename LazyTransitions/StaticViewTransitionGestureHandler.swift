@@ -29,7 +29,7 @@ public class StaticViewTransitionGestureHandler: TransitionGestureHandler {
         delegate?.updateInteractiveTransitionWithProgress(progress)
     }
     
-    public func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float {
+    public func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> CGFloat {
         
         guard let view = view else { return 0 }
         

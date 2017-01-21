@@ -48,7 +48,7 @@ struct BeginWithOrientationCalled {
 
 struct UpdateWithProgressCalled {
     private(set) var wasCalled: Bool = false
-    var progress: Float = 0 {
+    var progress: CGFloat = 0 {
         didSet {
             wasCalled = true
         }
@@ -67,7 +67,7 @@ class MockGestureHandlerDelegate: TransitionGestureHandlerDelegate {
         beginCalled.orientation = orientation
     }
     
-    func updateInteractiveTransitionWithProgress(_ progress: Float) {
+    func updateInteractiveTransitionWithProgress(_ progress: CGFloat) {
         updateCalled = UpdateWithProgressCalled()
         updateCalled.progress = progress
     }
@@ -119,7 +119,7 @@ class MockGestureHandler: TransitionGestureHandler {
     
     func didChange(_ gesture: UIPanGestureRecognizer) { }
     
-    func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> Float { return 0 }
+    func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> CGFloat { return 0 }
 }
 
 class TransitionGestureHandlerTests: XCTestCase {

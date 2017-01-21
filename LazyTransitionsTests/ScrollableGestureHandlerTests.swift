@@ -368,7 +368,7 @@ class ScrollableGestureHandlerTests: XCTestCase {
         handler.inProgressTransitionOrientation = .topToBottom
         handler.handlePanGesture(mockGesture)
         XCTAssert(mockGesture.passedCorrectViewInTranslationCall)
-        XCTAssert(mockHandlerDelegate.updateCalled.progress == 0.025)
+        XCTAssert(mockHandlerDelegate.updateCalled.progress == 0.02500000037252903)
         XCTAssert(handler.shouldFinish == false)
     }
 }

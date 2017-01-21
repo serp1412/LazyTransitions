@@ -16,11 +16,11 @@ public enum TransitionOrientation {
     case rightToLeft
 }
 
-public class TransitionProgressCalculator {
+public struct TransitionProgressCalculator {
     public static func progress(for view: UIView,
                          withGestureTranslation translation: CGPoint,
                          withTranslationOffset translationOffset: CGPoint,
-                         with orientation: TransitionOrientation) -> Float {
+                         with orientation: TransitionOrientation) -> CGFloat {
         var progress:Float = 0
         
         let adjustedTranslation = translation - translationOffset
@@ -45,7 +45,7 @@ public class TransitionProgressCalculator {
         default: break
         }
         
-        return progress
+        return CGFloat(progress)
     }
 }
 

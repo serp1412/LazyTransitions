@@ -75,7 +75,7 @@ class MockTransitionInteractor: TransitionInteractor {
     }
     
     override func update(_ percentComplete: CGFloat) {
-        updateCalled.progress = Float(percentComplete)
+        updateCalled.progress = percentComplete
     }
     
     override func finish() {
@@ -161,7 +161,7 @@ class DefaultInteractiveTransitionerTests: XCTestCase {
     }
     
     func testUpdateInteractiveTransition() {
-        let progress: Float = 0.5
+        let progress: CGFloat = 0.5
         transitioner.updateInteractiveTransitionWithProgress(progress)
         
         XCTAssert(mockInteractor.updateCalled.progress == progress)
