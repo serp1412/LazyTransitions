@@ -8,8 +8,13 @@
 
 import Foundation
 
+fileprivate enum TransitionType {
+    case forScrollView
+    case forStaticView
+}
+
 public class UniversalTransitionsHandler : NSObject {
-    fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?)
+    fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?, type: TransitionType)
     
     public var animator: TransitionAnimator {
         return transitionCombinator.animator
@@ -39,19 +44,19 @@ public class UniversalTransitionsHandler : NSObject {
     }
     
     public func addTransition(forView view: UIView) {
-        if transitionerTuples.contains(where: { $0.view === view }) { return }
+        if transitionerTuples.contains(where: { $0.view === view && $0.type == .forStaticView }) { return }
         let transitioner = createTransitioner(for: view)
         weak var weakView = view
         transitionCombinator.add(transitioner)
-        transitionerTuples.append((transitioner, weakView))
+        transitionerTuples.append((transitioner, weakView, .forStaticView))
     }
     
     public func addTransition(forScrollView scrollView: UIScrollView) {
-        if transitionerTuples.contains(where: { $0.view === scrollView }) { return }
+        if transitionerTuples.contains(where: { $0.view === scrollView && $0.type == .forScrollView }) { return }
         let transitioners = createTransitioners(for: scrollView)
         transitionCombinator.add(transitioners)
         weak var weakView = scrollView
-        transitioners.forEach { transitioner in transitionerTuples.append((transitioner, weakView)) }
+        transitioners.forEach { transitioner in transitionerTuples.append((transitioner, weakView, .forScrollView)) }
     }
     
     public func removeTransitions(for view: UIView) {
