@@ -56,21 +56,6 @@ For Pop:
 navigationController?.delegate = transitioner
 ```
 
-NOTE: In case you need to assign something else as the transitioning delegate, then you can simply forward the `animator` and `interactor` properties of your transition handler inside the delegate methods.
-
-Like so in case of dismiss:
-```swift
-func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    // ... pass the animator
-    return transitioner.animator
-}
-    
-func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-    // ... pass the interactor
-    return transitioner.interactor
-}
-```
-
 ### Example
 
 Here's some sample code on how to use LazyTransitions in your project.
@@ -130,4 +115,19 @@ let transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation
 * You can limit the allowed transition orientations by setting them like this:
 ```swift
 transitioner.allowedOrientations = [.leftToRight, .topToBottom, .bottomToTop]
+```
+
+* In case you need to assign something else as the transitioning delegate, then you can simply forward the `animator` and `interactor` properties of your transition handler inside the delegate methods.
+
+Like so in case of dismiss:
+```swift
+func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    // ... pass the animator
+    return transitioner.animator
+}
+    
+func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    // ... pass the interactor
+    return transitioner.interactor
+}
 ```
