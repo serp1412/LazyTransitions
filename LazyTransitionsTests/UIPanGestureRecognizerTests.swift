@@ -16,28 +16,28 @@ class UIPanGestureRecognizerTests: XCTestCase {
         mockGesture = MockPanGestureRecognizer()
     }
     
-    func testDirection_Up() {
+    func testDirection_bottomToTop() {
         mockGesture.mockVelocity = CGPoint(x: 10, y: -20)
         
-        XCTAssert(mockGesture.direction == .up)
+        XCTAssert(mockGesture.direction == .bottomToTop)
     }
     
-    func testDirection_Down() {
+    func testDirection_topToBottom() {
         mockGesture.mockVelocity = CGPoint(x: 10, y: 20)
         
-        XCTAssert(mockGesture.direction == .down)
+        XCTAssert(mockGesture.direction == .topToBottom)
     }
     
-    func testDirection_Left() {
+    func testDirection_rightToLeft() {
         mockGesture.mockVelocity = CGPoint(x: -20, y: 10)
         
-        XCTAssert(mockGesture.direction == .left)
+        XCTAssert(mockGesture.direction == .rightToLeft)
     }
     
-    func testDirection_Right() {
+    func testDirection_leftToRight() {
         mockGesture.mockVelocity = CGPoint(x: 20, y: 10)
         
-        XCTAssert(mockGesture.direction == .right)
+        XCTAssert(mockGesture.direction == .leftToRight)
     }
     
     func testIsQuickSwipeForOrientation_Unknown() {

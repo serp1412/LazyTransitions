@@ -46,10 +46,10 @@ public class StaticViewTransitionGestureHandler: TransitionGestureHandler {
 extension UIPanGestureRecognizerDirection {
     public var orientation: TransitionOrientation {
         switch self {
-        case .left: return .rightToLeft
-        case .right: return .leftToRight
-        case .up: return .bottomToTop
-        case .down: return .topToBottom
+        case .rightToLeft: return .rightToLeft
+        case .leftToRight: return .leftToRight
+        case .bottomToTop: return .bottomToTop
+        case .topToBottom: return .topToBottom
         default: return .unknown
         }
     }
@@ -58,7 +58,7 @@ extension UIPanGestureRecognizerDirection {
 extension UIPanGestureRecognizerDirection {
     public var isHorizontal: Bool {
         switch self {
-        case .left, .right:
+        case .rightToLeft, .leftToRight:
             return true
         default:
             return false
