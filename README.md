@@ -1,6 +1,11 @@
-# LazyTransitions
+<h1 align="center">LazyTransitions</h1>
 
-[![Twitter](https://img.shields.io/badge/twitter-@serp1412-blue.svg?style=flat)](http://twitter.com/serp1412)
+<p align="center">
+    <img src="https://img.shields.io/badge/platform-iOS8+-blue.svg?style=flat" alt="Platform: iOS 8+"/>
+    <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift%203-4BC51D.svg?style=flat" alt="Language: Swift 3" /></a>
+    <img src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat" alt="License: MIT" />
+    <a href="http://twitter.com/serp1412"><img src="https://img.shields.io/badge/twitter-@serp1412-blue.svg?style=flat" alt="Twitter: serp1412" /></a>
+</p>
 
 A simple framework that allows you to create similar lazy pops and dismisses like in the Facebook, Instagram or Twitter apps.
 
@@ -19,9 +24,6 @@ Add the following line to your PodFile:
 ## Usage
 
 The simplest way to use this framework is to take advantage of `UniversalTransitionsHandler` class.
-
-You can just give it the views in your view controller that will trigger a transition when the user swipes on them. 
-It could be a simple static view. Or a scroll view that will trigger the transition when it reaches the edges of it's content.
 
 * Import the framework
 ```swift
