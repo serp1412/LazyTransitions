@@ -23,17 +23,17 @@ Add the following line to your PodFile:
 
 ## Usage
 
-The simplest way to use this framework is to take advantage of `UniversalTransitionsHandler` class.
+The simplest way to use this framework is to take advantage of `LazyTransitioner` class.
 
 * Import the framework
 ```swift
 import LazyTransitions
 ```
-* Create an instance of `UniversalTransitionsHandler`
+* Create an instance of `LazyTransitioner`
 ```swift
-let transitioner = UniversalTransitionsHandler()
+let transitioner = LazyTransitioner()
 ```
-* Pass your transition views (views that will trigger a transition when user pans on them) to the handler
+* Pass your transition views (views that will trigger a transition when user pans on them) to the transitioner
 ```swift
 transitioner.addTransition(forView: view)
 // or
@@ -46,7 +46,7 @@ transitioner.triggerTransitionAction = { [weak self] _ in
 }
 ```
 
-* Set your transition handler as the transitioning delegate.
+* Set your transitioner as the transitioning delegate.
 
 For Dismiss:
 ```swift
@@ -67,12 +67,12 @@ Here's some sample code on how to use LazyTransitions in your project.
 import LazyTransitions
 
 class MyVC : UIViewController {
-    fileprivate let transitioner = UniversalTransitionsHandler()
+    fileprivate let transitioner = LazyTransitioner()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // add the main view to your transition handler
+        // add the main view to your transitioner
         transitioner.addTransition(forView: view)
         
         // trigger the transition in triggerTransitionAction
@@ -108,10 +108,10 @@ func scrollViewDidScroll(_ scrollView: UIScrollView) {
 }
 ```
 
-* To achieve the standard pop animation of iOS, use the provided `PopAnimator` when initializing the `UniversalTransitionsHandler`
+* To achieve the standard pop animation of iOS, use the provided `PopAnimator` when initializing the `LazyTransitioner`
 
 ```swift 
-let transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation: .leftToRight))
+let transitioner = LazyTransitioner(animator: PopAnimator(orientation: .leftToRight))
 ```
 
 * You can limit the allowed transition orientations by setting them like this:
@@ -119,7 +119,7 @@ let transitioner = UniversalTransitionsHandler(animator: PopAnimator(orientation
 transitioner.allowedOrientations = [.leftToRight, .topToBottom, .bottomToTop]
 ```
 
-* In case you need to assign something else as the transitioning delegate, then you can simply forward the `animator` and `interactor` properties of your transition handler inside the delegate methods.
+* In case you need to assign something else as the transitioning delegate, then you can simply forward the `animator` and `interactor` properties of your transitioner inside the delegate methods.
 
 Like so in case of dismiss:
 ```swift
