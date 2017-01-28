@@ -13,7 +13,7 @@ fileprivate enum TransitionType {
     case forStaticView
 }
 
-public class UniversalTransitionsHandler : NSObject {
+public class LazyTransitioner : NSObject {
     fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?, type: TransitionType)
     
     public var animator: TransitionAnimator {
@@ -27,11 +27,10 @@ public class UniversalTransitionsHandler : NSObject {
             transitionCombinator.allowedOrientations = allowedOrientations
         }
     }
-    public var triggerTransitionAction: (UniversalTransitionsHandler) -> () = { _ in }
+    public var triggerTransitionAction: (LazyTransitioner) -> () = { _ in }
     
     fileprivate let internalAnimator: TransitionAnimator
     fileprivate let internalInteractor: TransitionInteractor
-    weak public var delegate: TransitionerDelegate?
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
     public init(animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
@@ -110,13 +109,13 @@ public class UniversalTransitionsHandler : NSObject {
     }
 }
 
-extension UniversalTransitionsHandler: TransitionerDelegate {
+extension LazyTransitioner: TransitionerDelegate {
     public func beginTransition(with transitioner: Transitioner) {
         triggerTransitionAction(self)
     }
 }
 
-extension UniversalTransitionsHandler : UIViewControllerTransitioningDelegate {
+extension LazyTransitioner : UIViewControllerTransitioningDelegate {
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animator
     }
@@ -126,7 +125,7 @@ extension UniversalTransitionsHandler : UIViewControllerTransitioningDelegate {
     }
 }
 
-extension UniversalTransitionsHandler : UINavigationControllerDelegate {
+extension LazyTransitioner : UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard operation == .pop else { return nil }
         return animator
