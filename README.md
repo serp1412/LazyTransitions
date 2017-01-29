@@ -19,7 +19,7 @@ A simple framework that allows you to create similar lazy pops and dismisses lik
 
 Add the following line to your PodFile:
 
-``` pod 'LazyTransitions' , :git => 'https://github.com/serp1412/LazyTransitions.git' ``` 
+``` pod 'LazyTransitions' ``` 
 
 ## Usage
 
