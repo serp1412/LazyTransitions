@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class PartialTransitioner: Transitioner {
+public class PartialTransitioner: TransitionerType {
     public weak var scrollView: UIScrollView?
     fileprivate var isPartialTransitionPossible: Bool {
         guard let scrollView = scrollView else { return false }
@@ -29,7 +29,7 @@ public class PartialTransitioner: Transitioner {
     //MARK: Transitioner Protocol
     
     public weak var delegate: TransitionerDelegate?
-    public var animator: TransitionAnimator {
+    public var animator: TransitionAnimatorType {
         return PartialTransitionAnimator(orientation: orientation,
                                          speed: lastRecordedSpeed)
     }

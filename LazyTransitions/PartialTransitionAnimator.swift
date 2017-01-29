@@ -25,7 +25,7 @@ public class PartialTransitionAnimator: NSObject {
     }
 }
 
-extension PartialTransitionAnimator: TransitionAnimator {
+extension PartialTransitionAnimator: TransitionAnimatorType {
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.2
     }

@@ -1,5 +1,5 @@
 //
-//  UniversalTransitionsHandler.swift
+//  LazyTransitioner.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 12/29/16.
@@ -14,9 +14,9 @@ fileprivate enum TransitionType {
 }
 
 public class LazyTransitioner : NSObject {
-    fileprivate typealias TransitionerTuple = (transitioner: Transitioner, view: UIView?, type: TransitionType)
+    fileprivate typealias TransitionerTuple = (transitioner: TransitionerType, view: UIView?, type: TransitionType)
     
-    public var animator: TransitionAnimator {
+    public var animator: TransitionAnimatorType {
         return transitionCombinator.animator
     }
     public var interactor: TransitionInteractor? {
@@ -29,11 +29,11 @@ public class LazyTransitioner : NSObject {
     }
     public var triggerTransitionAction: (LazyTransitioner) -> () = { _ in }
     
-    fileprivate let internalAnimator: TransitionAnimator
+    fileprivate let internalAnimator: TransitionAnimatorType
     fileprivate let internalInteractor: TransitionInteractor
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
-    public init(animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
+    public init(animator: TransitionAnimatorType = DismissAnimator(orientation: .topToBottom),
                 interactor: TransitionInteractor = TransitionInteractor.default()) {
         self.internalAnimator = animator
         self.internalInteractor = interactor
@@ -69,7 +69,7 @@ public class LazyTransitioner : NSObject {
         partialTransitioner?.scrollViewDidScroll()
     }
     
-    fileprivate func transitioners(for view: UIView) -> [Transitioner] {
+    fileprivate func transitioners(for view: UIView) -> [TransitionerType] {
         return transitionerTuples
             .filter{$0.view === view}
             .map{$0.transitioner}
@@ -84,22 +84,22 @@ public class LazyTransitioner : NSObject {
             .lazy.first
     }
     
-    fileprivate func createTransitioner(for view: UIView) -> Transitioner {
-        let viewGestureHandler = StaticViewTransitionGestureHandler()
+    fileprivate func createTransitioner(for view: UIView) -> TransitionerType {
+        let viewGestureHandler = StaticViewGestureHandler()
         let panGesture = UIPanGestureRecognizer(gestureHandle: { [weak viewGestureHandler] gesture in
             viewGestureHandler?.handlePanGesture(gesture)
         })
         view.addGestureRecognizer(panGesture)
-        return DefaultInteractiveTransitioner(with: viewGestureHandler,
-                                              with: internalAnimator,
-                                              with: internalInteractor)
+        return InteractiveTransitioner(with: viewGestureHandler,
+                                       with: internalAnimator,
+                                       with: internalInteractor)
     }
     
-    fileprivate func createTransitioners(for scrollView: UIScrollView) -> [Transitioner] {
+    fileprivate func createTransitioners(for scrollView: UIScrollView) -> [TransitionerType] {
         let scrollViewGestureHandler = ScrollableGestureHandler(scrollable: scrollView)
-        let scrollViewTransitioner = DefaultInteractiveTransitioner(with: scrollViewGestureHandler,
-                                                                    with: internalAnimator,
-                                                                    with: internalInteractor)
+        let scrollViewTransitioner = InteractiveTransitioner(with: scrollViewGestureHandler,
+                                                             with: internalAnimator,
+                                                             with: internalInteractor)
         scrollView.panGestureRecognizer.set { gesture in
             scrollViewGestureHandler.handlePanGesture(gesture)
         }
@@ -110,7 +110,7 @@ public class LazyTransitioner : NSObject {
 }
 
 extension LazyTransitioner: TransitionerDelegate {
-    public func beginTransition(with transitioner: Transitioner) {
+    public func beginTransition(with transitioner: TransitionerType) {
         triggerTransitionAction(self)
     }
 }

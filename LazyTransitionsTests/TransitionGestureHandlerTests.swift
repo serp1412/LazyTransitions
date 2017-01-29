@@ -111,7 +111,7 @@ extension CGPoint {
     }
 }
 
-class MockGestureHandler: TransitionGestureHandler {
+class MockGestureHandler: TransitionGestureHandlerType {
     var delegate: TransitionGestureHandlerDelegate? = nil
     var shouldFinish: Bool = false
     var didBegin: Bool = false

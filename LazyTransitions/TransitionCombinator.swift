@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class TransitionCombinator: Transitioner {
+public class TransitionCombinator: TransitionerType {
     public weak var delegate: TransitionerDelegate?
-    public var animator: TransitionAnimator  {
-        return currentTransitioner?.animator ?? defaultAnimator
+    public var animator: TransitionAnimatorType  {
+        return currentTransitioner?.animator ?? dismissAnimator
     }
     public var interactor: TransitionInteractor? {
         return currentTransitioner?.interactor
@@ -21,36 +21,36 @@ public class TransitionCombinator: Transitioner {
             updateAnimatorsAllowedOrientations()
         }
     }
-    public private(set) var transitioners: [Transitioner] {
+    public private(set) var transitioners: [TransitionerType] {
         didSet {
             updateTransitionersDelegate()
             updateAnimatorsAllowedOrientations()
         }
     }
-    fileprivate var currentTransitioner: Transitioner?
-    fileprivate let defaultAnimator: TransitionAnimator
+    fileprivate var currentTransitioner: TransitionerType?
+    fileprivate let dismissAnimator: TransitionAnimatorType
     fileprivate var delayedRemove: (() -> ())?
     fileprivate var isTransitionInProgress: Bool {
         return currentTransitioner != nil
     }
     
-    public convenience init(defaultAnimator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
-                     transitioners: Transitioner...) {
+    public convenience init(defaultAnimator: TransitionAnimatorType = DismissAnimator(orientation: .topToBottom),
+                     transitioners: TransitionerType...) {
         self.init(defaultAnimator: defaultAnimator, transitioners: transitioners)
     }
     
-    public init(defaultAnimator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
-         transitioners: [Transitioner]) {
-        self.defaultAnimator = defaultAnimator
+    public init(defaultAnimator: TransitionAnimatorType = DismissAnimator(orientation: .topToBottom),
+         transitioners: [TransitionerType]) {
+        self.dismissAnimator = defaultAnimator
         self.transitioners = transitioners
         updateTransitionersDelegate()
     }
     
-    public func add(_ transitioner: Transitioner) {
+    public func add(_ transitioner: TransitionerType) {
         transitioners.append(transitioner)
     }
     
-    public func remove(_ transitioner: Transitioner) {
+    public func remove(_ transitioner: TransitionerType) {
         let remove: (() -> ()) = { [weak self] in
             self?.transitioners = self?.transitioners.filter { $0 !== transitioner } ?? []
         }
@@ -70,7 +70,7 @@ public class TransitionCombinator: Transitioner {
 }
 
 extension TransitionCombinator: TransitionerDelegate {
-    public func beginTransition(with transitioner: Transitioner) {
+    public func beginTransition(with transitioner: TransitionerType) {
         currentTransitioner = transitioner
         delegate?.beginTransition(with: transitioner)
     }
@@ -84,11 +84,11 @@ extension TransitionCombinator: TransitionerDelegate {
 }
 
 extension TransitionCombinator {
-    public func add(_ transitioners: [Transitioner]) {
+    public func add(_ transitioners: [TransitionerType]) {
         transitioners.forEach { transitioner in add(transitioner) }
     }
     
-    public func remove(_ transitioners: [Transitioner]) {
+    public func remove(_ transitioners: [TransitionerType]) {
         transitioners.forEach { transitioner in remove(transitioner) }
     }
 }

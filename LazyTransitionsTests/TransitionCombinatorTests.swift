@@ -9,9 +9,9 @@
 import XCTest
 @testable import LazyTransitions
 
-class MockTransitioner: Transitioner {
+class MockTransitioner: TransitionerType {
     weak var delegate: TransitionerDelegate?
-    var animator: TransitionAnimator = MockTransitionAnimator(orientation: .unknown)
+    var animator: TransitionAnimatorType = MockTransitionAnimator(orientation: .unknown)
     var interactor: TransitionInteractor?
 }
 

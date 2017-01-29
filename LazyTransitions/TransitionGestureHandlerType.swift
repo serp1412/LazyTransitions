@@ -1,5 +1,5 @@
 //
-//  TransitionGestureHandler.swift
+//  TransitionGestureHandlerType.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 12/5/16.
@@ -15,7 +15,7 @@ public protocol TransitionGestureHandlerDelegate: class {
     func cancelInteractiveTransition()
 }
 
-public protocol TransitionGestureHandler: class {
+public protocol TransitionGestureHandlerType: class {
     weak var delegate: TransitionGestureHandlerDelegate? { get set }
     var shouldFinish: Bool { get }
     var didBegin: Bool { get set }
@@ -28,7 +28,7 @@ public protocol TransitionGestureHandler: class {
     func calculateTransitionProgressWithTranslation(_ translation: CGPoint, on view: UIView?) -> CGFloat
 }
 
-extension TransitionGestureHandler {
+extension TransitionGestureHandlerType {
     public func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:

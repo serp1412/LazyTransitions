@@ -1,5 +1,5 @@
 //
-//  TransitionAnimator.swift
+//  DismissAnimator.swift
 //  LazyTransitions
 //
 //  Created by BeardWare on 6/29/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DefaultAnimator: NSObject {
+public class DismissAnimator: NSObject {
     weak public var delegate : TransitionAnimatorDelegate?
     public var orientation : TransitionOrientation
     public var allowedOrientations: [TransitionOrientation]?
@@ -17,7 +17,7 @@ public class DefaultAnimator: NSObject {
     }
 }
 
-extension DefaultAnimator: TransitionAnimator {
+extension DismissAnimator: TransitionAnimatorType {
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }

@@ -1,5 +1,5 @@
 //
-//  StaticViewTransitionGestureHandlerTests.swift
+//  StaticViewGestureHandlerTests.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 12/7/16.
@@ -9,9 +9,9 @@
 import XCTest
 @testable import LazyTransitions
 
-class StaticViewTransitionGestureHandlerTests: XCTestCase {
+class StaticViewGestureHandlerTests: XCTestCase {
     let mockGesture = MockPanGestureRecognizer()
-    var handler = StaticViewTransitionGestureHandler()
+    var handler = StaticViewGestureHandler()
     let mockHandlerDelegate = MockGestureHandlerDelegate()
     let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 400))
     

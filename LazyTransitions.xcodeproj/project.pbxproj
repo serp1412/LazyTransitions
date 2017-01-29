@@ -12,29 +12,29 @@
 		9D7D55771E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55761E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift */; };
 		DA65CB831E1E984C00ECE942 /* LazyTransitions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA65CB791E1E984C00ECE942 /* LazyTransitions.framework */; };
 		DA65CB8A1E1E984C00ECE942 /* LazyTransitions.h in Headers */ = {isa = PBXBuildFile; fileRef = DA65CB7C1E1E984C00ECE942 /* LazyTransitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA65CBA71E1E987000ECE942 /* DefaultAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB931E1E987000ECE942 /* DefaultAnimator.swift */; };
-		DA65CBA81E1E987000ECE942 /* DefaultInteractiveTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB941E1E987000ECE942 /* DefaultInteractiveTransitioner.swift */; };
+		DA65CBA71E1E987000ECE942 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB931E1E987000ECE942 /* DismissAnimator.swift */; };
+		DA65CBA81E1E987000ECE942 /* InteractiveTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB941E1E987000ECE942 /* InteractiveTransitioner.swift */; };
 		DA65CBA91E1E987000ECE942 /* OptionalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB951E1E987000ECE942 /* OptionalExtensions.swift */; };
 		DA65CBAA1E1E987000ECE942 /* PartialTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB961E1E987000ECE942 /* PartialTransitionAnimator.swift */; };
 		DA65CBAB1E1E987000ECE942 /* PartialTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB971E1E987000ECE942 /* PartialTransitioner.swift */; };
 		DA65CBAC1E1E987000ECE942 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB981E1E987000ECE942 /* PopAnimator.swift */; };
 		DA65CBAD1E1E987000ECE942 /* ScrollableGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB991E1E987000ECE942 /* ScrollableGestureHandler.swift */; };
 		DA65CBAE1E1E987000ECE942 /* ScrollableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9A1E1E987000ECE942 /* ScrollableProtocol.swift */; };
-		DA65CBAF1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9B1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift */; };
-		DA65CBB01E1E987000ECE942 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9C1E1E987000ECE942 /* TransitionAnimator.swift */; };
+		DA65CBAF1E1E987000ECE942 /* StaticViewGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9B1E1E987000ECE942 /* StaticViewGestureHandler.swift */; };
+		DA65CBB01E1E987000ECE942 /* TransitionAnimatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9C1E1E987000ECE942 /* TransitionAnimatorType.swift */; };
 		DA65CBB11E1E987000ECE942 /* TransitionCombinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9D1E1E987000ECE942 /* TransitionCombinator.swift */; };
 		DA65CBB21E1E987000ECE942 /* TransitionerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9E1E1E987000ECE942 /* TransitionerProtocols.swift */; };
-		DA65CBB31E1E987000ECE942 /* TransitionGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */; };
+		DA65CBB31E1E987000ECE942 /* TransitionGestureHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CB9F1E1E987000ECE942 /* TransitionGestureHandlerType.swift */; };
 		DA65CBB41E1E987000ECE942 /* TransitionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */; };
 		DA65CBB51E1E987000ECE942 /* TransitionProgressCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */; };
 		DA65CBB71E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */; };
 		DA65CBB81E1E987000ECE942 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */; };
 		DA65CBB91E1E987000ECE942 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */; };
 		DA65CBBA1E1E987000ECE942 /* LazyTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA61E1E987000ECE942 /* LazyTransitioner.swift */; };
-		DA65CBC11E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBB1E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift */; };
+		DA65CBC11E1E98A800ECE942 /* InteractiveTransitionerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBB1E1E98A800ECE942 /* InteractiveTransitionerTests.swift */; };
 		DA65CBC21E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBC1E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift */; };
 		DA65CBC31E1E98A800ECE942 /* ScrollableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBD1E1E98A800ECE942 /* ScrollableTests.swift */; };
-		DA65CBC41E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBE1E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift */; };
+		DA65CBC41E1E98A800ECE942 /* StaticViewGestureHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBE1E1E98A800ECE942 /* StaticViewGestureHandlerTests.swift */; };
 		DA65CBC51E1E98A800ECE942 /* TransitionCombinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBF1E1E98A800ECE942 /* TransitionCombinatorTests.swift */; };
 		DA65CBC61E1E98A800ECE942 /* TransitionGestureHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBC01E1E98A800ECE942 /* TransitionGestureHandlerTests.swift */; };
 /* End PBXBuildFile section */
@@ -58,29 +58,29 @@
 		DA65CB7D1E1E984C00ECE942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA65CB821E1E984C00ECE942 /* LazyTransitionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LazyTransitionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA65CB891E1E984C00ECE942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA65CB931E1E987000ECE942 /* DefaultAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAnimator.swift; sourceTree = "<group>"; };
-		DA65CB941E1E987000ECE942 /* DefaultInteractiveTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultInteractiveTransitioner.swift; sourceTree = "<group>"; };
+		DA65CB931E1E987000ECE942 /* DismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
+		DA65CB941E1E987000ECE942 /* InteractiveTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransitioner.swift; sourceTree = "<group>"; };
 		DA65CB951E1E987000ECE942 /* OptionalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalExtensions.swift; sourceTree = "<group>"; };
 		DA65CB961E1E987000ECE942 /* PartialTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialTransitionAnimator.swift; sourceTree = "<group>"; };
 		DA65CB971E1E987000ECE942 /* PartialTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialTransitioner.swift; sourceTree = "<group>"; };
 		DA65CB981E1E987000ECE942 /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		DA65CB991E1E987000ECE942 /* ScrollableGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGestureHandler.swift; sourceTree = "<group>"; };
 		DA65CB9A1E1E987000ECE942 /* ScrollableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableProtocol.swift; sourceTree = "<group>"; };
-		DA65CB9B1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticViewTransitionGestureHandler.swift; sourceTree = "<group>"; };
-		DA65CB9C1E1E987000ECE942 /* TransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		DA65CB9B1E1E987000ECE942 /* StaticViewGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticViewGestureHandler.swift; sourceTree = "<group>"; };
+		DA65CB9C1E1E987000ECE942 /* TransitionAnimatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimatorType.swift; sourceTree = "<group>"; };
 		DA65CB9D1E1E987000ECE942 /* TransitionCombinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionCombinator.swift; sourceTree = "<group>"; };
 		DA65CB9E1E1E987000ECE942 /* TransitionerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionerProtocols.swift; sourceTree = "<group>"; };
-		DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionGestureHandler.swift; sourceTree = "<group>"; };
+		DA65CB9F1E1E987000ECE942 /* TransitionGestureHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionGestureHandlerType.swift; sourceTree = "<group>"; };
 		DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionInteractor.swift; sourceTree = "<group>"; };
 		DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionProgressCalculator.swift; sourceTree = "<group>"; };
 		DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizerExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA61E1E987000ECE942 /* LazyTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyTransitioner.swift; sourceTree = "<group>"; };
-		DA65CBBB1E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultInteractiveTransitionerTests.swift; sourceTree = "<group>"; };
+		DA65CBBB1E1E98A800ECE942 /* InteractiveTransitionerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTransitionerTests.swift; sourceTree = "<group>"; };
 		DA65CBBC1E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGestureHandlerTests.swift; sourceTree = "<group>"; };
 		DA65CBBD1E1E98A800ECE942 /* ScrollableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableTests.swift; sourceTree = "<group>"; };
-		DA65CBBE1E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticViewTransitionGestureHandlerTests.swift; sourceTree = "<group>"; };
+		DA65CBBE1E1E98A800ECE942 /* StaticViewGestureHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticViewGestureHandlerTests.swift; sourceTree = "<group>"; };
 		DA65CBBF1E1E98A800ECE942 /* TransitionCombinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionCombinatorTests.swift; sourceTree = "<group>"; };
 		DA65CBC01E1E98A800ECE942 /* TransitionGestureHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionGestureHandlerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,8 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				DA65CB991E1E987000ECE942 /* ScrollableGestureHandler.swift */,
-				DA65CB9B1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift */,
-				DA65CB9F1E1E987000ECE942 /* TransitionGestureHandler.swift */,
+				DA65CB9B1E1E987000ECE942 /* StaticViewGestureHandler.swift */,
+				DA65CB9F1E1E987000ECE942 /* TransitionGestureHandlerType.swift */,
 			);
 			name = "Gesture Handlers";
 			sourceTree = "<group>";
@@ -117,10 +117,10 @@
 		9D7D556E1E1FC08A00054D3A /* Animators */ = {
 			isa = PBXGroup;
 			children = (
-				DA65CB9C1E1E987000ECE942 /* TransitionAnimator.swift */,
-				DA65CB931E1E987000ECE942 /* DefaultAnimator.swift */,
-				DA65CB961E1E987000ECE942 /* PartialTransitionAnimator.swift */,
+				DA65CB9C1E1E987000ECE942 /* TransitionAnimatorType.swift */,
+				DA65CB931E1E987000ECE942 /* DismissAnimator.swift */,
 				DA65CB981E1E987000ECE942 /* PopAnimator.swift */,
+				DA65CB961E1E987000ECE942 /* PartialTransitionAnimator.swift */,
 			);
 			name = Animators;
 			sourceTree = "<group>";
@@ -141,7 +141,7 @@
 			children = (
 				DA65CBA61E1E987000ECE942 /* LazyTransitioner.swift */,
 				DA65CB9D1E1E987000ECE942 /* TransitionCombinator.swift */,
-				DA65CB941E1E987000ECE942 /* DefaultInteractiveTransitioner.swift */,
+				DA65CB941E1E987000ECE942 /* InteractiveTransitioner.swift */,
 				DA65CB971E1E987000ECE942 /* PartialTransitioner.swift */,
 				DA65CB9E1E1E987000ECE942 /* TransitionerProtocols.swift */,
 			);
@@ -182,8 +182,8 @@
 				DA65CB7C1E1E984C00ECE942 /* LazyTransitions.h */,
 				9D7D55701E1FC0C100054D3A /* Transitioners */,
 				9D7D556E1E1FC08A00054D3A /* Animators */,
-				9D7D556F1E1FC0B600054D3A /* Extensions */,
 				9D7D556D1E1FC07D00054D3A /* Gesture Handlers */,
+				9D7D556F1E1FC0B600054D3A /* Extensions */,
 				9D7D55711E1FC0DB00054D3A /* Utilities */,
 				DA65CB7D1E1E984C00ECE942 /* Info.plist */,
 			);
@@ -193,10 +193,10 @@
 		DA65CB861E1E984C00ECE942 /* LazyTransitionsTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA65CBBB1E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift */,
+				DA65CBBB1E1E98A800ECE942 /* InteractiveTransitionerTests.swift */,
 				DA65CBBC1E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift */,
 				DA65CBBD1E1E98A800ECE942 /* ScrollableTests.swift */,
-				DA65CBBE1E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift */,
+				DA65CBBE1E1E98A800ECE942 /* StaticViewGestureHandlerTests.swift */,
 				DA65CBBF1E1E98A800ECE942 /* TransitionCombinatorTests.swift */,
 				DA65CBC01E1E98A800ECE942 /* TransitionGestureHandlerTests.swift */,
 				9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */,
@@ -322,10 +322,10 @@
 			files = (
 				DA65CBB81E1E987000ECE942 /* UIScrollViewExtensions.swift in Sources */,
 				DA65CBAE1E1E987000ECE942 /* ScrollableProtocol.swift in Sources */,
-				DA65CBB31E1E987000ECE942 /* TransitionGestureHandler.swift in Sources */,
+				DA65CBB31E1E987000ECE942 /* TransitionGestureHandlerType.swift in Sources */,
 				DA65CBB21E1E987000ECE942 /* TransitionerProtocols.swift in Sources */,
-				DA65CBAF1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift in Sources */,
-				DA65CBA81E1E987000ECE942 /* DefaultInteractiveTransitioner.swift in Sources */,
+				DA65CBAF1E1E987000ECE942 /* StaticViewGestureHandler.swift in Sources */,
+				DA65CBA81E1E987000ECE942 /* InteractiveTransitioner.swift in Sources */,
 				DA65CBBA1E1E987000ECE942 /* LazyTransitioner.swift in Sources */,
 				DA65CBB71E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift in Sources */,
 				DA65CBAD1E1E987000ECE942 /* ScrollableGestureHandler.swift in Sources */,
@@ -333,12 +333,12 @@
 				DA65CBAB1E1E987000ECE942 /* PartialTransitioner.swift in Sources */,
 				DA65CBA91E1E987000ECE942 /* OptionalExtensions.swift in Sources */,
 				DA65CBB41E1E987000ECE942 /* TransitionInteractor.swift in Sources */,
-				DA65CBB01E1E987000ECE942 /* TransitionAnimator.swift in Sources */,
+				DA65CBB01E1E987000ECE942 /* TransitionAnimatorType.swift in Sources */,
 				DA65CBB51E1E987000ECE942 /* TransitionProgressCalculator.swift in Sources */,
 				DA65CBB11E1E987000ECE942 /* TransitionCombinator.swift in Sources */,
 				DA65CBAC1E1E987000ECE942 /* PopAnimator.swift in Sources */,
 				DA65CBB91E1E987000ECE942 /* UIViewExtensions.swift in Sources */,
-				DA65CBA71E1E987000ECE942 /* DefaultAnimator.swift in Sources */,
+				DA65CBA71E1E987000ECE942 /* DismissAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,14 +347,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA65CBC51E1E98A800ECE942 /* TransitionCombinatorTests.swift in Sources */,
-				DA65CBC11E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift in Sources */,
+				DA65CBC11E1E98A800ECE942 /* InteractiveTransitionerTests.swift in Sources */,
 				9D7D55731E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift in Sources */,
 				DA65CBC21E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift in Sources */,
 				DA65CBC31E1E98A800ECE942 /* ScrollableTests.swift in Sources */,
 				9D7D55771E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift in Sources */,
 				9D7D55751E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift in Sources */,
 				DA65CBC61E1E98A800ECE942 /* TransitionGestureHandlerTests.swift in Sources */,
-				DA65CBC41E1E98A800ECE942 /* StaticViewTransitionGestureHandlerTests.swift in Sources */,
+				DA65CBC41E1E98A800ECE942 /* StaticViewGestureHandlerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

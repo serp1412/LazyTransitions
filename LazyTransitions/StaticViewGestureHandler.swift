@@ -1,5 +1,5 @@
 //
-//  StaticViewTransitionGestureHandler.swift
+//  StaticViewGestureHandler.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 12/6/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class StaticViewTransitionGestureHandler: TransitionGestureHandler {
+public class StaticViewGestureHandler: TransitionGestureHandlerType {
     public var shouldFinish: Bool = false
     public var didBegin: Bool = false
     public var inProgressTransitionOrientation = TransitionOrientation.unknown

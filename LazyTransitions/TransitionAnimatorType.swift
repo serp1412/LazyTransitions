@@ -1,5 +1,5 @@
 //
-//  DismissAnimatorDelegate.swift
+//  TransitionAnimatorType.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 11/24/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol TransitionAnimator : UIViewControllerAnimatedTransitioning {
+public protocol TransitionAnimatorType : UIViewControllerAnimatedTransitioning {
     weak var delegate: TransitionAnimatorDelegate? { get set }
     var orientation: TransitionOrientation { get set }
     init(orientation: TransitionOrientation)
@@ -16,7 +16,7 @@ public protocol TransitionAnimator : UIViewControllerAnimatedTransitioning {
     var allowedOrientations: [TransitionOrientation]? { get set }
 }
 
-extension TransitionAnimator {
+extension TransitionAnimatorType {
     public var supportedOrientations: [TransitionOrientation] {
         return [.topToBottom, .bottomToTop, .leftToRight, .rightToLeft]
     }
@@ -34,7 +34,7 @@ public protocol TransitionAnimatorDelegate: class {
     func transitionDidFinish(_ completed: Bool)
 }
 
-extension TransitionAnimator {
+extension TransitionAnimatorType {
     public func finalFrame(for view: UIView, for orientation: TransitionOrientation) -> CGRect {
         let size = view.frame.size
         switch orientation {

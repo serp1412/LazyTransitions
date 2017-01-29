@@ -20,7 +20,7 @@ public class PopAnimator: NSObject {
     }
 }
 
-extension PopAnimator: TransitionAnimator {
+extension PopAnimator: TransitionAnimatorType {
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }

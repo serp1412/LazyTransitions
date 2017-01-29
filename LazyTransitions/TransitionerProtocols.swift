@@ -12,27 +12,27 @@ let progressThreshold: CGFloat = 0.3
 
 public protocol TransitionerDelegate: class {
     func finishedInteractiveTransition(_ completed: Bool)
-    func beginTransition(with transitioner: Transitioner)
+    func beginTransition(with transitioner: TransitionerType)
 }
 
 public extension TransitionerDelegate {
     func finishedInteractiveTransition(_ completed: Bool) { }
 }
 
-public protocol Transitioner: class {
-    var animator: TransitionAnimator { get }
+public protocol TransitionerType: class {
+    var animator: TransitionAnimatorType { get }
     var interactor: TransitionInteractor? { get }
     weak var delegate: TransitionerDelegate? { get set }
 }
 
-public protocol InteractiveTransitioner: Transitioner {
-    var gestureHandler: TransitionGestureHandler { get }
-    init(with gestureHandler: TransitionGestureHandler,
-         with animator: TransitionAnimator,
+public protocol InteractiveTransitionerType: TransitionerType {
+    var gestureHandler: TransitionGestureHandlerType { get }
+    init(with gestureHandler: TransitionGestureHandlerType,
+         with animator: TransitionAnimatorType,
          with interactor: TransitionInteractor)
 }
 
-public extension Transitioner {
+public extension TransitionerType {
     var interactor: TransitionInteractor? {
         return nil
     }

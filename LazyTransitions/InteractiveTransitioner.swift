@@ -1,5 +1,5 @@
 //
-//  DefaultInteractiveTransitioner.swift
+//  InteractiveTransitioner.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 11/30/16.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class DefaultInteractiveTransitioner: InteractiveTransitioner {
+public class InteractiveTransitioner: InteractiveTransitionerType {
     
     //MARK: Initializers
     
-    public required init(with gestureHandler: TransitionGestureHandler,
-         with animator: TransitionAnimator = DefaultAnimator(orientation: .topToBottom),
+    public required init(with gestureHandler: TransitionGestureHandlerType,
+         with animator: TransitionAnimatorType = DismissAnimator(orientation: .topToBottom),
          with interactor: TransitionInteractor = TransitionInteractor.default()) {
         self.gestureHandler = gestureHandler
         self.animator = animator
@@ -24,13 +24,13 @@ public class DefaultInteractiveTransitioner: InteractiveTransitioner {
     
     //MARK: InteractiveTransitioner Protocol
     
-    public var gestureHandler: TransitionGestureHandler
+    public var gestureHandler: TransitionGestureHandlerType
     public weak var delegate: TransitionerDelegate?
-    public var animator: TransitionAnimator
+    public var animator: TransitionAnimatorType
     public var interactor: TransitionInteractor?
 }
 
-extension DefaultInteractiveTransitioner: TransitionGestureHandlerDelegate {
+extension InteractiveTransitioner: TransitionGestureHandlerDelegate {
     public func beginInteractiveTransition(with orientation: TransitionOrientation) {
         guard animator.allowedOrientations?.contains(orientation) ?? true else { return }
         guard animator.supportedOrientations.contains(orientation) else { return }
@@ -53,7 +53,7 @@ extension DefaultInteractiveTransitioner: TransitionGestureHandlerDelegate {
     }
 }
 
-extension DefaultInteractiveTransitioner: TransitionAnimatorDelegate {
+extension InteractiveTransitioner: TransitionAnimatorDelegate {
     public func transitionDidFinish(_ completed: Bool) {
         delegate?.finishedInteractiveTransition(completed)
     }

@@ -1,5 +1,5 @@
 //
-//  DefaultInteractiveTransitionerTests.swift
+//  InteractiveTransitionerTests.swift
 //  LazyTransitions
 //
 //  Created by Serghei Catraniuc on 12/8/16.
@@ -11,9 +11,9 @@ import XCTest
 
 struct BeginWithTransitionerCalled {
     private(set) var wasCalled: Bool = false
-    var transitioner: Transitioner
+    var transitioner: TransitionerType
     
-    init(transitioner: Transitioner) {
+    init(transitioner: TransitionerType) {
         self.transitioner = transitioner
         wasCalled = true
     }
@@ -33,7 +33,7 @@ class MockTransitionerDelegate: TransitionerDelegate {
     var beginCalled: BeginWithTransitionerCalled!
     var finishCalled: FinishWithCompletionCalled!
     
-    func beginTransition(with transitioner: Transitioner) {
+    func beginTransition(with transitioner: TransitionerType) {
         beginCalled = BeginWithTransitionerCalled(transitioner: transitioner)
     }
     
@@ -42,7 +42,7 @@ class MockTransitionerDelegate: TransitionerDelegate {
     }
 }
 
-class MockTransitionAnimator: NSObject, TransitionAnimator {
+class MockTransitionAnimator: NSObject, TransitionAnimatorType {
     var delegate: TransitionAnimatorDelegate?
     var orientation: TransitionOrientation
     var allowedOrientations: [TransitionOrientation]?
@@ -87,12 +87,12 @@ class MockTransitionInteractor: TransitionInteractor {
     }
 }
 
-class DefaultInteractiveTransitionerTests: XCTestCase {
+class InteractiveTransitionerTests: XCTestCase {
     
     var mockAnimator: MockTransitionAnimator!
     var mockHandler: MockGestureHandler!
     var mockDelegate: MockTransitionerDelegate!
-    var transitioner: DefaultInteractiveTransitioner!
+    var transitioner: InteractiveTransitioner!
     var mockInteractor: MockTransitionInteractor!
     
     override func setUp() {
@@ -100,7 +100,7 @@ class DefaultInteractiveTransitionerTests: XCTestCase {
         mockHandler = MockGestureHandler()
         mockAnimator = MockTransitionAnimator(orientation: .leftToRight)
         mockDelegate = MockTransitionerDelegate()
-        transitioner = DefaultInteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
+        transitioner = InteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
         transitioner.delegate = mockDelegate
     }
     
@@ -129,7 +129,7 @@ class DefaultInteractiveTransitionerTests: XCTestCase {
     func testBeginInteractiveTransition_UnsupportedOrientation() {
         mockAnimator.supportedOrientations = [.leftToRight, .rightToLeft]
         
-        transitioner = DefaultInteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
+        transitioner = InteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
         transitioner.delegate = mockDelegate
         
         transitioner.beginInteractiveTransition(with: .topToBottom)
@@ -141,7 +141,7 @@ class DefaultInteractiveTransitionerTests: XCTestCase {
         mockAnimator.supportedOrientations = [.leftToRight, .rightToLeft]
         mockAnimator.allowedOrientations = [.bottomToTop]
         
-        transitioner = DefaultInteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
+        transitioner = InteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
         transitioner.delegate = mockDelegate
         
         transitioner.beginInteractiveTransition(with: .leftToRight)
@@ -152,7 +152,7 @@ class DefaultInteractiveTransitionerTests: XCTestCase {
     func testBeginInteractiveTransition_AllowedOrientationsIsNil() {
         mockAnimator.supportedOrientations = [.leftToRight, .rightToLeft]
         
-        transitioner = DefaultInteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
+        transitioner = InteractiveTransitioner(with: mockHandler, with: mockAnimator, with: mockInteractor)
         transitioner.delegate = mockDelegate
         
         transitioner.beginInteractiveTransition(with: .leftToRight)

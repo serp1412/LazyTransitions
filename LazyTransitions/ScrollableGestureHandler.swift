@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ScrollableGestureHandler: TransitionGestureHandler {
+public class ScrollableGestureHandler: TransitionGestureHandlerType {
     public var shouldFinish = false
     public var didBegin = false
     public var inProgressTransitionOrientation = TransitionOrientation.unknown
