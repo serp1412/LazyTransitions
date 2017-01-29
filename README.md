@@ -3,6 +3,10 @@
 <p align="center">
     <img src="https://img.shields.io/badge/platform-iOS8+-blue.svg?style=flat" alt="Platform: iOS 8+"/>
     <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift%203-4BC51D.svg?style=flat" alt="Language: Swift 3" /></a>
+    <img src="https://img.shields.io/cocoapods/v/LazyTransitions.svg" alt="Cocoapods"/>
+    <a href="https://img.shields.io/cocoapods/v/LazyTransitions.svg">
+    <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"/>
+    <a href="https://github.com/Carthage/Carthage">
     <img src="http://img.shields.io/badge/license-BSD-lightgrey.svg?style=flat" alt="License: BSD" />
     <a href="http://twitter.com/serp1412"><img src="https://img.shields.io/badge/twitter-@serp1412-blue.svg?style=flat" alt="Twitter: serp1412" /></a>
 </p>
