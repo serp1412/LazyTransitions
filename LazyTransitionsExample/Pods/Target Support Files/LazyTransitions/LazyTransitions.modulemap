@@ -1,6 +1,0 @@
-framework module LazyTransitions {
-  umbrella header "LazyTransitions-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -30,7 +30,7 @@
 		DA65CBB71E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */; };
 		DA65CBB81E1E987000ECE942 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */; };
 		DA65CBB91E1E987000ECE942 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */; };
-		DA65CBBA1E1E987000ECE942 /* UniversalTransitionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA61E1E987000ECE942 /* UniversalTransitionsHandler.swift */; };
+		DA65CBBA1E1E987000ECE942 /* LazyTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBA61E1E987000ECE942 /* LazyTransitioner.swift */; };
 		DA65CBC11E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBB1E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift */; };
 		DA65CBC21E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBC1E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift */; };
 		DA65CBC31E1E98A800ECE942 /* ScrollableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65CBBD1E1E98A800ECE942 /* ScrollableTests.swift */; };
@@ -76,7 +76,7 @@
 		DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizerExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		DA65CBA61E1E987000ECE942 /* UniversalTransitionsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalTransitionsHandler.swift; sourceTree = "<group>"; };
+		DA65CBA61E1E987000ECE942 /* LazyTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyTransitioner.swift; sourceTree = "<group>"; };
 		DA65CBBB1E1E98A800ECE942 /* DefaultInteractiveTransitionerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultInteractiveTransitionerTests.swift; sourceTree = "<group>"; };
 		DA65CBBC1E1E98A800ECE942 /* ScrollableGestureHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableGestureHandlerTests.swift; sourceTree = "<group>"; };
 		DA65CBBD1E1E98A800ECE942 /* ScrollableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableTests.swift; sourceTree = "<group>"; };
@@ -139,10 +139,10 @@
 		9D7D55701E1FC0C100054D3A /* Transitioners */ = {
 			isa = PBXGroup;
 			children = (
+				DA65CBA61E1E987000ECE942 /* LazyTransitioner.swift */,
 				DA65CB9D1E1E987000ECE942 /* TransitionCombinator.swift */,
 				DA65CB941E1E987000ECE942 /* DefaultInteractiveTransitioner.swift */,
 				DA65CB971E1E987000ECE942 /* PartialTransitioner.swift */,
-				DA65CBA61E1E987000ECE942 /* UniversalTransitionsHandler.swift */,
 				DA65CB9E1E1E987000ECE942 /* TransitionerProtocols.swift */,
 			);
 			name = Transitioners;
@@ -326,7 +326,7 @@
 				DA65CBB21E1E987000ECE942 /* TransitionerProtocols.swift in Sources */,
 				DA65CBAF1E1E987000ECE942 /* StaticViewTransitionGestureHandler.swift in Sources */,
 				DA65CBA81E1E987000ECE942 /* DefaultInteractiveTransitioner.swift in Sources */,
-				DA65CBBA1E1E987000ECE942 /* UniversalTransitionsHandler.swift in Sources */,
+				DA65CBBA1E1E987000ECE942 /* LazyTransitioner.swift in Sources */,
 				DA65CBB71E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift in Sources */,
 				DA65CBAD1E1E987000ECE942 /* ScrollableGestureHandler.swift in Sources */,
 				DA65CBAA1E1E987000ECE942 /* PartialTransitionAnimator.swift in Sources */,
