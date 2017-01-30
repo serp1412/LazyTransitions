@@ -25,6 +25,12 @@ Add the following line to your PodFile:
 
 ``` pod 'LazyTransitions' ``` 
 
+### Carthage
+
+Add the following line to your `Cartfile`
+
+``` github "serp1412/LazyTransitions" ```
+
 ## Usage
 
 The simplest way to use this framework is to take advantage of `LazyTransitioner` class.
