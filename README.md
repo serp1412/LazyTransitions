@@ -56,11 +56,17 @@ transitioner.triggerTransitionAction = { [weak self] _ in
 }
 ```
 
-* Set your transitioner as the transitioning delegate.
+* Set your transitioner as the transitioning delegate of the view controller you're dismissing.
 
 For Dismiss:
 ```swift
 transitioningDelegate = transitioner
+```
+
+NOTE: if your view controller is embedded in another view controller you'll have to assign to your parent's transitioning delegate.
+In case of a screen embedded in a `UINavigationController` you have to do:
+```swift
+navigationController?.transitioningDelegate = transitioner
 ```
 
 For Pop:
