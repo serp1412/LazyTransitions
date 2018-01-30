@@ -7,6 +7,8 @@
     <a href="https://img.shields.io/cocoapods/v/LazyTransitions.svg">
     <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"/>
     <a href="https://github.com/Carthage/Carthage">
+    <img src="https://travis-ci.org/serp1412/LazyTransitions.svg?branch=master"/>
+    <a href="">
     <img src="http://img.shields.io/badge/license-BSD-lightgrey.svg?style=flat" alt="License: BSD" />
     <a href="http://twitter.com/serp1412"><img src="https://img.shields.io/badge/twitter-@serp1412-blue.svg?style=flat" alt="Twitter: serp1412" /></a>
 </p>
