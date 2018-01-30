@@ -7,6 +7,8 @@
     <a href="https://img.shields.io/cocoapods/v/LazyTransitions.svg">
     <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"/>
     <a href="https://github.com/Carthage/Carthage">
+    <a href="https://codecov.io/gh/serp1412/LazyTransitions">
+    <img src="https://codecov.io/gh/serp1412/LazyTransitions/branch/master/graph/badge.svg" /></a>    
     <img src="https://travis-ci.org/serp1412/LazyTransitions.svg?branch=master"/>
     <a href="">
     <img src="http://img.shields.io/badge/license-BSD-lightgrey.svg?style=flat" alt="License: BSD" />
