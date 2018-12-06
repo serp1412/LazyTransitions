@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'LazyTransitions'
-  s.version = '0.1.0'
+  s.version = '0.1.2'
   s.license = 'MIT'
   s.summary = 'Simple framework to add lazy pop and dismiss like in the Facebook or Instagram apps'
   s.homepage = 'https://github.com/serp1412/LazyTransitions'
