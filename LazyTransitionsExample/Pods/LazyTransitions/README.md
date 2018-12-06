@@ -3,6 +3,14 @@
 <p align="center">
     <img src="https://img.shields.io/badge/platform-iOS8+-blue.svg?style=flat" alt="Platform: iOS 8+"/>
     <a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/language-swift%203-4BC51D.svg?style=flat" alt="Language: Swift 3" /></a>
+    <img src="https://img.shields.io/cocoapods/v/LazyTransitions.svg" alt="Cocoapods"/>
+    <a href="https://img.shields.io/cocoapods/v/LazyTransitions.svg">
+    <img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"/>
+    <a href="https://github.com/Carthage/Carthage">
+    <a href="https://codecov.io/gh/serp1412/LazyTransitions">
+    <img src="https://codecov.io/gh/serp1412/LazyTransitions/branch/master/graph/badge.svg" /></a>    
+    <img src="https://travis-ci.org/serp1412/LazyTransitions.svg?branch=master"/>
+    <a href="">
     <img src="http://img.shields.io/badge/license-BSD-lightgrey.svg?style=flat" alt="License: BSD" />
     <a href="http://twitter.com/serp1412"><img src="https://img.shields.io/badge/twitter-@serp1412-blue.svg?style=flat" alt="Twitter: serp1412" /></a>
 </p>
@@ -19,7 +27,13 @@ A simple framework that allows you to create similar lazy pops and dismisses lik
 
 Add the following line to your PodFile:
 
-``` pod 'LazyTransitions' , :git => 'https://github.com/serp1412/LazyTransitions.git' ``` 
+``` pod 'LazyTransitions' ``` 
+
+### Carthage
+
+Add the following line to your `Cartfile`
+
+``` github "serp1412/LazyTransitions" ```
 
 ## Usage
 
@@ -46,11 +60,17 @@ transitioner.triggerTransitionAction = { [weak self] _ in
 }
 ```
 
-* Set your transitioner as the transitioning delegate.
+* Set your transitioner as the transitioning delegate of the view controller you're dismissing.
 
 For Dismiss:
 ```swift
 transitioningDelegate = transitioner
+```
+
+NOTE: if your view controller is embedded in another view controller you'll have to assign to your parent's transitioning delegate.
+In case of a screen embedded in a `UINavigationController` you have to do:
+```swift
+navigationController?.transitioningDelegate = transitioner
 ```
 
 For Pop:

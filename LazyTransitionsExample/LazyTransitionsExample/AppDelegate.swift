@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? = MBFingerTipWindow(frame: UIScreen.main.bounds)
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 //        if let fingerWindow = window as? MBFingerTipWindow {
 //            fingerWindow.alwaysShowTouches = true
 //        }

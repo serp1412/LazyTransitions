@@ -16,7 +16,7 @@ public protocol TransitionGestureHandlerDelegate: class {
 }
 
 public protocol TransitionGestureHandlerType: class {
-    weak var delegate: TransitionGestureHandlerDelegate? { get set }
+    var delegate: TransitionGestureHandlerDelegate? { get set }
     var shouldFinish: Bool { get }
     var didBegin: Bool { get set }
     var inProgressTransitionOrientation: TransitionOrientation { get }

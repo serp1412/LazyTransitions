@@ -32,7 +32,7 @@ public struct TransitionProgressCalculator {
             progress = fminf(downwardMovement, 1.0)
         case .bottomToTop:
             let verticalMovement = Float(adjustedTranslation.y / view.bounds.height)
-            let upwardMovement = fabs(fminf(verticalMovement, 0.0))
+            let upwardMovement = abs(fminf(verticalMovement, 0.0))
             progress = fminf(upwardMovement, 1.0)
         case .leftToRight:
             let horizontalMovement = Float(adjustedTranslation.x / view.bounds.width)
@@ -40,7 +40,7 @@ public struct TransitionProgressCalculator {
             progress = fminf(leftToRightMovement, 1.0)
         case .rightToLeft:
             let horizontalMovement = Float(adjustedTranslation.x / view.bounds.width)
-            let rightToLeftMovement = fabs(fminf(horizontalMovement, 0))
+            let rightToLeftMovement = abs(fminf(horizontalMovement, 0))
             progress = fminf(rightToLeftMovement, 1)
         default: break
         }

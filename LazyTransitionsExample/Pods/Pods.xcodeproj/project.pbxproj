@@ -402,7 +402,7 @@
 			};
 			name = Debug;
 		};
-		69BAD516B5F9FDC72EDFB769F43D16EB /* Release */ = {
+		1B7480F740E9733B5EE47762E9A8210A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3FDB507641E62E6A415FBD1EC8DE151 /* LazyTransitions.xcconfig */;
 			buildSettings = {
@@ -426,13 +426,12 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		85B95B1234E227C814CCC2C7902D0916 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -596,7 +595,7 @@
 			};
 			name = Release;
 		};
-		D141B232780E9CA8390D3A53883A345B /* Debug */ = {
+		E3BDD2E820640360CE1D26C6EBBB796E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3FDB507641E62E6A415FBD1EC8DE151 /* LazyTransitions.xcconfig */;
 			buildSettings = {
@@ -620,12 +619,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -651,8 +651,8 @@
 		8D00D1FAE7892F4ADB20820F72618B29 /* Build configuration list for PBXNativeTarget "LazyTransitions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D141B232780E9CA8390D3A53883A345B /* Debug */,
-				69BAD516B5F9FDC72EDFB769F43D16EB /* Release */,
+				1B7480F740E9733B5EE47762E9A8210A /* Debug */,
+				E3BDD2E820640360CE1D26C6EBBB796E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

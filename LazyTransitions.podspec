@@ -7,6 +7,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'http://twitter.com/serp1412'
   s.authors = { 'Serghei Catraniuc' => 'catraniuc.serghei@gmail.com' }
   s.source = { :git => 'https://github.com/serp1412/LazyTransitions.git', :tag => s.version }
+  s.swift_version = '4.2'
 
   s.ios.deployment_target = '8.0'
 

@@ -79,7 +79,7 @@ public class LazyTransitioner : NSObject {
         return transitionerTuples
             .filter{$0.transitioner is PartialTransitioner}
             .map{$0.transitioner as? PartialTransitioner}
-            .flatMap{$0}
+            .compactMap{$0}
             .filter{ $0.scrollView === scrollView }
             .lazy.first
     }
@@ -126,7 +126,7 @@ extension LazyTransitioner : UIViewControllerTransitioningDelegate {
 }
 
 extension LazyTransitioner : UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard operation == .pop else { return nil }
         return animator
     }
