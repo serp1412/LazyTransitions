@@ -1,7 +1,7 @@
 language: swift
 xcode_project: LazyTransitions.xcodeproj
 xcode_scheme: LazyTransitions
-osx_image: xcode10.0
+osx_image: xcode10.1
 script:
   - xcodebuild -scheme LazyTransitions -workspace LazyTransitions.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.1,name=iPhone XS' build test
 after_success:
