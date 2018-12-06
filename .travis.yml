@@ -3,6 +3,6 @@ xcode_project: LazyTransitions.xcodeproj
 xcode_scheme: LazyTransitions
 osx_image: xcode10.1
 script:
-  - xcodebuild -scheme LazyTransitions -workspace LazyTransitions.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.1,name=iPhone XS' -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.2' build test
+  - xcodebuild -scheme LazyTransitions -workspace LazyTransitions.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=12.1,name=iPhone XS' build test
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'LazyTransitions'
