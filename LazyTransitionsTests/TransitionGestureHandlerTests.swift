@@ -10,15 +10,16 @@ import XCTest
 @testable import LazyTransitions
 
 class MockPanGestureRecognizer: UIPanGestureRecognizer {
-    var mockState: UIGestureRecognizerState = .possible
+    var mockState: UIGestureRecognizer.State = .possible
     var mockVelocity: CGPoint = .zero
     var mockTranslation: CGPoint = .zero
     var mockView: UIView = UIView()
     
     var passedCorrectViewInTranslationCall: Bool = false
     
-    override var state: UIGestureRecognizerState {
+    override var state: UIGestureRecognizer.State {
         get { return mockState }
+        set { mockState = newValue }
     }
     
     override func velocity(in view: UIView?) -> CGPoint {

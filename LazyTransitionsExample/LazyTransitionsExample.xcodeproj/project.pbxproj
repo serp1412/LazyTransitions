@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41176DDAB5D9470BD87E26D7 /* Pods_LazyTransitionsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC20CD1F1EDDFDD7129D07C /* Pods_LazyTransitionsExample.framework */; };
 		9D7D55AD1E25118C00054D3A /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7D55A01E25118C00054D3A /* 11.png */; };
 		9D7D55AE1E25118C00054D3A /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7D55A11E25118C00054D3A /* 12.png */; };
 		9D7D55AF1E25118C00054D3A /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D7D55A21E25118C00054D3A /* 5.png */; };
@@ -86,6 +87,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		913B0D34309F01EA16EBF925 /* Pods-LazyTransitionsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyTransitionsExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LazyTransitionsExample/Pods-LazyTransitionsExample.debug.xcconfig"; sourceTree = "<group>"; };
 		9D7D55A01E25118C00054D3A /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
 		9D7D55A11E25118C00054D3A /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
 		9D7D55A21E25118C00054D3A /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
@@ -120,6 +122,8 @@
 		9D7D55DC1E26366700054D3A /* MBFingerTipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFingerTipWindow.m; sourceTree = "<group>"; };
 		9D7D55DE1E2637DE00054D3A /* HABorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HABorderButton.h; sourceTree = "<group>"; };
 		9D7D55DF1E2637DE00054D3A /* HABorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HABorderButton.m; sourceTree = "<group>"; };
+		B5900520C1F5D61408A906B2 /* Pods-LazyTransitionsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LazyTransitionsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-LazyTransitionsExample/Pods-LazyTransitionsExample.release.xcconfig"; sourceTree = "<group>"; };
+		CDC20CD1F1EDDFDD7129D07C /* Pods_LazyTransitionsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LazyTransitionsExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4E62D71E3E3D8F0049A5CB /* LazyTransitions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LazyTransitions.xcodeproj; path = ../LazyTransitions.xcodeproj; sourceTree = "<group>"; };
 		DAEE38991E23E2F2004CB8D9 /* LazyTransitionsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyTransitionsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEE389C1E23E2F2004CB8D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,12 +140,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA4E62E01E3E3DC30049A5CB /* LazyTransitions.framework in Frameworks */,
+				41176DDAB5D9470BD87E26D7 /* Pods_LazyTransitionsExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3A4F5A4502CFA893661648A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				913B0D34309F01EA16EBF925 /* Pods-LazyTransitionsExample.debug.xcconfig */,
+				B5900520C1F5D61408A906B2 /* Pods-LazyTransitionsExample.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DA4E62D81E3E3D8F0049A5CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +172,7 @@
 				DAEE389A1E23E2F2004CB8D9 /* Products */,
 				DC834C691B60C5B6AF5A618D /* Frameworks */,
 				DA4E62D71E3E3D8F0049A5CB /* LazyTransitions.xcodeproj */,
+				B3A4F5A4502CFA893661648A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,6 +234,7 @@
 		DC834C691B60C5B6AF5A618D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDC20CD1F1EDDFDD7129D07C /* Pods_LazyTransitionsExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -230,10 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAEE38AB1E23E2F2004CB8D9 /* Build configuration list for PBXNativeTarget "LazyTransitionsExample" */;
 			buildPhases = (
+				4E9AD1110150D57058839853 /* [CP] Check Pods Manifest.lock */,
 				DAEE38951E23E2F2004CB8D9 /* Sources */,
 				DAEE38961E23E2F2004CB8D9 /* Frameworks */,
 				DAEE38971E23E2F2004CB8D9 /* Resources */,
 				DA4E62E41E3E3DC30049A5CB /* Embed Frameworks */,
+				44E4B5AC03826B28D3C51A76 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -343,6 +361,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		44E4B5AC03826B28D3C51A76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LazyTransitionsExample/Pods-LazyTransitionsExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/LazyTransitions/LazyTransitions.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LazyTransitions.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LazyTransitionsExample/Pods-LazyTransitionsExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E9AD1110150D57058839853 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LazyTransitionsExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DAEE38951E23E2F2004CB8D9 /* Sources */ = {
@@ -481,6 +546,7 @@
 		};
 		DAEE38AC1E23E2F2004CB8D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 913B0D34309F01EA16EBF925 /* Pods-LazyTransitionsExample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -498,6 +564,7 @@
 		};
 		DAEE38AD1E23E2F2004CB8D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5900520C1F5D61408A906B2 /* Pods-LazyTransitionsExample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

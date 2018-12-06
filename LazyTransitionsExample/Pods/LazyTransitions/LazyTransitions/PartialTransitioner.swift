@@ -59,7 +59,7 @@ public class PartialTransitioner: TransitionerType {
         let distance = currentOffset.y - lastOffset.y
         let scrollSpeedNotAbs = (distance * 10) / 1000.0 //in pixels per millisecond
         
-        lastRecordedSpeed = abs(scrollSpeedNotAbs)
+        lastRecordedSpeed = fabs(scrollSpeedNotAbs)
         lastOffset = currentOffset
         lastOffsetCapture = currentTime
     }

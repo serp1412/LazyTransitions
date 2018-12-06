@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol TransitionAnimatorType : UIViewControllerAnimatedTransitioning {
-    var delegate: TransitionAnimatorDelegate? { get set }
+    weak var delegate: TransitionAnimatorDelegate? { get set }
     var orientation: TransitionOrientation { get set }
     init(orientation: TransitionOrientation)
     var supportedOrientations: [TransitionOrientation] { get }

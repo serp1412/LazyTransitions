@@ -22,7 +22,7 @@ public extension TransitionerDelegate {
 public protocol TransitionerType: class {
     var animator: TransitionAnimatorType { get }
     var interactor: TransitionInteractor? { get }
-    var delegate: TransitionerDelegate? { get set }
+    weak var delegate: TransitionerDelegate? { get set }
 }
 
 public protocol InteractiveTransitionerType: TransitionerType {
