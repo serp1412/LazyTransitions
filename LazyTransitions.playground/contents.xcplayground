@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='5.0' target-platform='ios' executeOnSourceChanges='false'>
-    <timeline fileName='timeline.xctimeline'/>
+<playground version='6.0' target-platform='ios' executeOnSourceChanges='false'>
+    <pages>
+        <page name='Lazy Dismiss animation'/>
+        <page name='Lazy Pop animation'/>
+        <page name='Bouncy ScrollView animation'/>
+    </pages>
 </playground>
