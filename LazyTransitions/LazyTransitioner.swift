@@ -15,7 +15,9 @@ fileprivate enum TransitionType {
 
 public class LazyTransitioner : NSObject {
     fileprivate typealias TransitionerTuple = (transitioner: TransitionerType, view: UIView?, type: TransitionType)
-    
+
+    public var onCompleteTransition: () -> () = {}
+
     public var animator: TransitionAnimatorType {
         return transitionCombinator.animator
     }
@@ -112,6 +114,10 @@ public class LazyTransitioner : NSObject {
 extension LazyTransitioner: TransitionerDelegate {
     public func beginTransition(with transitioner: TransitionerType) {
         triggerTransitionAction(self)
+    }
+
+    public func finishedInteractiveTransition(_ completed: Bool) {
+        onCompleteTransition()
     }
 }
 
