@@ -1,40 +1,69 @@
+/*:
+ # How to limit which transition orientations are allowed
+ */
+
+
 import LazyTransitions
 import PlaygroundSupport
 
-class LazyViewController: UIViewController {
-    let transitioner = LazyTransitioner()
+/*
+ 1. Conform the controller you want to become lazy to `LazyScreen`.
+ */
+class LazyViewController: UIViewController, LazyScreen {
+    /* 2. Introduce a new property `transitioner` */
+    var transitioner: LazyTransitioner?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
-        transitioner.addTransition(forView: view)
-        transitioner.allowedOrientations = [.leftToRight]
-        transitioner.triggerTransitionAction = { [weak self] transitioner in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        navigationController?.delegate = transitioner
+        /* 3. Initialize the transitioner */
+        transitioner = .init(lazyScreen: self,
+                             transition: .dismiss)
+
+        /*
+         4. Asign an array of orientations you want to allow to the `allowedOrientations` of your transitioner.
+         Feel free to change the array and see how that changes the interaction
+         */
+        transitioner?.allowedOrientations = [.topToBottom, .bottomToTop]
     }
 }
+
+/* 5. Run the playground to see it in action */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let backVC = UIViewController()
 backVC.view.backgroundColor = .blue
 
-let nav = UINavigationController.init(rootViewController: backVC)
+backVC.view.frame = .iphone6
 
-nav.view.frame = CGRect.init(x: 0, y: 0, width: 750 / 2, height: 1334 / 2)
+PlaygroundPage.current.liveView = backVC.view
+let lazyVC = LazyViewController()
+lazyVC.view.backgroundColor = .red
 
-PlaygroundPage.current.liveView = nav.view
-
-nav.pushViewController(LazyViewController(), animated: true)
-
-/*
- Dismiss
- Pop
- Bouncy scroll view
- Limit orientations
- Presentation controller
- Multiple scroll views
- Custom transitioners??
-
- */
+backVC.present(lazyVC, animated: true, completion: nil)

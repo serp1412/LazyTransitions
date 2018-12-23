@@ -50,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D0708FC21C059640020FE68 /* Xcode10Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Xcode10Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9D237C9021B99B1A001489FD /* LazyTransitions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LazyTransitions.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizerTests.swift; sourceTree = "<group>"; };
 		9D7D55741E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensionsTests.swift; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		DA65CB6F1E1E984C00ECE942 = {
 			isa = PBXGroup;
 			children = (
+				9D0708FC21C059640020FE68 /* Xcode10Playground.playground */,
 				9D237C9021B99B1A001489FD /* LazyTransitions.playground */,
 				DA65CB7B1E1E984C00ECE942 /* LazyTransitions */,
 				DA65CB861E1E984C00ECE942 /* LazyTransitionsTests */,

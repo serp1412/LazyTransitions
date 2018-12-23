@@ -2,52 +2,7 @@ import LazyTransitions
 import UIKit
 import PlaygroundSupport
 
-final class WebViewController: UIViewController {
-
-    let webView: UIWebView = {
-        let webView = UIWebView()
-        webView.scalesPageToFit = true
-
-        return webView
-    }()
-
-
-    init(url: URL, title: String = "") {
-        super.init(nibName: nil, bundle: nil)
-
-        self.edgesForExtendedLayout = []
-
-        let request = URLRequest(url: url)
-        self.webView.loadRequest(request)
-
-        self.title = title
-
-        self.setup()
-    }
-
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func setup() {
-        self.view.addSubview(self.webView)
-
-        self.setupConstraints()
-    }
-
-    func setupConstraints() {
-        self.webView.translatesAutoresizingMaskIntoConstraints = false
-        self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        self.webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        self.webView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        self.webView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    }
-}
-
 final class BottomUpTransition: NSObject, TransitionAnimatorType {
-
-    // MARK: Added to convert to a LazyTransition
     public weak var delegate: TransitionAnimatorDelegate?
     public var orientation = TransitionOrientation.topToBottom
     public var allowedOrientations: [TransitionOrientation]? = [TransitionOrientation.topToBottom]
@@ -57,8 +12,6 @@ final class BottomUpTransition: NSObject, TransitionAnimatorType {
         self.isReversed = true
         self.animationDuration = 0.3
     }
-
-    // MARK: Begin original code
 
     let isReversed: Bool
     let animationDuration: TimeInterval
@@ -135,12 +88,6 @@ class ViewController: UIViewController {
 
         self.button.addTarget(self, action: #selector(openWebViewController), for: .touchUpInside)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
    @objc func openWebViewController() {
         let url = URL(string: "https://www.google.com")!
@@ -277,7 +224,50 @@ private extension DimmmedBackgroundPresentationController {
     }
 }
 
+final class WebViewController: UIViewController {
+    let webView: UIWebView = {
+        let webView = UIWebView()
+        webView.scalesPageToFit = true
+
+        return webView
+    }()
+
+    init(url: URL, title: String = "") {
+        super.init(nibName: nil, bundle: nil)
+
+        self.edgesForExtendedLayout = []
+
+        let request = URLRequest(url: url)
+        self.webView.loadRequest(request)
+
+        self.title = title
+
+        self.setup()
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup() {
+        self.view.addSubview(self.webView)
+
+        self.setupConstraints()
+    }
+
+    func setupConstraints() {
+        self.webView.translatesAutoresizingMaskIntoConstraints = false
+        self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.webView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.webView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    }
+}
+
 let screen = ViewController()
 screen.view.frame = CGRect.init(x: 0, y: 0, width: 750 / 2, height: 1334 / 2)
 
 PlaygroundPage.current.liveView = screen.view
+
+
