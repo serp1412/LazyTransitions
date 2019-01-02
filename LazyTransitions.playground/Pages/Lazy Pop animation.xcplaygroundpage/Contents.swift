@@ -41,26 +41,46 @@ class LazyViewController: UIViewController, LazyScreen {
 
 
 
-let backVC = UIViewController()
-backVC.view.backgroundColor = .blue
 
-let nav = UINavigationController.init(rootViewController: backVC)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let nav = UINavigationController()
 nav.view.frame = .iphone6
+
+let lazyVC = LazyViewController()
+let backVC = BackgroundViewController.instantiate(with: lazyVC, action: { presented, presenting in
+
+    presenting.navigationController?.pushViewController(presented, animated: true)
+    presented.view.backgroundColor = .blue
+})
+
+nav.pushViewController(backVC, animated: false)
 
 PlaygroundPage.current.liveView = nav.view
 
-let lazyVC = LazyViewController()
-nav.pushViewController(lazyVC, animated: true)
-lazyVC.view.backgroundColor = .red
 
 /*
- Dismiss
- Pop
- Bouncy scroll view
- Limit orientations
- Presentation controller
- Multiple scroll views
- Custom transitioners??
- Add tap me button to background view
  Add swipe direction hint on lazyVC
+ LazyTransitioner in a runtime attribute
+ Override scroll view delegate using runtime
+ Write README in playgrounds
+ Delete Example project
+ Delete Xcode10Playground
+ Update README in repository
  */

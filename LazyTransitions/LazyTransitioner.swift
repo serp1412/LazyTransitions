@@ -8,6 +8,18 @@
 
 import Foundation
 
+public struct Presentation {
+    public typealias PresentationControllerInit = (_ presented: UIViewController, _ presenting: UIViewController?, _ source: UIViewController) -> UIPresentationController
+    let animator: UIViewControllerAnimatedTransitioning
+    let presentationControllerInit: PresentationControllerInit
+
+    public init(animator: UIViewControllerAnimatedTransitioning,
+                presentationControllerInit: @escaping PresentationControllerInit) {
+        self.animator = animator
+        self.presentationControllerInit = presentationControllerInit
+    }
+}
+
 fileprivate enum TransitionViewType {
     case forScrollView
     case forStaticView
@@ -16,6 +28,39 @@ fileprivate enum TransitionViewType {
 public enum TransitionType {
     case dismiss
     case pop
+
+    var animator: TransitionAnimatorType {
+        switch self {
+        case .dismiss: return DismissAnimator(orientation: .topToBottom)
+        case .pop: return PopAnimator(orientation: .leftToRight)
+        }
+    }
+
+    var transitionTrigger: (UIViewController) -> (LazyTransitioner) -> Void {
+        switch self {
+        case .dismiss:
+            return { vc in
+                weak var weakVC = vc
+                return { _ in
+                    weakVC?.dismiss(animated: true, completion: nil)
+                }
+            }
+        case .pop:
+            return { vc in
+                weak var weakVC = vc
+                return { _ in
+                    weakVC?.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
+
+    var allowedOrientations: [TransitionOrientation] {
+        switch self {
+        case .dismiss: return TransitionOrientation.allCases
+        case .pop: return [.leftToRight]
+        }
+    }
 }
 
 public protocol LazyScreen {
@@ -55,38 +100,31 @@ public class LazyTransitioner : NSObject {
     fileprivate let internalInteractor: TransitionInteractor
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
+    fileprivate let presentation: Presentation?
 
-    public init(lazyScreen: UIViewController & LazyScreen, transition: TransitionType) {
-        self.internalInteractor = TransitionInteractor.default()
-        switch transition {
-        case .dismiss:
-            self.internalAnimator = DismissAnimator(orientation: .topToBottom)
-            triggerTransitionAction = { [weak lazyScreen] _ in
-                lazyScreen?.dismiss(animated: true, completion: nil)
-            }
-        case .pop:
-            self.internalAnimator = PopAnimator(orientation: .leftToRight)
-            triggerTransitionAction = { [weak lazyScreen] _ in
-                lazyScreen?.navigationController?.popViewController(animated: true)
-            }
-        }
-
+    public init(lazyScreen: UIViewController & LazyScreen,
+                transition: TransitionType,
+                animator: TransitionAnimatorType? = nil,
+                interactor: TransitionInteractor? = nil,
+                presentation: Presentation? = nil) {
+        self.internalInteractor = interactor ?? TransitionInteractor.default()
+        self.internalAnimator = animator ?? transition.animator
+        self.triggerTransitionAction = transition.transitionTrigger(lazyScreen)
         self.transitionCombinator = TransitionCombinator(defaultAnimator: self.internalAnimator)
+        self.presentation = presentation ?? nil
+        self.transitionCombinator.allowedOrientations = transition.allowedOrientations
 
         super.init()
 
-
-        switch transition {
-        case .dismiss:
-            lazyScreen.transitioningDelegate = self
-        case .pop:
-            lazyScreen.navigationController?.delegate = self
-        }
-
+        transition == .dismiss ?
+            { lazyScreen.transitioningDelegate = self }() :
+            { lazyScreen.navigationController?.delegate = self }()
         transitionCombinator.delegate = self
-
         lazyScreen.views.forEach(addTransition(forView:))
         lazyScreen.scrollViews.forEach(addTransition(forScrollView:))
+        if presentation != nil {
+            lazyScreen.modalPresentationStyle = .custom
+        }
     }
 
     public init(animator: TransitionAnimatorType = DismissAnimator(orientation: .topToBottom),
@@ -94,6 +132,7 @@ public class LazyTransitioner : NSObject {
         self.internalAnimator = animator
         self.internalInteractor = interactor
         self.transitionCombinator = TransitionCombinator(defaultAnimator: animator)
+        self.presentation = nil
         super.init()
         transitionCombinator.delegate = self
     }
@@ -179,9 +218,17 @@ extension LazyTransitioner : UIViewControllerTransitioningDelegate {
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animator
     }
+
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return presentation?.animator
+    }
     
     public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactor
+    }
+
+    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return presentation?.presentationControllerInit(presented, presenting, source)
     }
 }
 

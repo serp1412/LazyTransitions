@@ -44,13 +44,40 @@ class LazyViewController: UIViewController, LazyScreen {
 
 
 
-let backVC = UIViewController()
-backVC.view.backgroundColor = .blue
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let lazyVC = LazyViewController()
+let backVC = BackgroundViewController.instantiate(with: lazyVC, action: { presented, presenting in
+    presenting.present(presented, animated: true, completion: nil)
+})
 backVC.view.frame = .iphone6
 
 PlaygroundPage.current.liveView = backVC.view
-let lazyVC = LazyViewController()
-lazyVC.view.backgroundColor = .red
 
-backVC.present(lazyVC, animated: true, completion: nil)
+lazyVC.view.backgroundColor = .blue
+

@@ -33,9 +33,33 @@ class LazyViewController: UIViewController, LazyScreen {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         transitioner?.didScroll(scrollView)
     }
+
+    /* 7. Add a transition for each collection view in every row cell */
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let rowCell = cell as! RowCell
+        transitioner?.addTransition(forScrollView: rowCell.collectionView)
+    }
 }
 
-/* 7. Run the playground and flick the collection view to the very top or bottom to see how it bounces. */
+/* 8. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
+
+ Then try srolling the cells to the very left or very right and see how they trigger a transition */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -66,13 +90,10 @@ class LazyViewController: UIViewController, LazyScreen {
 
 /* Oh hey there, didn't expect you to scroll down here. You won't find anything special here, just some setup code ☺️ */
 
-let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
-let itemsPerRow: CGFloat = 3
-
 extension LazyViewController: UICollectionViewDelegateFlowLayout {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        collectionView.register(RowCell.self, forCellWithReuseIdentifier: RowCell.identifier)
         view.addSubview(collectionView)
         collectionView.bindFrameToSuperviewBounds()
         collectionView.dataSource = self
@@ -83,11 +104,7 @@ extension LazyViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
-
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        return CGSize(width: collectionView.frame.width, height: 120)
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -97,24 +114,22 @@ extension LazyViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return 10
     }
 }
 
-// MARK: - UICollectionViewDataSource
 extension LazyViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
-                                 numberOfItemsInSection section: Int) -> Int {
-        return 27
+                        numberOfItemsInSection section: Int) -> Int {
+        return 10
     }
 
     func collectionView(_ collectionView: UICollectionView,
-                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier,
-                                                      for: indexPath) as! PhotoCell
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RowCell.identifier,
+                                                      for: indexPath) as! RowCell
         cell.backgroundColor = UIColor.white
-        cell.imageView.image = UIImage(named: "\(indexPath.row)")
-
+        cell.setup()
 
         return cell
     }
@@ -126,5 +141,4 @@ let backVC = BackgroundViewController.instantiate(with: LazyViewController(), ac
 backVC.view.frame = .iphone6
 
 PlaygroundPage.current.liveView = backVC.view
-
 
