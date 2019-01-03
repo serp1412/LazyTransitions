@@ -9,16 +9,13 @@ import PlaygroundSupport
 /*
  1. Conform the controller you want to become lazy to `LazyScreen`.
  */
-class LazyViewController: UIViewController, LazyScreen {
-    /* 2. Introduce a new property `transitioner` */
-    var transitioner: LazyTransitioner?
+class LazyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         /* 3. Initialize the transitioner */
-        transitioner = .init(lazyScreen: self,
-                             transition: .dismiss)
+        becomeLazy(for: .dismiss)
 
         /*
          4. Asign an array of orientations you want to allow to the `allowedOrientations` of your transitioner.
@@ -56,10 +53,12 @@ class LazyViewController: UIViewController, LazyScreen {
 
 
 
-let backVC = BackgroundViewController.instantiate(with: LazyViewController(), action: { presented, presenting in
+let lazyVC = LazyViewController()
+let backVC = BackgroundViewController.instantiate(with: lazyVC, action: { presented, presenting in
     presenting.present(presented, animated: true, completion: nil)
 })
 backVC.view.frame = .iphone6
+lazyVC.view.backgroundColor = .blue
 
 PlaygroundPage.current.liveView = backVC.view
 

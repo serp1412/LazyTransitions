@@ -63,21 +63,6 @@ public enum TransitionType {
     }
 }
 
-public protocol LazyScreen {
-    var views: [UIView] { get }
-    var scrollViews: [UIScrollView] { get }
-}
-
-public extension LazyScreen {
-    var views: [UIView] { return [] }
-    var scrollViews: [UIScrollView] {  return [] }
-
-}
-
-public extension LazyScreen where Self: UIViewController {
-    var views: [UIView] { return [view] }
-}
-
 public class LazyTransitioner : NSObject {
     fileprivate typealias TransitionerTuple = (transitioner: TransitionerType, view: UIView?, type: TransitionViewType)
 
@@ -101,8 +86,10 @@ public class LazyTransitioner : NSObject {
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
     fileprivate let presentation: Presentation?
+    @objc fileprivate var lazyScreen: UIViewController? = nil
+    fileprivate let transitionType: TransitionType?
 
-    public init(lazyScreen: UIViewController & LazyScreen,
+    public init(lazyScreen: UIViewController,
                 transition: TransitionType,
                 animator: TransitionAnimatorType? = nil,
                 interactor: TransitionInteractor? = nil,
@@ -112,16 +99,19 @@ public class LazyTransitioner : NSObject {
         self.triggerTransitionAction = transition.transitionTrigger(lazyScreen)
         self.transitionCombinator = TransitionCombinator(defaultAnimator: self.internalAnimator)
         self.presentation = presentation ?? nil
-        self.transitionCombinator.allowedOrientations = transition.allowedOrientations
+        self.transitionCombinator.allowedOrientations = animator?.allowedOrientations ?? transition.allowedOrientations
+        self.lazyScreen = lazyScreen
+        self.transitionType = transition
 
         super.init()
+
+        addObserver()
 
         transition == .dismiss ?
             { lazyScreen.transitioningDelegate = self }() :
             { lazyScreen.navigationController?.delegate = self }()
         transitionCombinator.delegate = self
-        lazyScreen.views.forEach(addTransition(forView:))
-        lazyScreen.scrollViews.forEach(addTransition(forScrollView:))
+        addTransition(forView: lazyScreen.view)
         if presentation != nil {
             lazyScreen.modalPresentationStyle = .custom
         }
@@ -133,6 +123,8 @@ public class LazyTransitioner : NSObject {
         self.internalInteractor = interactor
         self.transitionCombinator = TransitionCombinator(defaultAnimator: animator)
         self.presentation = nil
+        self.transitionType = nil
+
         super.init()
         transitionCombinator.delegate = self
     }
@@ -201,6 +193,18 @@ public class LazyTransitioner : NSObject {
         let partialViewTransitioner = PartialTransitioner(scrollView: scrollView)
         
         return [scrollViewTransitioner, partialViewTransitioner]
+    }
+
+    func addObserver() {
+        guard transitionType == .pop else { return }
+        addObserver(self, forKeyPath: #keyPath(lazyScreen.parent), options: [.new], context: nil)
+    }
+
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard transitionType == .pop else { return }
+        if keyPath == #keyPath(lazyScreen.parent) {
+            lazyScreen?.navigationController?.delegate = self
+        }
     }
 }
 

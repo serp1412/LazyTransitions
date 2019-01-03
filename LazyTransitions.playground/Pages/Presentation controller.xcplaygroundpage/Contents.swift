@@ -8,15 +8,7 @@ import WebKit
 import PlaygroundSupport
 
 /* 1. Conform your screen to LazyScreen */
-class WebViewController: UIViewController, LazyScreen {
-
-    /* 2. In our example we'll have a webView trigger a transition */
-    var scrollViews: [UIScrollView] {
-        return [webView.scrollView]
-    }
-
-    /* 3. Create the `transitioner` property  */
-    fileprivate var transitioner: LazyTransitioner?
+class WebViewController: UIViewController {
 
     let webView = WKWebView()
 
@@ -35,10 +27,10 @@ class WebViewController: UIViewController, LazyScreen {
         }
 
         /* 5. Initialize your transitioner and, in our case, we needed a custom animator when dismissing this controller */
-        transitioner = .init(lazyScreen: self,
-                             transition: .dismiss,
-                             animator: TopToBottomAnimator(),
-                             presentation: presentation)
+        becomeLazy(for: .dismiss,
+                   animator: TopToBottomAnimator(),
+                   presentation: presentation)
+        addTransition(forScrollView: webView.scrollView)
     }
 }
 

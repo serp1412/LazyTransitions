@@ -12,17 +12,14 @@ import PlaygroundSupport
  **NOTE**: By default panning on your main view will trigger a transition.
  Override `views` and `scrollViews` properties if you want pans on other views to trigger a transition
  */
-class LazyViewController: UIViewController, LazyScreen {
-    
-    /* 2. Introduce a new property, it can be optional or IUO */
-    var transitioner: LazyTransitioner?
+class LazyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         /* 3. Initialize the transitioner by passing `self` as the lazy screen and providing `.dismiss` as the transition type, since our screen was presented
          */
-        transitioner = .init(lazyScreen: self, transition: .dismiss)
+        becomeLazy(for: .dismiss)
     }
 }
 

@@ -7,13 +7,7 @@ import UIKit
 import PlaygroundSupport
 
 /* 1. Conform your screen to LazyScreen */
-class LazyViewController: UIViewController, LazyScreen {
-
-    /* 2. Override the `scrollViews` property from `LazyScreen` conformance and pass in it the scroll views of your screen that you want to trigger transitions */
-    var scrollViews: [UIScrollView] { return [collectionView] }
-
-    /* 3. Create the `transitioner` property  */
-    var transitioner: LazyTransitioner?
+class LazyViewController: UIViewController {
 
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: UICollectionViewFlowLayout())
@@ -22,8 +16,8 @@ class LazyViewController: UIViewController, LazyScreen {
         super.viewDidLoad()
 
         /* 4. Initialize your transitioner */
-        transitioner = .init(lazyScreen: self,
-                             transition: .dismiss)
+        becomeLazy(for: .dismiss)
+        addTransition(forScrollView: collectionView)
 
         /* 5. Become the delegate of your scroll view (or any class that inherits from scroll view) */
         collectionView.delegate = self
@@ -37,13 +31,12 @@ class LazyViewController: UIViewController, LazyScreen {
     /* 7. Add a transition for each collection view in every row cell */
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let rowCell = cell as! RowCell
-        transitioner?.addTransition(forScrollView: rowCell.collectionView)
+        addTransition(forScrollView: rowCell.collectionView)
     }
 }
-
 /* 8. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
 
- Then try srolling the cells to the very left or very right and see how they trigger a transition */
+ Then try scrolling the cells to the very left or very right and see how they trigger a transition */
 
 
 

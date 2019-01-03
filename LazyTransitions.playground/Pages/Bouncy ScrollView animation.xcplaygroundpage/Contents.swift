@@ -7,13 +7,7 @@ import UIKit
 import PlaygroundSupport
 
 /* 1. Conform your screen to LazyScreen */
-class LazyViewController: UIViewController, LazyScreen {
-
-    /* 2. Override the `scrollViews` property from `LazyScreen` conformance and pass in it the scroll views of your screen that you want to trigger transitions */
-    var scrollViews: [UIScrollView] { return [collectionView] }
-
-    /* 3. Create the `transitioner` property  */
-    var transitioner: LazyTransitioner?
+class LazyViewController: UIViewController {
 
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: UICollectionViewFlowLayout())
@@ -22,8 +16,8 @@ class LazyViewController: UIViewController, LazyScreen {
         super.viewDidLoad()
 
         /* 4. Initialize your transitioner */
-        transitioner = .init(lazyScreen: self,
-                             transition: .dismiss)
+        becomeLazy(for: .dismiss)
+        addTransition(forScrollView: collectionView)
 
         /* 5. Become the delegate of your scroll view (or any class that inherits from scroll view) */
         collectionView.delegate = self

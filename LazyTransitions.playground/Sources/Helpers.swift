@@ -131,7 +131,7 @@ public extension UIButton {
 }
 
 public class BackgroundViewController: UIViewController {
-    var screenToPresent: UIViewController!
+    public var screenToPresent: UIViewController!
     var action: ((UIViewController, UIViewController) -> ())!
 
     public static func instantiate(with screen: UIViewController, action: @escaping (_ presented: UIViewController, _ presenting: UIViewController) -> ()) -> BackgroundViewController {
