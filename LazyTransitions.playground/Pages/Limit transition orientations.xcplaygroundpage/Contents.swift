@@ -6,26 +6,29 @@
 import LazyTransitions
 import PlaygroundSupport
 
-/*
- 1. Conform the controller you want to become lazy to `LazyScreen`.
- */
 class LazyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /* 3. Initialize the transitioner */
+        /* 1. Become lazy for your transition type */
         becomeLazy(for: .dismiss)
 
         /*
-         4. Asign an array of orientations you want to allow to the `allowedOrientations` of your transitioner.
-         Feel free to change the array and see how that changes the interaction
+         2. Provide the orientations that you'd like to allow
+
+         **NOTE** if your transition animator doesn't support the orientation that you provide, it'll be ignored.
          */
         transitioner?.allowedOrientations = [.topToBottom, .bottomToTop]
     }
 }
 
-/* 5. Run the playground to see it in action */
+/*
+ 3. Run the playground to see it in action
+
+ Vertical swipes should dismiss the screen.
+ While horizontal ones should be ignored
+ */
 
 
 

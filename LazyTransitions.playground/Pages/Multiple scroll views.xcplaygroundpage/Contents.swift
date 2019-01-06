@@ -6,35 +6,27 @@ import LazyTransitions
 import UIKit
 import PlaygroundSupport
 
-/* 1. Conform your screen to LazyScreen */
 class LazyViewController: UIViewController {
-
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: UICollectionViewFlowLayout())
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /* 4. Initialize your transitioner */
+        /* 1. Become lazy for dismiss transition */
         becomeLazy(for: .dismiss)
         addTransition(forScrollView: collectionView)
-
-        /* 5. Become the delegate of your scroll view (or any class that inherits from scroll view) */
-        collectionView.delegate = self
     }
 
-    /* 6. Implement the `scrollViewDidScroll` delegate method */
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        transitioner?.didScroll(scrollView)
-    }
-
-    /* 7. Add a transition for each collection view in every row cell */
+    /* 2. Add a transition for each scroll view that you want to trigger a transition.
+     In our case each collection view in every RowCell */
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let rowCell = cell as! RowCell
         addTransition(forScrollView: rowCell.collectionView)
     }
 }
-/* 8. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
+
+/* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
 
  Then try scrolling the cells to the very left or very right and see how they trigger a transition */
 
@@ -90,6 +82,7 @@ extension LazyViewController: UICollectionViewDelegateFlowLayout {
         view.addSubview(collectionView)
         collectionView.bindFrameToSuperviewBounds()
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .white
     }
 

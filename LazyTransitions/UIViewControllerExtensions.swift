@@ -37,8 +37,8 @@ extension UIViewController {
                              presentation: presentation)
     }
 
-    public func addTransition(forScrollView scrollView: UIScrollView) {
-        transitioner?.addTransition(forScrollView: scrollView)
+    public func addTransition(forScrollView scrollView: UIScrollView, bouncyEdges: Bool = true) {
+        transitioner?.addTransition(forScrollView: scrollView, bouncyEdges: bouncyEdges)
     }
 
     public func addTransition(forView view: UIView) {

@@ -6,11 +6,9 @@ import LazyTransitions
 import PlaygroundSupport
 
 /*
- 1. Conform the controller you want to become lazy to `LazyScreen`.
+  **NOTE**: By default panning on your main view will trigger a transition.
 
- **NOTE**: By default panning on your main view will trigger a transition.
-
- Call the `addTransition(forScrollView:)` or `addTransition(forView)` functions if you want make other screens trigger a transition
+ Call the `addTransition(forScrollView:)` or `addTransition(forView)` functions if you want make other views trigger a transition
  */
 
 class LazyViewController: UIViewController {
@@ -19,13 +17,16 @@ class LazyViewController: UIViewController {
         super.viewDidLoad()
 
         /*
-         3. Initialize the transitioner by passing `self` as the lazy screen and providing `.pop` as the transition type, since our screen is in a navigation stack
+         1. Call the `becomeLazy(for: TransitionType)` function and pass in whether this screen is going to be lazily dismissed or popped (i.e. if it was presented or is inside a navigation stack)
          */
         becomeLazy(for: .pop)
     }
 }
 
-// 4. Run the Playground to see how it works
+/* Run the Playground to see how it works
+
+ Try swiping left to right to pop the blue screen
+ */
 
 
 
@@ -67,8 +68,6 @@ PlaygroundPage.current.liveView = nav.view
 
 
 /*
- Add swipe direction hint on lazyVC
- Override scroll view delegate using runtime
  Override navigation delegate using runtime
  Write README in playgrounds
  Delete Example project

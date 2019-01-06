@@ -2,5 +2,10 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/scatraniuc/Projects/LazyTransitions/Xcode10Playground.playground#CharacterRangeLen=35&amp;CharacterRangeLoc=846&amp;EndingColumnNumber=0&amp;EndingLineNumber=27&amp;StartingColumnNumber=9&amp;StartingLineNumber=26&amp;Timestamp=568406223.178647"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>

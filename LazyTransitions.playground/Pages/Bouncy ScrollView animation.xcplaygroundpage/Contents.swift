@@ -6,30 +6,22 @@ import LazyTransitions
 import UIKit
 import PlaygroundSupport
 
-/* 1. Conform your screen to LazyScreen */
 class LazyViewController: UIViewController {
-
     let collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: UICollectionViewFlowLayout())
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /* 4. Initialize your transitioner */
+        /* 1. Become lazy for your transition type */
         becomeLazy(for: .dismiss)
+
+        /* 2. Add transition for your scroll view. Bouncy effect will be applied automatically */
         addTransition(forScrollView: collectionView)
-
-        /* 5. Become the delegate of your scroll view (or any class that inherits from scroll view) */
-        collectionView.delegate = self
-    }
-
-    /* 6. Implement the `scrollViewDidScroll` delegate method */
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        transitioner?.didScroll(scrollView)
     }
 }
 
-/* 7. Run the playground and flick the collection view to the very top or bottom to see how it bounces. */
+/* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces. */
 
 
 
@@ -69,6 +61,7 @@ extension LazyViewController: UICollectionViewDelegateFlowLayout {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
         view.addSubview(collectionView)
         collectionView.bindFrameToSuperviewBounds()
+        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
     }
@@ -98,12 +91,12 @@ extension LazyViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UICollectionViewDataSource
 extension LazyViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
-                                 numberOfItemsInSection section: Int) -> Int {
+                        numberOfItemsInSection section: Int) -> Int {
         return 27
     }
 
     func collectionView(_ collectionView: UICollectionView,
-                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier,
                                                       for: indexPath) as! PhotoCell
         cell.backgroundColor = UIColor.white

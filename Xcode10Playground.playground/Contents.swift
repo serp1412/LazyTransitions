@@ -1,318 +1,364 @@
 /*:
- # How to setup LazyTransitions with a Presentation controller
+ # How to add a bouncy effect to scroll view transitions
  */
 
 import LazyTransitions
 import UIKit
-import WebKit
 import PlaygroundSupport
 
 /* 1. Conform your screen to LazyScreen */
-class WebViewController: UIViewController, LazyScreen {
-
-    /* 2. In our example we'll have a webView trigger a transition */
-    var scrollViews: [UIScrollView] {
-        return [webView.scrollView]
-    }
-
-    /* 3. Create the `transitioner` property  */
-    fileprivate var transitioner: LazyTransitioner?
-
-    let webView = WKWebView()
+class LazyViewController: UIViewController {
+    let collectionView = UICollectionView(frame: .zero,
+                                          collectionViewLayout: UICollectionViewFlowLayout())
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /* 4. Create a Presentation instance passing in the presentation animator and a closure to create a UIPresentationController */
+        /* 4. Initialize your transitioner */
+        becomeLazy(for: .dismiss)
+        addTransition(forScrollView: collectionView)
 
-        let presentation = Presentation(animator: BottomToTopAnimator()) { presented, presenting, source in
+        /* 5. Become the delegate of your scroll view (or any class that inherits from scroll view) */
+        collectionView.delegate = self
+    }
 
-            let presentor = DimmmedBackgroundPresentationController(presentedViewController: presented, presenting: presenting)
-
-            presentor.desiredSize = CGSize(width: source.view.frame.width, height: source.view.frame.height - 200)
-
-            return presentor
-        }
-
-        /* 5. Initialize your transitioner and, in our case, we needed a custom animator when dismissing this controller */
-        transitioner = .init(lazyScreen: self,
-                             transition: .dismiss,
-                             animator: TopToBottomAnimator(),
-                             presentation: presentation)
+    /* 6. Implement the `scrollViewDidScroll` delegate method */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        transitioner?.didScroll(scrollView)
     }
 }
 
-/* 6. Run the playground to see it in action. You can swipe the card down to dismiss it */
-
-/* Note: For custom presentations, in most cases you'll need a dismiss and present animators that do the exact opposite of each other. Check the implementations of the animators in this playground to get a better understanding */
 
 
 
+/* 7. Run the playground and flick the collection view to the very top or bottom to see how it bounces. */
 
 
 
+class MiddleManClass: NSObject, UIScrollViewDelegate {
+    let interceptor: NSProtocolInterceptor
 
+    override init() {
+        self.interceptor = NSProtocolInterceptor.forProtocol(aProtocol: UIScrollViewDelegate.self)
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-extension WebViewController {
-    static func instantiate(url: URL, title: String = "") -> WebViewController {
-        let webVC = WebViewController()
-        let request = URLRequest(url: url)
-        webVC.webView.load(request)
-        webVC.title = title
-        webVC.setup()
-
-        return webVC
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("MIDDLEMAN GOT IT!!")
     }
 }
 
-class TopToBottomAnimator: NSObject, TransitionAnimatorType {
-    weak var delegate: TransitionAnimatorDelegate?
-    var orientation = TransitionOrientation.topToBottom
-    var allowedOrientations: [TransitionOrientation]? = [.topToBottom]
 
-    override convenience init() {
-        self.init(orientation: .topToBottom)
+
+/**
+ `NSProtocolInterceptor` is a proxy which intercepts messages to the middle man
+ which originally intended to send to the receiver.
+
+ - Discussion: `NSProtocolInterceptor` is a class cluster which dynamically
+ subclasses itself to conform to the intercepted protocols at the runtime.
+ */
+public final class NSProtocolInterceptor: NSObject {
+    /// Returns the intercepted protocols
+    public var interceptedProtocols: [Protocol] { return _interceptedProtocols }
+    private var _interceptedProtocols: [Protocol] = []
+
+    /// The receiver receives messages
+    public weak var receiver: NSObjectProtocol?
+
+    /// The middle man intercepts messages
+    public weak var middleMan: NSObjectProtocol?
+
+    private func doesSelectorBelongToAnyInterceptedProtocol(
+        aSelector: Selector) -> Bool
+    {
+        for aProtocol in _interceptedProtocols
+            where sel_belongsToProtocol(aSelector, aProtocol)
+        {
+            return true
+        }
+        return false
     }
 
-    required init(orientation: TransitionOrientation) {
-        self.orientation = orientation
-    }
-
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3
-    }
-
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) else {
-            return
+    /// Returns the object to which unrecognized messages should first be
+    /// directed.
+    public override func forwardingTarget(for aSelector: Selector!) -> Any? {
+        if middleMan?.responds(to: aSelector) == true &&
+            doesSelectorBelongToAnyInterceptedProtocol(aSelector: aSelector)
+        {
+            return middleMan
         }
 
-        let containerView = transitionContext.containerView
-
-        let animationDuration = transitionDuration(using: transitionContext)
-
-        containerView.addSubview(fromViewController.view)
-
-        let scaleOutTransform = CGAffineTransform(translationX: 0.0, y: fromViewController.view.frame.height)
-        let identityTransform = CGAffineTransform.identity
-        fromViewController.view.transform = identityTransform
-
-
-        UIView.animate(withDuration: animationDuration, delay: 0.0, options: .curveEaseInOut, animations: {
-            fromViewController.view.transform = scaleOutTransform
-        }) { _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            fromViewController.view.transform = identityTransform
-        }
-    }
-
-    func animationEnded(_ transitionCompleted: Bool) {
-        delegate?.transitionDidFinish(transitionCompleted)
-    }
-}
-
-class BottomToTopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.3
-    }
-
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
-            return
+        if receiver?.responds(to: aSelector) == true {
+            return receiver
         }
 
-        let containerView = transitionContext.containerView
-        let duration = transitionDuration(using: transitionContext)
-
-        containerView.addSubview(toViewController.view)
-
-        let scaleOutTransform = CGAffineTransform(translationX: 0.0, y: toViewController.view.frame.height)
-        let identityTransform = CGAffineTransform.identity
-        toViewController.view.transform = scaleOutTransform
-
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseInOut, animations: {
-            toViewController.view.transform = identityTransform
-        }) { _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        }
-    }
-}
-
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let button = UIButton.tapMe
-
-        view.addSubview(button)
-        button.bindToSuperviewCenter()
-        view.backgroundColor = .white
-
-        button.addTarget(self, action: #selector(openWebViewController), for: .touchUpInside)
+        return super.forwardingTarget(for: aSelector)
     }
 
-    @objc func openWebViewController() {
-        let url = URL(string: "https://www.google.com")!
-        let navVC = WebViewController.instantiate(url: url, title: "Test")
-
-        present(navVC, animated: true, completion: nil)    }
-}
-
-class DimmmedBackgroundPresentationController: UIPresentationController {
-
-    var desiredSize: CGSize?
-    var showsDismissButton = false
-
-
-    fileprivate let dimmingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-
-        return view
-    }()
-
-    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
-        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-
-        setup()
-    }
-
-    override func presentationTransitionWillBegin() {
-        containerView?.addSubview(dimmingView)
-
-        dimmingView.alpha = 0.0
-        presentedView?.layer.cornerRadius = 15
-        presentedView?.layer.masksToBounds = true
-
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = 1.0
-        }, completion: nil)
-    }
-
-    override func dismissalTransitionWillBegin() {
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = 0.0
-        }, completion: nil)
-    }
-
-    override func containerViewWillLayoutSubviews() {
-        super.containerViewWillLayoutSubviews()
-
-        if let containerViewBounds = containerView?.bounds {
-            dimmingView.frame = containerViewBounds
+    /// Returns a Boolean value that indicates whether the receiver implements
+    /// or inherits a method that can respond to a specified message.
+    public override func responds(to aSelector: Selector!) -> Bool {
+        if middleMan?.responds(to: aSelector) == true &&
+            doesSelectorBelongToAnyInterceptedProtocol(aSelector: aSelector)
+        {
+            return true
         }
 
-        presentedView?.frame = frameOfPresentedViewInContainerView
-    }
-
-    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        return CGSize(width: parentSize.width, height: parentSize.height)
-    }
-
-    override var frameOfPresentedViewInContainerView: CGRect {
-        var presentedViewFrame = CGRect.zero
-
-        guard let containerBounds = containerView?.bounds else {
-            return presentedViewFrame
+        if receiver?.responds(to: aSelector) == true {
+            return true
         }
 
-        let contentContainer = presentedViewController
-        if let desiredSize = desiredSize {
-            let y = contentContainer.view.frame.size.height - desiredSize.height + 200
-            presentedViewFrame.size = desiredSize
-            presentedViewFrame.origin.x = (contentContainer.view.frame.size.width - desiredSize.width) / 2
-            presentedViewFrame.origin.y = y
+        return super.responds(to: aSelector)
+    }
+
+    /**
+     Create a protocol interceptor which intercepts a single Objecitve-C
+     protocol.
+
+     - Parameter     protocols:  An Objective-C protocol, such as
+     UITableViewDelegate.self.
+     */
+    public class func forProtocol(aProtocol: Protocol)
+        -> NSProtocolInterceptor
+    {
+        return forProtocols(protocols: [aProtocol])
+    }
+
+    /**
+     Create a protocol interceptor which intercepts a variable-length sort of
+     Objecitve-C protocols.
+
+     - Parameter     protocols:  A variable length sort of Objective-C protocol,
+     such as UITableViewDelegate.self.
+     */
+    public class func forProtocols(protocols: Protocol ...)
+        -> NSProtocolInterceptor
+    {
+        return forProtocols(protocols: protocols)
+    }
+
+    /**
+     Create a protocol interceptor which intercepts an array of Objecitve-C
+     protocols.
+
+     - Parameter     protocols:  An array of Objective-C protocols, such as
+     [UITableViewDelegate.self].
+     */
+    public class func forProtocols(protocols: [Protocol])
+        -> NSProtocolInterceptor
+    {
+        let protocolNames = protocols.map { NSStringFromProtocol($0) }
+        let sortedProtocolNames = protocolNames.sorted()
+        let concatenatedName = sortedProtocolNames.joined(separator: ",")
+
+        let theConcreteClass = concreteClassWithProtocols(protocols: protocols,
+                                                          concatenatedName: concatenatedName,
+                                                          salt: nil)
+
+        let protocolInterceptor = theConcreteClass.init()
+            as! NSProtocolInterceptor
+        protocolInterceptor._interceptedProtocols = protocols
+
+        return protocolInterceptor
+    }
+
+    /**
+     Return a subclass of `NSProtocolInterceptor` which conforms to specified
+     protocols.
+
+     - Parameter     protocols:          An array of Objective-C protocols. The
+     subclass returned from this function will conform to these protocols.
+
+     - Parameter     concatenatedName:   A string which came from concatenating
+     names of `protocols`.
+
+     - Parameter     salt:               A UInt number appended to the class name
+     which used for distinguishing the class name itself from the duplicated.
+
+     - Discussion: The return value type of this function can only be
+     `NSObject.Type`, because if you return with `NSProtocolInterceptor.Type`,
+     you can only init the returned class to be a `NSProtocolInterceptor` but not
+     its subclass.
+     */
+    private class func concreteClassWithProtocols(protocols: [Protocol],
+                                                  concatenatedName: String,
+                                                  salt: UInt?)
+        -> NSObject.Type
+    {
+        let className: String = {
+            let basicClassName = "_" +
+                NSStringFromClass(NSProtocolInterceptor.self) +
+                "_" + concatenatedName
+
+            if let salt = salt { return basicClassName + "_\(salt)" }
+            else { return basicClassName }
+        }()
+
+        let nextSalt = salt.map {$0 + 1}
+
+        if let theClass = NSClassFromString(className) {
+            switch theClass {
+            case let anInterceptorClass as NSProtocolInterceptor.Type:
+                let isClassConformsToAllProtocols: Bool = {
+                    // Check if the found class conforms to the protocols
+                    for eachProtocol in protocols
+                        where !class_conformsToProtocol(anInterceptorClass,
+                                                        eachProtocol)
+                    {
+                        return false
+                    }
+                    return true
+                }()
+
+                if isClassConformsToAllProtocols {
+                    return anInterceptorClass
+                } else {
+                    return concreteClassWithProtocols(protocols: protocols,
+                                                      concatenatedName: concatenatedName,
+                                                      salt: nextSalt)
+                }
+            default:
+                return concreteClassWithProtocols(protocols: protocols,
+                                                  concatenatedName: concatenatedName,
+                                                  salt: nextSalt)
+            }
         } else {
-            presentedViewFrame.size = size(forChildContentContainer: contentContainer, withParentContainerSize: containerBounds.size)
+            let subclass = objc_allocateClassPair(NSProtocolInterceptor.self,
+                                                  className,
+                                                  0)
+                as! NSObject.Type
+
+            for eachProtocol in protocols {
+                class_addProtocol(subclass, eachProtocol)
+            }
+
+            objc_registerClassPair(subclass)
+
+            return subclass
         }
-        presentedViewFrame.size = desiredSize ?? size(forChildContentContainer: contentContainer, withParentContainerSize: containerBounds.size)
-
-        return presentedViewFrame
     }
 }
 
-private extension DimmmedBackgroundPresentationController {
+/**
+ Returns true when the given selector belongs to the given protocol.
+ */
+public func sel_belongsToProtocol(_ aSelector: Selector,
+                                  _ aProtocol: Protocol) -> Bool
+{
+    for optionBits: UInt in 0..<(1 << 2) {
+        let isRequired = optionBits & 1 != 0
+        let isInstance = !(optionBits & (1 << 1) != 0)
 
-    func setup() {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dimmingViewTapped))
-        dimmingView.addGestureRecognizer(tapRecognizer)
-    }
+        var methodDescription = protocol_getMethodDescription(aProtocol,
+                                                              aSelector, isRequired, isInstance)
 
-    @objc dynamic func dimmingViewTapped() {
-        presentingViewController.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension WebViewController {
-    func setup() {
-        view.addSubview(webView)
-        setupConstraints()
-    }
-
-    func setupConstraints() {
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
-}
-
-let screen = ViewController()
-screen.view.frame = CGRect.init(x: 0, y: 0, width: 750 / 2, height: 1334 / 2)
-
-PlaygroundPage.current.liveView = screen.view
-
-public extension UIView {
-    public func bindToSuperviewCenter() {
-        guard let superview = self.superview else {
-            print("Error! `superview` was nil – call `addSubview(view: UIView)` before calling `bindFrameToSuperviewBounds()` to fix this.")
-            return
+        if !objc_method_description_isEmpty(methodDescription: &methodDescription)
+        {
+            return true
         }
+    }
+    return false
+}
 
-        translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
-        centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
+public func objc_method_description_isEmpty(methodDescription: inout objc_method_description)
+    -> Bool
+{
+    let ptr: UnsafePointer<Int8> = withUnsafePointer(to: methodDescription) { pointer in
+        let copy = pointer as UnsafePointer<objc_method_description>
+        let opaque: OpaquePointer = OpaquePointer.init(copy)
+        return UnsafePointer<Int8>.init(opaque)
+    }
+    for offset in 0..<MemoryLayout.size(ofValue: methodDescription) {
+        if ptr[offset] != 0 {
+            return false
+        }
+    }
+    return true
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Oh hey there, didn't expect you to scroll down here. You won't find anything special here, just some setup code ☺️ */
+
+let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+let itemsPerRow: CGFloat = 3
+
+extension LazyViewController: UICollectionViewDelegateFlowLayout {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        view.addSubview(collectionView)
+        collectionView.bindFrameToSuperviewBounds()
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .white
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
     }
 }
 
-public extension UIButton {
-    public static var tapMe: UIButton  {
-        let button = UIButton(type: .system)
+// MARK: - UICollectionViewDataSource
+extension LazyViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        print("number of items")
+        return 27
+    }
 
-        button.backgroundColor = UIColor.red
-        button.setTitle("Tap me!", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier,
+                                                      for: indexPath) as! PhotoCell
+        cell.backgroundColor = UIColor.white
+        cell.imageView.image = UIImage(named: "\(indexPath.row)")
 
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
-        button.layer.cornerRadius = 200 / 2
 
-        return button
+        return cell
     }
 }
+
+let backVC = BackgroundViewController.instantiate(with: LazyViewController(), action: { presented, presenting in
+    presenting.present(presented, animated: true, completion: nil)
+})
+backVC.view.frame = .iphone6
+
+PlaygroundPage.current.liveView = backVC.view
+
+

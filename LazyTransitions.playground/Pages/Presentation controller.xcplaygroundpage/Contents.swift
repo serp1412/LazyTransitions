@@ -7,16 +7,17 @@ import UIKit
 import WebKit
 import PlaygroundSupport
 
-/* 1. Conform your screen to LazyScreen */
 class WebViewController: UIViewController {
-
     let webView = WKWebView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /* 4. Create a Presentation instance passing in the presentation animator and a closure to create a UIPresentationController */
-
+        /* 1. Create a Presentation instance passing in the presentation animator and a closure to create a UIPresentationController.
+         Basically, it's exactly what you would do inside the
+         `presentationController(forPresented:presenting:source:)`
+         delegate method.
+         */
         let presentation = Presentation(animator: BottomToTopAnimator()) { presented, presenting, source in
 
             let presentor = DimmmedBackgroundPresentationController(presentedViewController: presented, presenting: presenting)
@@ -26,15 +27,17 @@ class WebViewController: UIViewController {
             return presentor
         }
 
-        /* 5. Initialize your transitioner and, in our case, we needed a custom animator when dismissing this controller */
+        /* 2. Become lazy for dismiss and, in our case, we needed a custom animator when dismissing this controller */
         becomeLazy(for: .dismiss,
                    animator: TopToBottomAnimator(),
                    presentation: presentation)
-        addTransition(forScrollView: webView.scrollView)
+
+        /* 3. Add transition for the web view's scroll view */
+        addTransition(forScrollView: webView.scrollView, bouncyEdges: false)
     }
 }
 
-/* 6. Run the playground to see it in action. You can swipe the card down to dismiss it */
+/* 4. Run the playground to see it in action. You can swipe the card down to dismiss it */
 
 /* Note: For custom presentations, in most cases you'll need a dismiss and present animators that do the exact opposite of each other. Check the implementations of the animators in this playground to get a better understanding */
 
