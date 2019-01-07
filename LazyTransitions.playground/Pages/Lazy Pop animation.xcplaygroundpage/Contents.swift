@@ -54,6 +54,7 @@ class LazyViewController: UIViewController {
 let nav = UINavigationController()
 nav.view.frame = .iphone6
 
+
 let lazyVC = LazyViewController()
 let backVC = BackgroundViewController.instantiate(with: lazyVC, action: { presented, presenting in
 
@@ -63,12 +64,13 @@ let backVC = BackgroundViewController.instantiate(with: lazyVC, action: { presen
 lazyVC.view.backgroundColor = .blue
 
 nav.pushViewController(backVC, animated: false)
-
 PlaygroundPage.current.liveView = nav.view
 
 
 /*
- Override navigation delegate using runtime
+ Check that navigation delegate methods are forwarded
+ Fix memory leaks
+ Fix bug with child scroll views triggering transition
  Write README in playgrounds
  Delete Example project
  Delete Xcode10Playground

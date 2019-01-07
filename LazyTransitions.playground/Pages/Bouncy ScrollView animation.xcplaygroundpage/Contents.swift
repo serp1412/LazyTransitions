@@ -21,7 +21,10 @@ class LazyViewController: UIViewController {
     }
 }
 
-/* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces. */
+/* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
+
+ **NOTE** to opt out of the bouncy effect just call `addTransition(forScrollView: collectionView, bouncyEdges: false)`
+ */
 
 
 

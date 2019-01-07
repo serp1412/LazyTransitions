@@ -36,7 +36,7 @@ public enum TransitionType {
         }
     }
 
-    var transitionTrigger: (UIViewController) -> (LazyTransitioner) -> Void {
+    var transitionTrigger: (UIViewController?) -> (LazyTransitioner) -> Void {
         switch self {
         case .dismiss:
             return { vc in
@@ -86,9 +86,12 @@ public class LazyTransitioner : NSObject {
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
     fileprivate let presentation: Presentation?
-    @objc fileprivate var lazyScreen: UIViewController? = nil
+    @objc weak fileprivate var lazyScreen: UIViewController? = nil
     fileprivate let transitionType: TransitionType?
-    fileprivate var interceptors: [UIScrollView?: ProtocolInterceptor] = [:]
+    fileprivate var navigationInterceptor: ProtocolInterceptor? = nil
+    fileprivate var scrollViewInterceptors: [UIScrollView?: ProtocolInterceptor] = [:]
+
+    // MARK: Public
 
     public init(lazyScreen: UIViewController,
                 transition: TransitionType,
@@ -97,7 +100,8 @@ public class LazyTransitioner : NSObject {
                 presentation: Presentation? = nil) {
         self.internalInteractor = interactor ?? TransitionInteractor.default()
         self.internalAnimator = animator ?? transition.animator
-        self.triggerTransitionAction = transition.transitionTrigger(lazyScreen)
+        weak var weakLazyScreen = lazyScreen
+        self.triggerTransitionAction = transition.transitionTrigger(weakLazyScreen)
         self.transitionCombinator = TransitionCombinator(defaultAnimator: self.internalAnimator)
         self.presentation = presentation ?? nil
         self.transitionCombinator.allowedOrientations = animator?.allowedOrientations ?? transition.allowedOrientations
@@ -106,7 +110,7 @@ public class LazyTransitioner : NSObject {
 
         super.init()
 
-        addObserver()
+        addNavigationObserver()
 
         transition == .dismiss ?
             { lazyScreen.transitioningDelegate = self }() :
@@ -137,7 +141,7 @@ public class LazyTransitioner : NSObject {
         transitionCombinator.add(transitioner)
         transitionerTuples.append((transitioner, weakView, .forStaticView))
     }
-    
+
     public func addTransition(forScrollView scrollView: UIScrollView, bouncyEdges: Bool = true) {
         if transitionerTuples.contains(where: { $0.view === scrollView && $0.type == .forScrollView }) { return }
         let transitioners = createTransitioners(for: scrollView)
@@ -145,25 +149,25 @@ public class LazyTransitioner : NSObject {
         weak var weakView = scrollView
         transitioners.forEach { transitioner in transitionerTuples.append((transitioner, weakView, .forScrollView)) }
         guard bouncyEdges else { return }
-        let interceptor = ProtocolInterceptor.forProtocol(aProtocol: UIScrollViewDelegate.self)
-        interceptor.receiver = scrollView.delegate
-        interceptor.middleMan = self
-        scrollView.delegate = interceptor as? UIScrollViewDelegate
-        weak var weakScrollView = scrollView
-        interceptors[weakScrollView] = interceptor
-        scrollView.addObserver(self, forKeyPath: "delegate", options: [.new], context: nil)
+        addScrollViewObserver(scrollView)
     }
     
     public func removeTransitions(for view: UIView) {
         let transitioners = self.transitioners(for: view)
         transitionCombinator.remove(transitioners)
-        transitionerTuples = transitionerTuples.filter{ $0.view !== view }
+        transitionerTuples = transitionerTuples.filter { $0.view !== view }
+        guard let scrollView = view as? UIScrollView, let interceptor = scrollViewInterceptors[scrollView] else { return }
+        scrollView.removeObserver(self, forKeyPath: "delegate")
+        scrollView.delegate = interceptor.receiver as? UIScrollViewDelegate
+        scrollViewInterceptors.removeValue(forKey: scrollView)
     }
     
     public func didScroll(_ scrollView: UIScrollView) {
         let partialTransitioner = self.partialTransitioner(for: scrollView)
         partialTransitioner?.scrollViewDidScroll()
     }
+
+    // MARK: Private
     
     fileprivate func transitioners(for view: UIView) -> [TransitionerType] {
         return transitionerTuples
@@ -204,26 +208,47 @@ public class LazyTransitioner : NSObject {
         return [scrollViewTransitioner, partialViewTransitioner]
     }
 
-    func addObserver() {
+    // MARK: KVO
+
+    fileprivate func addNavigationObserver() {
         guard transitionType == .pop else { return }
+        let interceptor = ProtocolInterceptor.forProtocol(aProtocol: UINavigationControllerDelegate.self)
+        interceptor.receiver = lazyScreen?.navigationController?.delegate
+        interceptor.middleMan = self
+        lazyScreen?.navigationController?.delegate = interceptor as? UINavigationControllerDelegate
+        navigationInterceptor = interceptor
         addObserver(self, forKeyPath: #keyPath(lazyScreen.parent), options: [.new], context: nil)
     }
 
+    fileprivate func addScrollViewObserver(_ scrollView: UIScrollView) {
+        let interceptor = ProtocolInterceptor.forProtocol(aProtocol: UIScrollViewDelegate.self)
+        interceptor.receiver = scrollView.delegate
+        interceptor.middleMan = self
+        scrollView.delegate = interceptor as? UIScrollViewDelegate
+        weak var weakScrollView = scrollView
+        scrollViewInterceptors[weakScrollView] = interceptor
+        scrollView.addObserver(self, forKeyPath: "delegate", options: [.new], context: nil)
+    }
+
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "delegate", let scrollView = object as? UIScrollView, let interceptor = interceptors[scrollView], scrollView.delegate !== interceptor {
+        if keyPath == "delegate", let scrollView = object as? UIScrollView, let interceptor = scrollViewInterceptors[scrollView], scrollView.delegate !== interceptor {
             interceptor.receiver = scrollView.delegate
-            scrollView.delegate = interceptor as! UIScrollViewDelegate
+            scrollView.delegate = interceptor as? UIScrollViewDelegate
             interceptor.middleMan = self
 
             return
         }
 
         guard transitionType == .pop else { return }
-        if keyPath == #keyPath(lazyScreen.parent) {
-            lazyScreen?.navigationController?.delegate = self
+        if keyPath == #keyPath(lazyScreen.parent), lazyScreen?.navigationController?.delegate !== navigationInterceptor {
+            navigationInterceptor?.receiver = lazyScreen?.navigationController?.delegate
+            navigationInterceptor?.middleMan = self
+            lazyScreen?.navigationController?.delegate = navigationInterceptor as? UINavigationControllerDelegate
         }
     }
 }
+
+// MARK: Extensions
 
 extension LazyTransitioner: TransitionerDelegate {
     public func beginTransition(with transitioner: TransitionerType) {
@@ -267,7 +292,9 @@ extension LazyTransitioner : UINavigationControllerDelegate {
 extension LazyTransitioner: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         didScroll(scrollView)
-        guard let interceptor = interceptors[scrollView], let receiver = interceptor.receiver as? UIScrollViewDelegate, let scrollFunc = receiver.scrollViewDidScroll else { return }
+        guard let interceptor = scrollViewInterceptors[scrollView],
+            let receiver = interceptor.receiver as? UIScrollViewDelegate,
+            let scrollFunc = receiver.scrollViewDidScroll else { return }
 
         scrollFunc(scrollView)
     }

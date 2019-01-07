@@ -19,7 +19,7 @@ class LazyViewController: UIViewController {
 
          **NOTE** if your transition animator doesn't support the orientation that you provide, it'll be ignored.
          */
-        transitioner?.allowedOrientations = [.topToBottom, .bottomToTop]
+        allowedOrientations = [.topToBottom, .bottomToTop]
     }
 }
 

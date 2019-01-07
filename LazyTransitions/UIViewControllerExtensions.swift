@@ -12,7 +12,7 @@ import Foundation
 extension UIViewController {
     private static var transitionerKey = "LazyTransitions"
 
-    public var transitioner: LazyTransitioner? {
+    var transitioner: LazyTransitioner? {
         get {
             return objc_getAssociatedObject(self, &UIViewController.transitionerKey) as? LazyTransitioner
         }
@@ -43,5 +43,19 @@ extension UIViewController {
 
     public func addTransition(forView view: UIView) {
         transitioner?.addTransition(forView: view)
+    }
+
+    public var allowedOrientations: [TransitionOrientation] {
+        get {
+            return transitioner?.allowedOrientations ?? []
+        }
+
+        set {
+            transitioner?.allowedOrientations = newValue
+        }
+    }
+
+    public func removeTransitions(for view: UIView) {
+        transitioner?.removeTransitions(for: view)
     }
 }
