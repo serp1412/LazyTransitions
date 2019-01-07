@@ -9,7 +9,12 @@
 import Foundation
 
 public struct Presentation {
-    public typealias PresentationControllerInit = (_ presented: UIViewController, _ presenting: UIViewController?, _ source: UIViewController) -> UIPresentationController
+    public typealias PresentationControllerInit = (
+        _ presented: UIViewController,
+        _ presenting: UIViewController?,
+        _ source: UIViewController
+        ) -> UIPresentationController
+
     let animator: UIViewControllerAnimatedTransitioning
     let presentationControllerInit: PresentationControllerInit
 
@@ -208,6 +213,9 @@ public class LazyTransitioner : NSObject {
 
     // MARK: KVO
 
+    fileprivate let parentViewControllerKey = "parentViewController"
+    fileprivate let scrollViewDelegateKey = "delegate"
+
     fileprivate func addNavigationObserver() {
         guard transitionType == .pop else { return }
         let interceptor = ProtocolInterceptor.forProtocol(aProtocol: UINavigationControllerDelegate.self)
@@ -215,7 +223,7 @@ public class LazyTransitioner : NSObject {
         interceptor.middleMan = self
         navigationInterceptor = interceptor
         lazyScreen?.navigationController?.delegate = navigationInterceptor as? UINavigationControllerDelegate
-        lazyScreen?.addObserver(self, forKeyPath: "parentViewController", options: [.old, .new], context: nil)
+        lazyScreen?.addObserver(self, forKeyPath: parentViewControllerKey, options: [.old, .new], context: nil)
     }
 
     fileprivate func addScrollViewObserver(_ scrollView: UIScrollView) {
@@ -225,11 +233,13 @@ public class LazyTransitioner : NSObject {
         scrollView.delegate = interceptor as? UIScrollViewDelegate
         weak var weakScrollView = scrollView
         scrollViewInterceptors[weakScrollView] = interceptor
-        scrollView.addObserver(self, forKeyPath: "delegate", options: [.new], context: nil)
+        scrollView.addObserver(self, forKeyPath: scrollViewDelegateKey, options: [.new], context: nil)
     }
 
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "delegate",
+    public override func observeValue(forKeyPath keyPath: String?,
+                                      of object: Any?, change: [NSKeyValueChangeKey : Any]?,
+                                      context: UnsafeMutableRawPointer?) {
+        if keyPath == scrollViewDelegateKey,
             let scrollView = object as? UIScrollView,
             let interceptor = scrollViewInterceptors[scrollView],
             scrollView.delegate !== interceptor {
@@ -242,7 +252,7 @@ public class LazyTransitioner : NSObject {
         }
 
         guard transitionType == .pop else { return }
-        if keyPath == "parentViewController" {
+        if keyPath == parentViewControllerKey {
             let oldParent = change?[.oldKey]
             let newParent = change?[.newKey]
 
@@ -273,7 +283,7 @@ public class LazyTransitioner : NSObject {
             guard let strongSV = scrollView else { return }
             self.removeTransitions(for: strongSV)
         }
-        lazyScreen?.removeObserver(self, forKeyPath: "parentViewController")
+        lazyScreen?.removeObserver(self, forKeyPath: parentViewControllerKey)
     }
 }
 
@@ -294,26 +304,37 @@ extension LazyTransitioner : UIViewControllerTransitioningDelegate {
         return animator
     }
 
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented presented: UIViewController,
+                                    presenting: UIViewController,
+                                    source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return presentation?.animator
     }
     
-    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    public func interactionControllerForDismissal(
+        using animator: UIViewControllerAnimatedTransitioning
+        ) -> UIViewControllerInteractiveTransitioning? {
         return interactor
     }
 
-    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    public func presentationController(forPresented presented: UIViewController,
+                                       presenting: UIViewController?,
+                                       source: UIViewController) -> UIPresentationController? {
         return presentation?.presentationControllerInit(presented, presenting, source)
     }
 }
 
 extension LazyTransitioner : UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func navigationController(_ navigationController: UINavigationController,
+                                     animationControllerFor operation: UINavigationController.Operation,
+                                     from fromVC: UIViewController,
+                                     to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard operation == .pop else { return nil }
         return animator
     }
     
-    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    public func navigationController(_ navigationController: UINavigationController,
+                                     interactionControllerFor animationController: UIViewControllerAnimatedTransitioning)
+        -> UIViewControllerInteractiveTransitioning? {
         return interactor
     }
 }

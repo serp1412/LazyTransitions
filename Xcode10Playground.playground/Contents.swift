@@ -24,4 +24,3 @@ PlaygroundPage.current.liveView = nav.view
 vc.navigationController?.delegate = vc
 
 nav.pushViewController(otherVC, animated: true)
-
