@@ -20,6 +20,11 @@ class LazyViewController: UIViewController {
          **NOTE** if your transition animator doesn't support the orientation that you provide, it'll be ignored.
          */
         allowedOrientations = [.topToBottom, .bottomToTop]
+        view.backgroundColor = .blue
+    }
+
+    deinit {
+        print("happened")
     }
 }
 
@@ -56,12 +61,10 @@ class LazyViewController: UIViewController {
 
 
 
-let lazyVC = LazyViewController()
-let backVC = BackgroundViewController.instantiate(with: lazyVC, action: { presented, presenting in
+let backVC = BackgroundViewController.instantiate(with: LazyViewController.self, action: { presented, presenting in
     presenting.present(presented, animated: true, completion: nil)
 })
 backVC.view.frame = .iphone6
-lazyVC.view.backgroundColor = .blue
 
 PlaygroundPage.current.liveView = backVC.view
 

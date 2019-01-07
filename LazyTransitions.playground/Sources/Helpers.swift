@@ -130,11 +130,11 @@ public extension UIButton {
     }
 }
 
-public class BackgroundViewController: UIViewController {
-    public var screenToPresent: UIViewController!
+public class BackgroundViewController <T: UIViewController>: UIViewController, UINavigationControllerDelegate {
+    public var screenToPresent: T.Type!
     var action: ((UIViewController, UIViewController) -> ())!
 
-    public static func instantiate(with screen: UIViewController, action: @escaping (_ presented: UIViewController, _ presenting: UIViewController) -> ()) -> BackgroundViewController {
+    public static func instantiate(with screen: T.Type, action: @escaping (_ presented: UIViewController, _ presenting: UIViewController) -> ()) -> BackgroundViewController {
         let backVC = BackgroundViewController()
         backVC.action = action
         backVC.screenToPresent = screen
@@ -153,6 +153,15 @@ public class BackgroundViewController: UIViewController {
     }
 
     @objc func triggerAction() {
-        action(screenToPresent, self)
+        action(screenToPresent.init(), self)
+    }
+
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        print("nav was called")
+    }
+
+    public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        print("nav was called")
     }
 }
+

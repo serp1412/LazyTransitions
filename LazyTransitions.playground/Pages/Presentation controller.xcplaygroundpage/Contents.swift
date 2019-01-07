@@ -13,7 +13,7 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /* 1. Create a Presentation instance passing in the presentation animator and a closure to create a UIPresentationController.
+        /* 1. Create a Presentation instance passing in the presentation animator and a closure to create your UIPresentationController.
          Basically, it's exactly what you would do inside the
          `presentationController(forPresented:presenting:source:)`
          delegate method.
@@ -35,11 +35,15 @@ class WebViewController: UIViewController {
         /* 3. Add transition for the web view's scroll view */
         addTransition(forScrollView: webView.scrollView, bouncyEdges: false)
     }
+
+    deinit {
+        print("happened")
+    }
 }
 
 /* 4. Run the playground to see it in action. You can swipe the card down to dismiss it */
 
-/* Note: For custom presentations, in most cases you'll need a dismiss and present animators that do the exact opposite of each other. Check the implementations of the animators in this playground to get a better understanding */
+/* **NOTE**: For custom presentations, in most cases you'll need a dismiss and present animators that do the exact opposite of each other. Check the implementations of the animators in this playground to get a better understanding */
 
 
 

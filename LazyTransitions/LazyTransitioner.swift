@@ -20,11 +20,6 @@ public struct Presentation {
     }
 }
 
-fileprivate enum TransitionViewType {
-    case forScrollView
-    case forStaticView
-}
-
 public enum TransitionType {
     case dismiss
     case pop
@@ -64,6 +59,12 @@ public enum TransitionType {
 }
 
 public class LazyTransitioner : NSObject {
+
+    fileprivate enum TransitionViewType {
+        case forScrollView
+        case forStaticView
+    }
+
     fileprivate typealias TransitionerTuple = (transitioner: TransitionerType, view: UIView?, type: TransitionViewType)
 
     public var onCompleteTransition: () -> () = {}
@@ -86,7 +87,7 @@ public class LazyTransitioner : NSObject {
     fileprivate var transitionerTuples: [TransitionerTuple] = []
     fileprivate let transitionCombinator: TransitionCombinator
     fileprivate let presentation: Presentation?
-    @objc weak fileprivate var lazyScreen: UIViewController? = nil
+    fileprivate weak var lazyScreen: UIViewController? = nil
     fileprivate let transitionType: TransitionType?
     fileprivate var navigationInterceptor: ProtocolInterceptor? = nil
     fileprivate var scrollViewInterceptors: [UIScrollView?: ProtocolInterceptor] = [:]
@@ -103,7 +104,7 @@ public class LazyTransitioner : NSObject {
         weak var weakLazyScreen = lazyScreen
         self.triggerTransitionAction = transition.transitionTrigger(weakLazyScreen)
         self.transitionCombinator = TransitionCombinator(defaultAnimator: self.internalAnimator)
-        self.presentation = presentation ?? nil
+        self.presentation = presentation
         self.transitionCombinator.allowedOrientations = animator?.allowedOrientations ?? transition.allowedOrientations
         self.lazyScreen = lazyScreen
         self.transitionType = transition
@@ -112,14 +113,10 @@ public class LazyTransitioner : NSObject {
 
         addNavigationObserver()
 
-        transition == .dismiss ?
-            { lazyScreen.transitioningDelegate = self }() :
-            { lazyScreen.navigationController?.delegate = self }()
+        lazyScreen.transitioningDelegate = self
         transitionCombinator.delegate = self
         addTransition(forView: lazyScreen.view)
-        if presentation != nil {
-            lazyScreen.modalPresentationStyle = .custom
-        }
+        if presentation != nil { lazyScreen.modalPresentationStyle = .custom }
     }
 
     public init(animator: TransitionAnimatorType = DismissAnimator(orientation: .topToBottom),
@@ -156,7 +153,8 @@ public class LazyTransitioner : NSObject {
         let transitioners = self.transitioners(for: view)
         transitionCombinator.remove(transitioners)
         transitionerTuples = transitionerTuples.filter { $0.view !== view }
-        guard let scrollView = view as? UIScrollView, let interceptor = scrollViewInterceptors[scrollView] else { return }
+        guard let scrollView = view as? UIScrollView,
+            let interceptor = scrollViewInterceptors[scrollView] else { return }
         scrollView.removeObserver(self, forKeyPath: "delegate")
         scrollView.delegate = interceptor.receiver as? UIScrollViewDelegate
         scrollViewInterceptors.removeValue(forKey: scrollView)
@@ -215,9 +213,9 @@ public class LazyTransitioner : NSObject {
         let interceptor = ProtocolInterceptor.forProtocol(aProtocol: UINavigationControllerDelegate.self)
         interceptor.receiver = lazyScreen?.navigationController?.delegate
         interceptor.middleMan = self
-        lazyScreen?.navigationController?.delegate = interceptor as? UINavigationControllerDelegate
         navigationInterceptor = interceptor
-        addObserver(self, forKeyPath: #keyPath(lazyScreen.parent), options: [.new], context: nil)
+        lazyScreen?.navigationController?.delegate = navigationInterceptor as? UINavigationControllerDelegate
+        lazyScreen?.addObserver(self, forKeyPath: "parentViewController", options: [.old, .new], context: nil)
     }
 
     fileprivate func addScrollViewObserver(_ scrollView: UIScrollView) {
@@ -231,7 +229,11 @@ public class LazyTransitioner : NSObject {
     }
 
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "delegate", let scrollView = object as? UIScrollView, let interceptor = scrollViewInterceptors[scrollView], scrollView.delegate !== interceptor {
+        if keyPath == "delegate",
+            let scrollView = object as? UIScrollView,
+            let interceptor = scrollViewInterceptors[scrollView],
+            scrollView.delegate !== interceptor {
+
             interceptor.receiver = scrollView.delegate
             scrollView.delegate = interceptor as? UIScrollViewDelegate
             interceptor.middleMan = self
@@ -240,11 +242,38 @@ public class LazyTransitioner : NSObject {
         }
 
         guard transitionType == .pop else { return }
-        if keyPath == #keyPath(lazyScreen.parent), lazyScreen?.navigationController?.delegate !== navigationInterceptor {
-            navigationInterceptor?.receiver = lazyScreen?.navigationController?.delegate
-            navigationInterceptor?.middleMan = self
-            lazyScreen?.navigationController?.delegate = navigationInterceptor as? UINavigationControllerDelegate
+        if keyPath == "parentViewController" {
+            let oldParent = change?[.oldKey]
+            let newParent = change?[.newKey]
+
+            // Scenario when navigation controller of our lazy screen becomes non nil
+            // Could be when initially pushed or when a pop transition was initiated and then cancelled
+            if oldParent is NSNull,
+                let navVC = newParent as? UINavigationController,
+                navVC.delegate !== navigationInterceptor {
+
+                // Set our interceptor as the delegate
+                navigationInterceptor?.receiver = lazyScreen?.navigationController?.delegate
+                navigationInterceptor?.middleMan = self
+                navVC.delegate = navigationInterceptor as? UINavigationControllerDelegate
+            }
+
+            // Scenario when navigation controller of our lazy screen becomes nil
+            // Normally called when pop transition was initiated
+            if let navVC = oldParent as? UINavigationController,
+                newParent is NSNull {
+                // Return the initial delegate reference
+                navVC.delegate = navigationInterceptor?.receiver as? UINavigationControllerDelegate
+            }
         }
+    }
+
+    deinit {
+        scrollViewInterceptors.forEach { (scrollView, interceptor) in
+            guard let strongSV = scrollView else { return }
+            self.removeTransitions(for: strongSV)
+        }
+        lazyScreen?.removeObserver(self, forKeyPath: "parentViewController")
     }
 }
 

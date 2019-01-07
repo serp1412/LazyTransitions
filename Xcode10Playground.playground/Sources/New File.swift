@@ -129,30 +129,3 @@ public extension UIButton {
         return button
     }
 }
-
-public class BackgroundViewController: UIViewController {
-    public var screenToPresent: UIViewController!
-    var action: ((UIViewController, UIViewController) -> ())!
-
-    public static func instantiate(with screen: UIViewController, action: @escaping (_ presented: UIViewController, _ presenting: UIViewController) -> ()) -> BackgroundViewController {
-        let backVC = BackgroundViewController()
-        backVC.action = action
-        backVC.screenToPresent = screen
-
-        return backVC
-    }
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .white
-        let button = UIButton.tapMe
-        view.addSubview(button)
-        button.bindToSuperviewCenter()
-
-        button.addTarget(self, action: #selector(triggerAction), for: .touchUpInside)
-    }
-
-    @objc func triggerAction() {
-        action(screenToPresent, self)
-    }
-}

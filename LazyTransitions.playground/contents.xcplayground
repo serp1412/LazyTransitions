@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='false'>
-    <pages>
-        <page name='README'/>
-        <page name='Lazy Dismiss animation'/>
-        <page name='Lazy Pop animation'/>
-        <page name='Bouncy ScrollView animation'/>
-        <page name='Limit transition orientations'/>
-        <page name='Presentation controller'/>
-        <page name='Multiple scroll views'/>
-    </pages>
-</playground>
+<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='false'/>

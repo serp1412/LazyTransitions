@@ -19,6 +19,10 @@ class LazyViewController: UIViewController {
         /* 2. Add transition for your scroll view. Bouncy effect will be applied automatically */
         addTransition(forScrollView: collectionView)
     }
+
+    deinit {
+        print("happened")
+    }
 }
 
 /* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
@@ -110,7 +114,7 @@ extension LazyViewController: UICollectionViewDataSource {
     }
 }
 
-let backVC = BackgroundViewController.instantiate(with: LazyViewController(), action: { presented, presenting in
+let backVC = BackgroundViewController.instantiate(with: LazyViewController.self, action: { presented, presenting in
     presenting.present(presented, animated: true, completion: nil)
 })
 backVC.view.frame = .iphone6
