@@ -84,11 +84,3 @@ nav.pushViewController(backVC, animated: false)
 PlaygroundPage.current.liveView = nav.view
 
 backVC.navigationController?.delegate = backVC
-
-/*
- Fix bug with child scroll views triggering transition
- Write README in playgrounds
- Delete Example project
- Delete Xcode10Playground
- Update README in repository
- */
