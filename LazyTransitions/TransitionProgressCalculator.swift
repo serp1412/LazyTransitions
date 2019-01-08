@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TransitionOrientation {
+public enum TransitionOrientation: CaseIterable {
     case unknown
     case topToBottom
     case bottomToTop

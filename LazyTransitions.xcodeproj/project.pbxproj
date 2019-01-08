@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D07355321E129EA00E27DB4 /* ProtocolInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D07355221E129EA00E27DB4 /* ProtocolInterceptor.swift */; };
+		9D2E165221DD3E3F0079D7F1 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E165121DD3E3F0079D7F1 /* UIViewControllerExtensions.swift */; };
 		9D7D55731E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */; };
 		9D7D55751E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55741E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift */; };
 		9D7D55771E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7D55761E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift */; };
@@ -50,7 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D07355221E129EA00E27DB4 /* ProtocolInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolInterceptor.swift; sourceTree = "<group>"; };
 		9D237C9021B99B1A001489FD /* LazyTransitions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LazyTransitions.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9D2E165121DD3E3F0079D7F1 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		9D7D55721E1FC9FD00054D3A /* UIPanGestureRecognizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanGestureRecognizerTests.swift; sourceTree = "<group>"; };
 		9D7D55741E1FCA0300054D3A /* UIScrollViewExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensionsTests.swift; sourceTree = "<group>"; };
 		9D7D55761E1FCA2A00054D3A /* TransitionProgressCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionProgressCalculatorTests.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				DA65CBA31E1E987000ECE942 /* UIPanGestureRecognizerExtensions.swift */,
 				DA65CBA41E1E987000ECE942 /* UIScrollViewExtensions.swift */,
 				DA65CBA51E1E987000ECE942 /* UIViewExtensions.swift */,
+				9D2E165121DD3E3F0079D7F1 /* UIViewControllerExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 				DA65CB9A1E1E987000ECE942 /* ScrollableProtocol.swift */,
 				DA65CBA11E1E987000ECE942 /* TransitionProgressCalculator.swift */,
 				DA65CBA01E1E987000ECE942 /* TransitionInteractor.swift */,
+				9D07355221E129EA00E27DB4 /* ProtocolInterceptor.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -334,6 +340,8 @@
 				DA65CBAA1E1E987000ECE942 /* PartialTransitionAnimator.swift in Sources */,
 				DA65CBAB1E1E987000ECE942 /* PartialTransitioner.swift in Sources */,
 				DA65CBA91E1E987000ECE942 /* OptionalExtensions.swift in Sources */,
+				9D2E165221DD3E3F0079D7F1 /* UIViewControllerExtensions.swift in Sources */,
+				9D07355321E129EA00E27DB4 /* ProtocolInterceptor.swift in Sources */,
 				DA65CBB41E1E987000ECE942 /* TransitionInteractor.swift in Sources */,
 				DA65CBB01E1E987000ECE942 /* TransitionAnimatorType.swift in Sources */,
 				DA65CBB51E1E987000ECE942 /* TransitionProgressCalculator.swift in Sources */,
