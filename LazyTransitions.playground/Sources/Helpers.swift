@@ -157,11 +157,9 @@ public class BackgroundViewController <T: UIViewController>: UIViewController, U
     }
 
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        print("nav was called")
     }
 
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        print("nav was called")
     }
 }
 
