@@ -37,45 +37,23 @@ Add the following line to your `Cartfile`
 
 ## Usage
 
-The simplest way to use this framework is to take advantage of `LazyTransitioner` class.
+Here's the simplest way to use `LazyTransitions`
 
-* Import the framework
+* Import the framework in the view controller that you want to make lazy
 ```swift
 import LazyTransitions
 ```
-* Create an instance of `LazyTransitioner`
+* Make the view controller lazy for the transition that you need
 ```swift
-let transitioner = LazyTransitioner()
-```
-* Pass your transition views (views that will trigger a transition when user pans on them) to the transitioner
-```swift
-transitioner.addTransition(forView: view)
-// or
-transitioner.addTransition(forScrollView: scrollView)
-```
-* In the `triggerTransitionAction` trigger your transition (dismiss or pop)
-```swift
-transitioner.triggerTransitionAction = { [weak self] _ in
-    self?.dismiss(animated: true, completion: nil)
+func viewDidLoad() {
+    becomeLazy(for: .dismiss) // or .pop if have pushed this screen
 }
 ```
-
-* Set your transitioner as the transitioning delegate of the view controller you're dismissing.
-
-For Dismiss:
+* A lazy transition trigger is automatically added to the screen's `view` property. But you can add transition triggers (i.e. panning on them will also trigger a transition) for other views in your screen
 ```swift
-transitioningDelegate = transitioner
-```
-
-NOTE: if your view controller is embedded in another view controller you'll have to assign to your parent's transitioning delegate.
-In case of a screen embedded in a `UINavigationController` you have to do:
-```swift
-navigationController?.transitioningDelegate = transitioner
-```
-
-For Pop:
-```swift
-navigationController?.delegate = transitioner
+addTransition(forView: view)
+// or
+addTransition(forScrollView: scrollView)
 ```
 
 ### Example
@@ -83,73 +61,25 @@ navigationController?.delegate = transitioner
 Here's some sample code on how to use LazyTransitions in your project.
 
 ```swift
-// first of all import LazyTransitions
 import LazyTransitions
 
-class MyVC : UIViewController {
-    fileprivate let transitioner = LazyTransitioner()
-    
+class LazyViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // add the main view to your transitioner
-        transitioner.addTransition(forView: view)
-        
-        // trigger the transition in triggerTransitionAction
-        transitioner.triggerTransitionAction = { [weak self] _ in
-            // for dismiss
-            self?.dismiss(animated: true, completion: nil)
-            // or for pop
-            _ = self?.navigationController?.popViewController(animated: true)
-        }
-        
-        // FOR DISMISS
-        // set transitioner as the delegate for custom view controller transitioning
-        transitioningDelegate = transitioner
-        
-        // or FOR POP
-        // set transitioner as the delegate for your navigation controller
-        navigationController.delegate = transitioner
+
+        becomeLazy(for: .dismiss)
     }
 }
 ```
 
-## Usage Tips
+That's it! 😜
 
-* To add the a bouncy effect when user scrolls with inertia and the UIScrollView reaches its edges, do the following:
-```swift
-// become the delegate of your UIScrollView
-scrollView.delegate = self
+## More Info Please!
 
-// implement the scrollViewDidScroll() delegate method
-func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    // forward it to the transitioner
-    transitioner.didScroll(scrollView)
-}
-```
+If you want to find out about more use cases for `LazyTransitions` or just mess around with it a bit.
+1. Clone this project
+2. Open it in Xcode and find the `LazyTransitions.playground` file
+3. Open the `README` playground page and follow the instructions inside.
 
-* To achieve the standard pop animation of iOS, use the provided `PopAnimator` when initializing the `LazyTransitioner`
-
-```swift 
-let transitioner = LazyTransitioner(animator: PopAnimator(orientation: .leftToRight))
-```
-
-* You can limit the allowed transition orientations by setting them like this:
-```swift
-transitioner.allowedOrientations = [.leftToRight, .topToBottom, .bottomToTop]
-```
-
-* In case you need to assign something else as the transitioning delegate, then you can simply forward the `animator` and `interactor` properties of your transitioner inside the delegate methods.
-
-Like so in case of dismiss:
-```swift
-func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    // ... pass the animator
-    return transitioner.animator
-}
-    
-func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-    // ... pass the interactor
-    return transitioner.interactor
-}
-```
+I hope you enjoy using this framework as much as I did creating it 😊
