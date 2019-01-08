@@ -22,17 +22,21 @@ class LazyViewController: UIViewController {
      In our case each collection view in every RowCell */
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let rowCell = cell as! RowCell
-        addTransition(forScrollView: rowCell.collectionView)
-    }
 
-    deinit {
-        print("happened")
+        // **NOTE**: Don't worry calling this function multiple times for the same view, subsequent times will simply be ignored
+        addTransition(forScrollView: rowCell.collectionView)
     }
 }
 
 /* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
 
- Then try scrolling the cells to the very left or very right and see how they trigger a transition */
+ Then try scrolling the cells to the very left or very right, keep on scrolling and see how they trigger a transition */
+
+//: [NEXT: Presentation Controller](Presentation%20controller)     [PREVIOUS: Bouncy Scroll View Animation](Bouncy%20ScrollView%20animation)
+
+
+
+
 
 
 

@@ -19,16 +19,30 @@ class LazyViewController: UIViewController {
         /* 2. Add transition for your scroll view. Bouncy effect will be applied automatically */
         addTransition(forScrollView: collectionView)
     }
-
-    deinit {
-        print("happened")
-    }
 }
 
 /* 3. Run the playground and flick the collection view to the very top or bottom to see how it bounces.
 
- **NOTE** to opt out of the bouncy effect just call `addTransition(forScrollView: collectionView, bouncyEdges: false)`
+ **NOTE** to opt out of the bouncy effect just call `addTransition(forScrollView: collectionView, bouncyEdges: false)` instead
  */
+
+//: [NEXT: Multiple Scroll Views](Multiple%20scroll%20views)      [PREVIOUS: Limit Transition Orientations](Limit%20transition%20orientations)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

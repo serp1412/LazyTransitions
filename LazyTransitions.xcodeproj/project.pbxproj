@@ -52,7 +52,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9D0708FC21C059640020FE68 /* Xcode10Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Xcode10Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9D07355221E129EA00E27DB4 /* ProtocolInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolInterceptor.swift; sourceTree = "<group>"; };
 		9D237C9021B99B1A001489FD /* LazyTransitions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LazyTransitions.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9D2E165121DD3E3F0079D7F1 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -169,7 +168,6 @@
 		DA65CB6F1E1E984C00ECE942 = {
 			isa = PBXGroup;
 			children = (
-				9D0708FC21C059640020FE68 /* Xcode10Playground.playground */,
 				9D237C9021B99B1A001489FD /* LazyTransitions.playground */,
 				DA65CB7B1E1E984C00ECE942 /* LazyTransitions */,
 				DA65CB861E1E984C00ECE942 /* LazyTransitionsTests */,

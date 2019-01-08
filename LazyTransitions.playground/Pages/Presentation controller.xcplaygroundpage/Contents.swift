@@ -33,17 +33,21 @@ class WebViewController: UIViewController {
                    presentation: presentation)
 
         /* 3. Add transition for the web view's scroll view */
-        addTransition(forScrollView: webView.scrollView, bouncyEdges: false)
-    }
-
-    deinit {
-        print("happened")
+        addTransition(forScrollView: webView.scrollView,
+                      bouncyEdges: false)
     }
 }
 
 /* 4. Run the playground to see it in action. You can swipe the card down to dismiss it */
 
 /* **NOTE**: For custom presentations, in most cases you'll need a dismiss and present animators that do the exact opposite of each other. Check the implementations of the animators in this playground to get a better understanding */
+/*:
+ These are the main use cases for `LazyTransitions`.
+
+ If you'd like to find out if your particular case is supported, feel free to [open an issue in my repo](https://github.com/serp1412/LazyTransitions/issues)
+ */
+
+//: [PREVIOUS: Multiple Scroll Views](Multiple%20scroll%20views)
 
 
 
@@ -76,6 +80,16 @@ class WebViewController: UIViewController {
 
 
 
+
+
+
+
+
+
+
+
+
+/* Oh hey there, didn't expect you to scroll down here. You won't find anything special here, just some setup code ☺️ */
 extension WebViewController {
     static func instantiate(url: URL, title: String = "") -> WebViewController {
         let webVC = WebViewController()

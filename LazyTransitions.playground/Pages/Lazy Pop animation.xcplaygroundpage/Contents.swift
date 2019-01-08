@@ -22,17 +22,16 @@ class LazyViewController: UIViewController {
          */
         becomeLazy(for: .pop)
     }
-
-    deinit {
-        print("happened")
-    }
 }
 
 /* Run the Playground to see how it works
 
  Try swiping left to right to pop the blue screen
+
+ **NOTE**: By default becoming lazy for .pop allows to pop the screen only left to right. If you want to add right to left as well you can add `allowedOrientations = [.leftToRight, .rightToLeft]` in `viewDidLoad`
  */
 
+//: [NEXT: Limit Transition Orientations](Limit%20transition%20orientations)       [PREVIOUS: Lazy Dismiss Animation](Lazy%20Dismiss%20animation)
 
 
 
@@ -55,6 +54,22 @@ class LazyViewController: UIViewController {
 
 
 
+
+
+
+
+
+
+
+/* Oh hey there, didn't expect you to scroll down here. You won't find anything special here, just some setup code ☺️ */
+
+extension LazyViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view.backgroundColor = .blue
+    }
+}
 
 let nav = UINavigationController()
 nav.view.frame = .iphone6

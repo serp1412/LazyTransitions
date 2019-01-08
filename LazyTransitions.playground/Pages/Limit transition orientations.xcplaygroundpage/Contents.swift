@@ -20,11 +20,6 @@ class LazyViewController: UIViewController {
          **NOTE** if your transition animator doesn't support the orientation that you provide, it'll be ignored.
          */
         allowedOrientations = [.topToBottom, .bottomToTop]
-        view.backgroundColor = .blue
-    }
-
-    deinit {
-        print("happened")
     }
 }
 
@@ -35,6 +30,7 @@ class LazyViewController: UIViewController {
  While horizontal ones should be ignored
  */
 
+//: [NEXT: Bouncy Scroll View Animation](Bouncy%20ScrollView%20animation)       [PREVIOUS: Lazy Pop Animation](Lazy%20Pop%20animation)
 
 
 
@@ -61,6 +57,22 @@ class LazyViewController: UIViewController {
 
 
 
+
+
+
+
+
+
+
+/* Oh hey there, didn't expect you to scroll down here. You won't find anything special here, just some setup code ☺️ */
+
+extension LazyViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view.backgroundColor = .blue
+    }
+}
 let backVC = BackgroundViewController.instantiate(with: LazyViewController.self, action: { presented, presenting in
     presenting.present(presented, animated: true, completion: nil)
 })

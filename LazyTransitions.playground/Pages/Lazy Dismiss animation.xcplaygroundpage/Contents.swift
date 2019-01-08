@@ -18,11 +18,6 @@ class LazyViewController: UIViewController {
         /* 1. Call the `becomeLazy(for: TransitionType)` function and pass in whether this screen is going to be lazily dismissed or popped (i.e. if it was presented or is inside a navigation stack)
          */
         becomeLazy(for: .dismiss)
-        view.backgroundColor = .blue
-    }
-
-    deinit {
-        print("happened")
     }
 }
 
@@ -30,6 +25,7 @@ class LazyViewController: UIViewController {
 
  Try swiping the blue screen in any direction */
 
+//: [NEXT: Lazy Pop Animation](Lazy%20Pop%20animation)
 
 
 
@@ -71,6 +67,17 @@ class LazyViewController: UIViewController {
 
 
 
+
+
+/* Oh hey there, didn't expect you to scroll down here. You won't find anything special here, just some setup code ☺️ */
+
+extension LazyViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view.backgroundColor = .blue
+    }
+}
 
 let backVC = BackgroundViewController.instantiate(with: LazyViewController.self, action: { presented, presenting in
     presenting.present(presented, animated: true, completion: nil)
@@ -78,6 +85,3 @@ let backVC = BackgroundViewController.instantiate(with: LazyViewController.self,
 backVC.view.frame = .iphone6
 
 PlaygroundPage.current.liveView = backVC.view
-
-//lazyVC.view.backgroundColor = .blue
-
