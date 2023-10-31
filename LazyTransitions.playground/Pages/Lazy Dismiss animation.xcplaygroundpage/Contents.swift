@@ -3,7 +3,7 @@
  */
 
 
-import LazyTransitions
+@testable import LazyTransitions
 import PlaygroundSupport
 
 /*
